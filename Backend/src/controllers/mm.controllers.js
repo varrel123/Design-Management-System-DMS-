@@ -36,11 +36,39 @@ async function deleteAccount(req,res){
     }
 }
 
+async function addAuditPlan(req,res){
+    try{
+        const result = await mmService.addAuditPlan(req.body);
+        res.json(result);
+    }catch(err){
+        res.json(err.detail);
+    }
+}
 
+async function deleteAuditPlan(req,res){
+    try{
+        const result = await mmService.deleteAuditPlan(req.body);
+        res.json(result);
+    }catch(err){
+        res.json(err.detail);
+    }
+}
+
+async function UpdateAuditPlan(req,res){
+    try{
+        const result = await mmService.UpdateAuditPlan(req.body);
+        res.json(result);
+    }catch(err){
+        res.json(err.detail);
+    }
+}
 
 module.exports = {
     login,
     addAccount,
     showAccount,
-    deleteAccount
+    deleteAccount,
+    addAuditPlan,
+    deleteAuditPlan,
+    UpdateAuditPlan
 }

@@ -11,4 +11,10 @@ router.get('/showAccount', mmController.showAccount);
 
 router.delete('/deleteAccount', mmController.deleteAccount);
 
+router.post('/addAuditPlan', mmController.addAuditPlan);
+
+router.delete('/deleteAuditPlan', mmController.deleteAuditPlan);
+
+router.put('/UpdateAuditPlan', mmController.UpdateAuditPlan);
+
 module.exports = router;

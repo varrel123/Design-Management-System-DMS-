@@ -1,3 +1,52 @@
+CREATE TYPE user_role AS ENUM (
+    'Admin', 
+    'DO',
+    'AO'
+);
+
+CREATE TYPE Office_Code AS ENUM (
+'TE',
+'TEC-1',
+'TEA',
+'TEA-1',
+'TEA-2',
+'TEA-3',
+'TEA-4',
+'TED',
+'TED-1',
+'TED-2',
+'TED-3',
+'TED-4',
+'TER',
+'TER-1',
+'TER-2',
+'TER-3',
+'TER-4',
+'TER-5',
+'TEL',
+'TEL-1',
+'TEL-2',
+'TEJ',
+'TEJ-1',
+'TEJ-2',
+'TEJ-3',
+'TEM',
+'TEM-1',
+'TEM-2',
+'TEM-3'
+);
+
+CREATE TABLE Account (
+    AccountID BIGSERIAL PRIMARY KEY UNIQUE,
+    Name VARCHAR(255),
+    Unit Office_Code,
+    Password VARCHAR(255),
+    Role user_role
+);
+
+
+------------------------------------------------------------------------
+
 CREATE TYPE Audit_Type AS ENUM (
     'Procedure Audit',
     'Product Audit'
@@ -15,7 +64,6 @@ CREATE TYPE Work_Station AS ENUM (
 'EL: Elang Lintas Indonesia'
 );
 
-------------------------------------------------------------------------
 
 CREATE TABLE AuditPlan (
     DocNo BIGSERIAL PRIMARY KEY UNIQUE, 

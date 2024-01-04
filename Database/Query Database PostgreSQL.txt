@@ -50,3 +50,116 @@ CREATE TABLE Issuence (
 
 ------------------------------------------------------------------------
 
+CREATE TYPE Reg_Based AS ENUM(
+    'DHCA', 'EASA'
+);
+
+CREATE TYPE ResponOffice AS ENUM(
+    'AO: Airworthiness Office',
+    'DO: Design Office', 
+    'IM: Independent Monitoring',
+    'PR: Partner',
+    'SC: Subcontractor', 
+    'BR: BRIN',
+    'GF: GMF AeroAsia',
+    'BA: BIFA Flying School',
+    'EL: Elang Lintas Indonesia'
+);
+
+CREATE TYPE AuditType AS ENUM(
+    'Procedure',
+    'Product',
+    'Surveillance'
+);
+
+CREATE TYPE AuditScope AS ENUM(
+    'Authority',
+    'Internal',
+    'External',
+    'Subcontractor'
+);
+
+CREATE TYPE UIC AS ENUM(
+    'Chief Design Office',
+    'Chief Airworthiness Office',
+    'Chief Independent Monitoring',
+    'Head of DOA'
+);
+
+CREATE TYPE level AS ENUM(
+    '1', '2', '3'
+);
+
+CREATE TYPE ProbAnalis AS ENUM(
+    'Required', 'Not Required'
+);
+
+CREATE TYPE enum_Stat AS ENUM(
+    'Open',
+    'Mentor',
+    'Close'
+);
+
+CREATE TABLE NCR_Initial(
+    NCR_init_ID BIGSERIAL PRIMARY KEY UNIQUE,
+    RegulationBased Reg_Based NOT NULL,
+    Subject TEXT NOT NULL,
+    Audit_Plan_No VARCHAR(10) NOT NULL,
+    NCR_No VARCHAR(11) NOT NULL,
+    Issued_Date DATE NOT NULL,
+    Responsibility_Office ResponOffice NOT NULL,
+    Audit_Type AuditType NOT NULL,
+    Audit_Scope AuditScope NOT NULL,
+    To_UIC UIC NOT NULL,
+    Attention TEXT NOT NULL,
+    Require_Condition_Reference TEXT NOT NULL,
+    Level_Finding level NOT NULL,
+    Problem_Analysis ProbAnalis NOT NULL,
+    Answer_Due_Date DATE NOT NULL,
+    Issue_IAN BOOLEAN NOT NULL,
+    IAN_No TEXT NOT NULL,
+    Encountered_Condition TEXT NOT NULL,
+    Audit_by TEXT NOT NULL,
+    Audit_Date DATE NOT NULL,
+    Acknowledge_by TEXT NOT NULL,
+    Acknowledge_date DATE NOT NULL,
+    Status enum_Stat NOT NULL,
+    TemporaryLink TEXT
+);
+
+CREATE TABLE NCR_reply(
+    NCR_init_ID BIGSERIAL,
+    FOREIGN KEY (NCR_init_ID) REFERENCES NCR_Initial(NCR_init_ID),
+    RCA_problem TEXT NOT NULL,
+    Corrective_Action TEXT NOT NULL,
+    Preventive_Action TEXT NOT NULL,
+    Identified_by_Auditee TEXT NOT NULL,
+    Identified_Date DATE NOT NULL,
+    Accept_by_Auditor TEXT NOT NULL,
+    Auditor_Accept_date DATE NOT NULL,
+    TemporaryLink TEXT
+);
+
+CREATE TYPE effective AS ENUM(
+    'Effective', 'Not Effective'
+);
+
+CREATE TABLE NCR_FollowResult(
+    NCR_init_ID BIGSERIAL,
+    FOREIGN KEY (NCR_init_ID) REFERENCES NCR_Initial(NCR_init_ID),
+    Close_Corrective_Actions TEXT,
+    Proposed_Close_Auditee TEXT NOT NULL,
+    Proposed_Close_Date DATE NOT NULL,
+    Is_close BOOLEAN NOT NULL,
+    effectiveness effective NOT NULL,
+    Refer_Verification VARCHAR(10),
+    Sheet_No VARCHAR(50),
+    New_NCR_Issue_nbr VARCHAR(10),
+    Close_approved_by TEXT NOT NULL,
+    Close_approved_date DATE NOT NULL,
+    Verified_Chief_IM TEXT NOT NULL,
+    Verified_Date DATE NOT NULL,
+    TemporaryLink TEXT
+);
+
+

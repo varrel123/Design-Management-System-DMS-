@@ -63,6 +63,15 @@ async function UpdateAuditPlan(req,res){
     }
 }
 
+async function showAuditPlan(req,res){
+    try{
+        const result = await mmService.showAuditPlan(req.body);
+        res.json(result);
+    }catch(err){
+        res.json(err.detail);
+    }
+}
+
 module.exports = {
     login,
     addAccount,
@@ -70,5 +79,6 @@ module.exports = {
     deleteAccount,
     addAuditPlan,
     deleteAuditPlan,
-    UpdateAuditPlan
+    UpdateAuditPlan,
+    showAuditPlan
 }

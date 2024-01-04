@@ -17,4 +17,6 @@ router.delete('/deleteAuditPlan', mmController.deleteAuditPlan);
 
 router.put('/UpdateAuditPlan', mmController.UpdateAuditPlan);
 
+router.get('/showAuditPlan', mmController.showAuditPlan);
+
 module.exports = router;

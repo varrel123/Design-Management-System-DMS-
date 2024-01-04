@@ -66,6 +66,8 @@ CREATE TYPE Work_Station AS ENUM (
 
 
 CREATE TABLE AuditPlan (
+    AccountID BIGSERIAL, -- Menambah kolom AccountID
+    FOREIGN KEY (AccountID) REFERENCES Account(AccountID),
     DocNo BIGSERIAL PRIMARY KEY UNIQUE, 
     DocDate DATE NOT NULL,
     Subject TEXT NOT NULL,
@@ -74,6 +76,8 @@ CREATE TABLE AuditPlan (
 
 CREATE TABLE APdetail (
     DocNo BIGSERIAL UNIQUE,
+    AccountID BIGSERIAL, -- Menambah kolom AccountID
+    FOREIGN KEY (AccountID) REFERENCES Account(AccountID),
     FOREIGN KEY (DocNo) REFERENCES AuditPlan(DocNo),
     NoItem BIGSERIAL UNIQUE,
     Requirement TEXT NOT NULL,
@@ -88,6 +92,8 @@ CREATE TABLE APdetail (
 
 CREATE TABLE Issuence (
     DocNo BIGSERIAL,
+    AccountID BIGSERIAL, -- Menambah kolom AccountID
+    FOREIGN KEY (AccountID) REFERENCES Account(AccountID),
     FOREIGN KEY (DocNo) REFERENCES AuditPlan(DocNo),
     IssueNbr BIGSERIAL UNIQUE, 
     IssueDate DATE NOT NULL,
@@ -95,6 +101,7 @@ CREATE TABLE Issuence (
     IssuedBy TEXT NOT NULL, 
     HDOapprove TEXT
 );
+
 
 ------------------------------------------------------------------------
 
@@ -149,6 +156,8 @@ CREATE TYPE enum_Stat AS ENUM(
 );
 
 CREATE TABLE NCR_Initial(
+    AccountID BIGSERIAL, -- Menambah kolom AccountID
+    FOREIGN KEY (AccountID) REFERENCES Account(AccountID),
     NCR_init_ID BIGSERIAL PRIMARY KEY UNIQUE,
     RegulationBased Reg_Based NOT NULL,
     Subject TEXT NOT NULL,
@@ -176,6 +185,8 @@ CREATE TABLE NCR_Initial(
 );
 
 CREATE TABLE NCR_reply(
+    AccountID BIGSERIAL, -- Menambah kolom AccountID
+    FOREIGN KEY (AccountID) REFERENCES Account(AccountID),
     NCR_init_ID BIGSERIAL,
     FOREIGN KEY (NCR_init_ID) REFERENCES NCR_Initial(NCR_init_ID),
     RCA_problem TEXT NOT NULL,
@@ -193,6 +204,8 @@ CREATE TYPE effective AS ENUM(
 );
 
 CREATE TABLE NCR_FollowResult(
+    AccountID BIGSERIAL, -- Menambah kolom AccountID
+    FOREIGN KEY (AccountID) REFERENCES Account(AccountID),
     NCR_init_ID BIGSERIAL,
     FOREIGN KEY (NCR_init_ID) REFERENCES NCR_Initial(NCR_init_ID),
     Close_Corrective_Actions TEXT,
@@ -210,6 +223,4 @@ CREATE TABLE NCR_FollowResult(
     TemporaryLink TEXT
 );
 
-
-Tester push
 

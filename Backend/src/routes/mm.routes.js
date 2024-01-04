@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const mmController = require('../controllers/mm.controllers');
 
-router.post('/login',passport.authenticate('local'), mmController.login);
+router.post('/login', mmController.login);
 
 router.post('/addAccount', mmController.addAccount);
 

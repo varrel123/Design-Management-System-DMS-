@@ -20,7 +20,7 @@ async function addAccount(req,res){
 
 async function showAccount(req,res){
     try{
-        const result = await mmService.showAccount(req.user);
+        const result = await mmService.showAccount(req.body);
         res.json(result);
     }catch(err){
         res.json(err);
@@ -29,7 +29,7 @@ async function showAccount(req,res){
 
 async function deleteAccount(req,res){
     try{
-        const result = await mmService.deleteAccount(req.user);
+        const result = await mmService.deleteAccount(req.body);
         res.json(result);
     }catch(err){
         res.json(err);

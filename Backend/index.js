@@ -36,10 +36,9 @@ app.get('/', (req, res) => {
     }else{
         res.send('Not logged in');
     }
-    //res.json({ message: 'Welcome to the mm backend' }); 
 });
 
-app.use('/mm', mmRoute);
+app.use(mmRoute);
 
 app.listen(port, () => {
     console.log('Server is running on port: ' + port);

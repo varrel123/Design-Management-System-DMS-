@@ -1,0 +1,52 @@
+CREATE TYPE Audit_Type AS ENUM (
+    'Procedure Audit',
+    'Product Audit'
+);
+
+CREATE TYPE Work_Station AS ENUM (
+'AO: Airworthiness Office',
+'DO: Design Office', 
+'IM: Independent Monitoring',
+'PR: Partner',
+'SC: Subcontractor', 
+'BR: BRIN',
+'GF: GMF AeroAsia',
+'BA: BIFA Flying School',
+'EL: Elang Lintas Indonesia'
+);
+
+------------------------------------------------------------------------
+
+CREATE TABLE AuditPlan (
+    DocNo BIGSERIAL PRIMARY KEY UNIQUE, 
+    DocDate DATE NOT NULL,
+    Subject TEXT NOT NULL,
+    AuditType Audit_Type 
+);
+
+CREATE TABLE APdetail (
+    DocNo BIGSERIAL UNIQUE,
+    FOREIGN KEY (DocNo) REFERENCES AuditPlan(DocNo),
+    NoItem BIGSERIAL UNIQUE,
+    Requirement TEXT NOT NULL,
+    Description TEXT NOT NULL,
+    AuditType Audit_Type, 
+    SubDescription TEXT NOT NULL,
+    WorkStation Work_Station, 
+    PlannedWeek DATE NOT NULL,
+    ActualVisitDate DATE NOT NULL,
+    AuditReportEvidenceNbr VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE Issuence (
+    DocNo BIGSERIAL,
+    FOREIGN KEY (DocNo) REFERENCES AuditPlan(DocNo),
+    IssueNbr BIGSERIAL UNIQUE, 
+    IssueDate DATE NOT NULL,
+    IssueDesc TEXT NOT NULL, 
+    IssuedBy TEXT NOT NULL, 
+    HDOapprove TEXT
+);
+
+------------------------------------------------------------------------
+

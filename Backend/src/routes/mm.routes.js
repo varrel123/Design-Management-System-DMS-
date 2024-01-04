@@ -19,4 +19,6 @@ router.put('/UpdateAuditPlan', mmController.UpdateAuditPlan);
 
 router.get('/showAuditPlan', mmController.showAuditPlan);
 
+router.post('/addAPdetail', mmController.addAPdetail);
+
 module.exports = router;

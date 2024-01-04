@@ -128,13 +128,13 @@ async function showAuditPlan(temp) {
             };
         } else {
             return {
-                status: 200, // or 204 (No Content) depending on your preference
+                status: 200, 
                 message: 'Audit Plan not found',
             };
         }
     } catch (error) {
         console.error('Error fetching account information:', error);
-        throw error; // Re-throw the error to ensure it gets logged
+        throw error; 
     }
 }
 
@@ -153,6 +153,22 @@ async function UpdateAuditPlan(temp) {
     }
 }
 
+async function addAPdetail  (mm) {
+    const {DocNo,accountid,NoItem ,Requirement ,Description,AuditType ,SubDescription ,WorkStation,PlannedWeek,ActualVisitDate,AuditReportEvidenceNbr } = mm;
+    const query = `INSERT INTO APdetail   (DocNo,accountid,NoItem ,Requirement ,Description,AuditType ,SubDescription ,WorkStation,PlannedWeek,ActualVisitDate,AuditReportEvidenceNbr) 
+    VALUES ('${DocNo}','${accountid}','${NoItem}',  '${Requirement}','${Description}','${AuditType}','${SubDescription}','${WorkStation}','${PlannedWeek}','${ActualVisitDate}','${AuditReportEvidenceNbr}')`;
+    const result = await db.query(query);
+    if (result.rowCount === 1) {
+        return {
+            message: 'addAPdetail Created'
+        }
+    } else {
+        return {
+            message: 'Error'
+        }
+    }
+}
+
 module.exports = {
     login,
     addAccount,
@@ -161,5 +177,6 @@ module.exports = {
     addAuditPlan,
     deleteAuditPlan,
     UpdateAuditPlan,
-    showAuditPlan
+    showAuditPlan,
+    addAPdetail
 }

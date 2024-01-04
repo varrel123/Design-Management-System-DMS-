@@ -72,6 +72,14 @@ async function showAuditPlan(req,res){
     }
 }
 
+async function addAPdetail(req,res){
+    try{
+        const result = await mmService.addAPdetail(req.body);
+        res.json(result);
+    }catch(err){
+        res.json(err.detail);
+    }
+}
 module.exports = {
     login,
     addAccount,
@@ -80,5 +88,6 @@ module.exports = {
     addAuditPlan,
     deleteAuditPlan,
     UpdateAuditPlan,
-    showAuditPlan
+    showAuditPlan,
+    addAPdetail
 }

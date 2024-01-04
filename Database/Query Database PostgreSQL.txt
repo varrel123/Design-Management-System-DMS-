@@ -223,4 +223,174 @@ CREATE TABLE NCR_FollowResult(
     TemporaryLink TEXT
 );
 
+------------------------------------------------------------------------
+
+CREATE TABLE FindingIdentification (
+    OrganisationName VARCHAR(60),
+    DOANo VARCHAR(7),
+    DOACoreProcess VARCHAR(30),
+    KeySubject VARCHAR(60),
+    HandbookProcedure VARCHAR(80),
+    FindingNo VARCHAR(4),
+    Part21 VARCHAR(30),
+    InitialDeadline DATE,
+    CurrentDeadline DATE,
+    Level VARCHAR(15),
+    Status VARCHAR(6),
+    Finding TEXT,
+    Notes TEXT,
+    Evidences TEXT,
+    Name VARCHAR(20),
+    Position VARCHAR(20),
+    DateOfNotification DATE,
+    DOAHolderFocalPointEmail TEXT
+);
+
+CREATE TABLE FindingClosureLogEvents (
+    DateLog DATE,
+    DescriptionType VARCHAR(60),
+    DescriptionText TEXT
+);
+
+CREATE TABLE FindingClosureRootCauseExtensions (
+    ItemNumber VARCHAR(2),
+    DOAHolderDateComment DATE,
+    DOAHolderDescribe TEXT,
+    EASAResponseDate DATE,
+    EASAResponse TEXT
+);
+
+CREATE TABLE FindingClosureCorrectiveActionPlan (
+    ItemNumber VARCHAR(2),
+    DOAHolderDateComment DATE,
+    DOAHolderDescribe TEXT,
+    EASAResponseDate DATE,
+    EASAResponseFeedback TEXT
+);
+
+CREATE TABLE FindingClosureClosingTheFinding (
+    ItemNumber VARCHAR(2),
+    DOAHolderDateComment DATE,
+    DOAHolderDescribe TEXT,
+    EASAResponseDate DATE,
+    EASAResponse TEXT
+);
+
+CREATE TABLE ClosureAndPerformance (
+    Closure TEXT,
+    NumberOfExtension VARCHAR(1),
+    WasFindingEverOverdue VARCHAR(30)
+);
+
+------------------------------------------------------------------------
+
+CREATE TABLE Tbl_DO_project (
+    DO_project_id BIGSERIAL PRIMARY KEY,
+    RegulationBased VARCHAR(5) CHECK (RegulationBased IN ('DGCA', 'EASA', 'IDAA')),
+    ProjectTitle TEXT,
+    ProjectNumber TEXT,
+    ProjectDescription TEXT,
+    ProjectCreatedDate DATE,
+    EstStartDate DATE,
+    EstFinishDate DATE,
+    ActStartDate DATE,
+    ActFinishDate DATE,
+    AircraftTypeEngineTypePart TEXT,
+    NumberOfAircraftEnginePart TEXT,
+    CustomerName TEXT,
+    ProjectClassification VARCHAR(5) CHECK (ProjectClassification IN ('Major', 'Minor')),
+    SubClassification VARCHAR(10) CHECK (SubClassification IN ('Alteration', 'Repair'))
+);
+
+CREATE TABLE RequiredDocuments (
+    doc_id BIGSERIAL  PRIMARY KEY,
+    DO_project_id BIGSERIAL ,
+    DocumentType TEXT,
+    DocumentName TEXT,
+    DocumentNumber TEXT,
+    DocumentCreatedBy TEXT,
+    DocumentCreatedDate DATE,
+    DocumentCheckBy TEXT,
+    DocumentCheckDate DATE,
+    DocumentApproveBy TEXT,
+    DocumentApproveDate DATE,
+    Status VARCHAR(5) CHECK (Status IN ('Open', 'Monitor', 'Close')),
+    Remark TEXT
+);
+
+CREATE TABLE AssignPIC (
+    pic_id BIGSERIAL  PRIMARY KEY,
+    DO_project_id BIGSERIAL ,
+    Name TEXT,
+    Role TEXT,
+    AuthorizedLetterValidity DATE
+);
+
+CREATE TABLE HighlightIssue (
+    highlight_id BIGSERIAL  PRIMARY KEY,
+    DO_project_id BIGSERIAL ,
+    Date DATE,
+    ProblemIssue TEXT,
+    CorrectiveAction TEXT,
+    PIC TEXT,
+    Status VARCHAR(5) CHECK (Status IN ('Open', 'Monitor', 'Close')),
+    Remark TEXT
+);
+
+CREATE TABLE CommercialAspect (
+    cost_id BIGSERIAL  PRIMARY KEY,
+    DO_project_id BIGSERIAL ,
+    Budget TEXT,
+    CostSpend TEXT,
+    PostProject TEXT,
+    BillingProcess TEXT
+);
+
+------------------------------------------------------------------------
+
+
+CREATE TABLE tbl_occurrence (
+    id_IOR BIGSERIAL PRIMARY KEY,
+    subject_ior TEXT,
+    occur_nbr VARCHAR(15),
+    occur_date DATE,
+    reference_ior VARCHAR(80),
+    to_uic VARCHAR(4),
+    cc_uic VARCHAR(4),
+    category_occur VARCHAR(1),
+    type_or_pnbr VARCHAR(15),
+    level_type VARCHAR(10),
+    detail_occurance TEXT,
+    ReportedBy VARCHAR(75),
+    reporter_uic VARCHAR(4),
+    report_date DATE,
+    reporter_identity BOOLEAN,
+    data_reference BOOLEAN,
+    hirac_process BOOLEAN,
+    initial_probability VARCHAR(1),
+    initial_severity VARCHAR(1),
+    initial_riskindex VARCHAR(40)
+);
+
+CREATE TABLE tbl_category_ior (
+    id_ior_category BIGSERIAL PRIMARY KEY,
+    number_cat VARCHAR(2),
+    occur_nbr VARCHAR(60)
+);
+
+CREATE TABLE tbl_follupOccur (
+    id_follup BIGSERIAL PRIMARY KEY,
+    id_IOR INT,
+    follup_detail TEXT,
+    follupby VARCHAR(75),
+    follup_uic VARCHAR(4),
+    follup_date DATE,
+    follup_datarefer BOOLEAN,
+    follup_status VARCHAR(8),
+    nextuic_follup VARCHAR(4),
+    current_probability VARCHAR(1),
+    current_severity VARCHAR(1),
+    current_riskindex VARCHAR(40),
+    FOREIGN KEY (id_IOR) REFERENCES tbl_occurrence(id_IOR)
+);
 

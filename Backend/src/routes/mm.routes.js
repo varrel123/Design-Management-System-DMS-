@@ -17,8 +17,12 @@ router.delete('/deleteAuditPlan', mmController.deleteAuditPlan);
 
 router.put('/UpdateAuditPlan', mmController.UpdateAuditPlan);
 
-router.get('/showAuditPlan', mmController.showAuditPlan);
+router.get('/showAuditPlanACC', mmController.showAuditPlanACC);
 
 router.post('/addAPdetail', mmController.addAPdetail);
+
+router.get('/showAPdetail', mmController.showAPdetail);
+
+router.put('/UpdateAPdetail', mmController.UpdateAPdetail);
 
 module.exports = router;

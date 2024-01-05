@@ -10,6 +10,8 @@ const db = new Client({
     ssl: true
 });
 
+// psql 'postgresql://rafinoval72:HcvUqeRQx98M@ep-cold-mode-215887.ap-southeast-1.aws.neon.tech/GMF?sslmode=require'
+
 db.connect((err) => {
     if (err) {
         console.log(err);

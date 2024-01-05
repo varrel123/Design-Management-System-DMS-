@@ -114,7 +114,7 @@ async function deleteAuditPlan(temp) {
     }
 }
 
-async function showAuditPlan(temp) {
+async function showAuditPlanACC(temp) {
     try {
         const { accountid } = temp;
         const query = `SELECT * FROM AuditPlan WHERE accountid = '${accountid}'`;
@@ -169,6 +169,51 @@ async function addAPdetail  (mm) {
     }
 }
 
+async function UpdateAPdetail(temp) {
+    const {DocNo,accountid,NoItem ,Requirement ,Description,AuditType ,SubDescription ,WorkStation,PlannedWeek,ActualVisitDate,AuditReportEvidenceNbr} = temp;
+    
+    const query = `UPDATE APdetail SET accountid = '${accountid}' , NoItem = '${NoItem}',Requirement = '${Requirement}' ,Description = '${Description}',AuditType = '${AuditType}',
+    SubDescription = '${SubDescription}',WorkStation = '${WorkStation}',PlannedWeek = '${PlannedWeek}',ActualVisitDate = '${ActualVisitDate}'
+    ,AuditReportEvidenceNbr = '${AuditReportEvidenceNbr}' WHERE DocNo ='${DocNo}' `;
+    
+    const result = await db.query(query);
+
+    if (result.rowCount === 1) {
+      return {
+        status:200, message: 'Update Audit Plan Detail successful'
+      }
+    } else {
+      return {
+        status:404, message: 'Error'
+      }
+    }
+}
+
+
+async function showAPdetail(temp) {
+    try {
+        const { DocNo } = temp;
+        const query = `SELECT * FROM apdetail WHERE DocNo = '${DocNo}'`;
+        const result = await db.query(query);
+
+        if (result.rowCount > 0) {
+            return {
+                status: 200,
+                message: 'Audit Plan Detail found',
+                account: result.rows[0],
+            };
+        } else {
+            return {
+                status: 200, 
+                message: 'Audit Plan Detail not found',
+            };
+        }
+    } catch (error) {
+        console.error('Error fetching Audit Plan Detail information:', error);
+        throw error; 
+    }
+}
+
 module.exports = {
     login,
     addAccount,
@@ -177,6 +222,8 @@ module.exports = {
     addAuditPlan,
     deleteAuditPlan,
     UpdateAuditPlan,
-    showAuditPlan,
-    addAPdetail
+    showAuditPlanACC,
+    addAPdetail,
+    showAPdetail,
+    UpdateAPdetail
 }

@@ -63,9 +63,9 @@ async function UpdateAuditPlan(req,res){
     }
 }
 
-async function showAuditPlan(req,res){
+async function showAuditPlanACC(req,res){
     try{
-        const result = await mmService.showAuditPlan(req.body);
+        const result = await mmService.showAuditPlanACC(req.body);
         res.json(result);
     }catch(err){
         res.json(err.detail);
@@ -80,6 +80,25 @@ async function addAPdetail(req,res){
         res.json(err.detail);
     }
 }
+
+async function showAPdetail(req,res){
+    try{
+        const result = await mmService.showAPdetail(req.body);
+        res.json(result);
+    }catch(err){
+        res.json(err.detail);
+    }
+}
+
+async function UpdateAPdetail(req,res){
+    try{
+        const result = await mmService.UpdateAPdetail(req.body);
+        res.json(result);
+    }catch(err){
+        res.json(err.detail);
+    }
+}
+
 module.exports = {
     login,
     addAccount,
@@ -88,6 +107,8 @@ module.exports = {
     addAuditPlan,
     deleteAuditPlan,
     UpdateAuditPlan,
-    showAuditPlan,
-    addAPdetail
+    showAuditPlanACC,
+    addAPdetail,
+    showAPdetail,
+    UpdateAPdetail
 }

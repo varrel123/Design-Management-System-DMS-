@@ -108,6 +108,25 @@ async function addIssuence(req,res){
     }
 }
 
+async function UpdateaddIssuence(req,res){
+    try{
+        const result = await mmService.UpdateaddIssuence(req.body);
+        res.json(result);
+    }catch(err){
+        res.json(err.detail);
+    }
+}
+
+async function showissuence(req,res){
+    try{
+        const result = await mmService.showissuence(req.body);
+        res.json(result);
+    }catch(err){
+        res.json(err.detail);
+    }
+}
+
+
 async function addOccurrence(req,res){
     try{
         const result = await mmService.addOccurrence(req.body);
@@ -130,5 +149,7 @@ module.exports = {
     showAPdetail,
     UpdateAPdetail,
     addIssuence,
-    addOccurrence
+    addOccurrence,
+    UpdateaddIssuence,
+    showissuence
 }

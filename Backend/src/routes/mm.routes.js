@@ -29,4 +29,6 @@ router.post('/addIssuence', mmController.addIssuence);
 
 router.post('/addOccurrence', mmController.addOccurrence);
 
+router.post('/showissuence', mmController.showissuence);
+
 module.exports = router;

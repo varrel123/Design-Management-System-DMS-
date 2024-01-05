@@ -3,6 +3,10 @@ const { use } = require('passport/lib');
 const db = require('../configs/db.config');
 const helper = require('../utils/helper');
 
+//===========================================
+//============ account ======================
+//===========================================
+
 async function login(mm) {
     const { accountid, password } = mm;
     const query = `SELECT * FROM account WHERE accountid = '${accountid}'`;
@@ -56,13 +60,13 @@ async function showAccount(temp) {
             };
         } else {
             return {
-                status: 200, // or 204 (No Content) depending on your preference
+                status: 200, 
                 message: 'Account not found',
             };
         }
     } catch (error) {
         console.error('Error fetching account information:', error);
-        throw error; // Re-throw the error to ensure it gets logged
+        throw error; 
     }
 }
 
@@ -82,6 +86,10 @@ async function deleteAccount(temp) {
         }
     }
 }
+
+//===========================================
+//============ AuditPlan ====================
+//===========================================
 
 async function addAuditPlan (mm) {
     const {accountid,docdate,Subject,AuditType} = mm;
@@ -153,6 +161,10 @@ async function UpdateAuditPlan(temp) {
     }
 }
 
+//==========================================
+//============ APdetail ====================
+//==========================================
+
 async function addAPdetail  (mm) {
     const {DocNo,accountid,NoItem ,Requirement ,Description,AuditType ,SubDescription ,WorkStation,PlannedWeek,ActualVisitDate,AuditReportEvidenceNbr } = mm;
     const query = `INSERT INTO APdetail   (DocNo,accountid,NoItem ,Requirement ,Description,AuditType ,SubDescription ,WorkStation,PlannedWeek,ActualVisitDate,AuditReportEvidenceNbr) 
@@ -171,13 +183,10 @@ async function addAPdetail  (mm) {
 
 async function UpdateAPdetail(temp) {
     const {DocNo,accountid,NoItem ,Requirement ,Description,AuditType ,SubDescription ,WorkStation,PlannedWeek,ActualVisitDate,AuditReportEvidenceNbr} = temp;
-    
-    const query = `UPDATE APdetail SET accountid = '${accountid}' , NoItem = '${NoItem}',Requirement = '${Requirement}' ,Description = '${Description}',AuditType = '${AuditType}',
-    SubDescription = '${SubDescription}',WorkStation = '${WorkStation}',PlannedWeek = '${PlannedWeek}',ActualVisitDate = '${ActualVisitDate}'
-    ,AuditReportEvidenceNbr = '${AuditReportEvidenceNbr}' WHERE DocNo ='${DocNo}' `;
-    
+    const query = `UPDATE APdetail SET accountid = '${accountid}' , NoItem = '${NoItem}',Requirement = '${Requirement}' ,Description = '${Description}', 
+    AuditType = '${AuditType}',SubDescription = '${SubDescription}' ,WorkStation = '${WorkStation}',PlannedWeek = '${PlannedWeek}',
+    ActualVisitDate = '${ActualVisitDate}' ,AuditReportEvidenceNbr = '${AuditReportEvidenceNbr}' WHERE DocNo ='${DocNo}' `;
     const result = await db.query(query);
-
     if (result.rowCount === 1) {
       return {
         status:200, message: 'Update Audit Plan Detail successful'
@@ -214,6 +223,10 @@ async function showAPdetail(temp) {
     }
 }
 
+//==========================================
+//============ Issuence  ===================
+//==========================================
+
 async function addIssuence  (mm) {
     const {DocNo ,accountid,IssueNbr ,IssueDate ,IssueDesc,IssuedBy ,HDOapprove} = mm;
     const query = `INSERT INTO issuence  (DocNo ,accountid,IssueNbr ,IssueDate ,IssueDesc,IssuedBy ,HDOapprove) 
@@ -229,6 +242,52 @@ async function addIssuence  (mm) {
         }
     }
 }
+
+async function UpdateaddIssuence(temp) {
+    const {DocNo ,accountid,IssueNbr ,IssueDate ,IssueDesc,IssuedBy ,HDOapprove} = temp;
+    
+    const query = `UPDATE issuence SET accountid = '${accountid}' , IssueNbr = '${IssueNbr}',IssueDate = '${IssueDate}' ,IssueDesc = '${IssueDesc}', 
+    IssuedBy = '${IssuedBy}',HDOapprove = '${HDOapprove}' WHERE DocNo ='${DocNo}' `;
+
+    const result = await db.query(query);
+    if (result.rowCount === 1) {
+      return {
+        status:200, message: 'Update Issuence successful'
+      }
+    } else {
+      return {
+        status:404, message: 'Error'
+      }
+    }
+}
+
+async function showissuence(temp) {
+    try {
+        const { DocNo } = temp;
+        const query = `SELECT * FROM issuence WHERE DocNo = '${DocNo}'`;
+        const result = await db.query(query);
+
+        if (result.rowCount > 0) {
+            return {
+                status: 200,
+                message: 'Audit Plan Detail found',
+                account: result.rows[0],
+            };
+        } else {
+            return {
+                status: 200, 
+                message: 'Audit Plan Detail not found',
+            };
+        }
+    } catch (error) {
+        console.error('Error fetching Audit Plan Detail information:', error);
+        throw error; 
+    }
+}
+
+//==========================================
+//============ Occurrence   ================
+//==========================================
 
 async function addOccurrence  (mm) {
     const {subject_ior,occur_nbr,occur_date,reference_ior,to_uic,cc_uic,category_occur,type_or_pnbr,level_type,detail_occurance,ReportedBy,reporter_uic,report_date,reporter_identity,
@@ -281,5 +340,7 @@ module.exports = {
     showAPdetail,
     UpdateAPdetail,
     addIssuence,
-    addOccurrence
+    addOccurrence,
+    UpdateaddIssuence,
+    showissuence
 }

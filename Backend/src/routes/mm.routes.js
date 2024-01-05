@@ -29,6 +29,16 @@ router.post('/addIssuence', mmController.addIssuence);
 
 router.post('/addOccurrence', mmController.addOccurrence);
 
-router.post('/showissuence', mmController.showissuence);
+router.get('/showOccurrence', mmController.showOccurrence);
+
+router.get('/showissuence', mmController.showissuence);
+
+router.put('/updateOccurrence', mmController.updateOccurrence);
+
+router.delete('/deleteOccurrence', mmController.deleteOccurrence);
+
+router.post('/addCategoryIOR', mmController.addCategoryIOR);
+
+router.post('/addFollowUpOccurrence', mmController.addFollowUpOccurrence);
 
 module.exports = router;

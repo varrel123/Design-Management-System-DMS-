@@ -136,6 +136,51 @@ async function addOccurrence(req,res){
     }
 }
 
+async function showOccurrence(req,res){
+    try{
+        const result = await mmService.showOccurrence(req.body);
+        res.json(result);
+    }catch(err){
+        res.json(err.detail);
+    }
+}
+
+async function updateOccurrence(req,res){
+    try{
+        const result = await mmService.updateOccurrence(req.body);
+        res.json(result);
+    }catch(err){
+        res.json(err.detail);
+    }
+}
+
+async function deleteOccurrence(req,res){
+    try{
+        const result = await mmService.deleteOccurrence(req.body);
+        res.json(result);
+    }catch(err){
+        res.json(err.detail);
+    }
+}
+
+async function addCategoryIOR(req,res){
+    try{
+        const result = await mmService.addCategoryIOR(req.body);
+        res.json(result);
+    }catch(err){
+        res.json(err.detail);
+    }
+}
+
+async function addFollowUpOccurrence(req,res){
+    try{
+        const result = await mmService.addFollowUpOccurrence(req.body);
+        res.json(result);
+    }catch(err){
+        res.json(err.detail);
+    }
+}
+
 module.exports = {
     login,
     addAccount,
@@ -151,5 +196,10 @@ module.exports = {
     addIssuence,
     addOccurrence,
     UpdateaddIssuence,
-    showissuence
-}
+    showissuence,
+    showOccurrence,
+    updateOccurrence,
+    deleteOccurrence,
+    addCategoryIOR,
+    addFollowUpOccurrence
+};

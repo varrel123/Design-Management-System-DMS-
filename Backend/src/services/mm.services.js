@@ -214,6 +214,22 @@ async function showAPdetail(temp) {
     }
 }
 
+async function addIssuence  (mm) {
+    const {DocNo ,accountid,IssueNbr ,IssueDate ,IssueDesc,IssuedBy ,HDOapprove} = mm;
+    const query = `INSERT INTO issuence  (DocNo ,accountid,IssueNbr ,IssueDate ,IssueDesc,IssuedBy ,HDOapprove) 
+    VALUES ('${DocNo}','${accountid}','${IssueNbr}',  '${IssueDate}','${IssueDesc}','${IssuedBy}',  '${HDOapprove}')`;
+    const result = await db.query(query);
+    if (result.rowCount === 1) {
+        return {
+            message: 'issuence Created'
+        }
+    } else {
+        return {
+            message: 'Error'
+        }
+    }
+}
+
 module.exports = {
     login,
     addAccount,
@@ -225,5 +241,6 @@ module.exports = {
     showAuditPlanACC,
     addAPdetail,
     showAPdetail,
-    UpdateAPdetail
+    UpdateAPdetail,
+    addIssuence
 }

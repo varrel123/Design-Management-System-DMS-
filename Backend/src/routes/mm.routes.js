@@ -25,4 +25,6 @@ router.get('/showAPdetail', mmController.showAPdetail);
 
 router.put('/UpdateAPdetail', mmController.UpdateAPdetail);
 
+router.post('/addIssuence', mmController.addIssuence);
+
 module.exports = router;

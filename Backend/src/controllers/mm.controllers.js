@@ -99,6 +99,15 @@ async function UpdateAPdetail(req,res){
     }
 }
 
+async function addIssuence(req,res){
+    try{
+        const result = await mmService.addIssuence(req.body);
+        res.json(result);
+    }catch(err){
+        res.json(err.detail);
+    }
+}
+
 module.exports = {
     login,
     addAccount,
@@ -110,5 +119,6 @@ module.exports = {
     showAuditPlanACC,
     addAPdetail,
     showAPdetail,
-    UpdateAPdetail
+    UpdateAPdetail,
+    addIssuence
 }

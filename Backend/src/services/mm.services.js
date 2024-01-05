@@ -230,6 +230,44 @@ async function addIssuence  (mm) {
     }
 }
 
+async function addOccurrence  (mm) {
+    const {subject_ior,occur_nbr,occur_date,reference_ior,to_uic,cc_uic,category_occur,type_or_pnbr,level_type,detail_occurance,ReportedBy,reporter_uic,report_date,reporter_identity,
+        data_reference,hirac_process,initial_probability,initial_severity,initial_riskindex} = mm;
+        const query = `INSERT INTO tbl_occurrence (
+            subject_ior,
+            occur_nbr,
+            occur_date,
+            reference_ior,
+            to_uic,
+            cc_uic,
+            category_occur,
+            type_or_pnbr,
+            level_type,
+            detail_occurance,
+            ReportedBy,
+            reporter_uic,
+            report_date,
+            reporter_identity,
+            data_reference,
+            hirac_process,
+            initial_probability,
+            initial_severity,
+            initial_riskindex
+        ) VALUES ('${subject_ior}','${occur_nbr}','${occur_date}','${reference_ior}','${to_uic}','${cc_uic}','${category_occur}','${type_or_pnbr}','${level_type}','${detail_occurance}',
+        '${ReportedBy}','${reporter_uic}','${report_date}',${reporter_identity},${data_reference},${hirac_process},'${initial_probability}','${initial_severity}','${initial_riskindex}')`;
+
+    const result = await db.query(query);
+    if (result.rowCount === 1) {
+        return {
+            message: 'Occurrence Created'
+        }
+    } else {
+        return {
+            message: 'Error'
+        }
+    }
+}
+
 module.exports = {
     login,
     addAccount,
@@ -242,5 +280,6 @@ module.exports = {
     addAPdetail,
     showAPdetail,
     UpdateAPdetail,
-    addIssuence
+    addIssuence,
+    addOccurrence
 }

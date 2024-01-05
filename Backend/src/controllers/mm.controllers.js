@@ -108,6 +108,15 @@ async function addIssuence(req,res){
     }
 }
 
+async function addOccurrence(req,res){
+    try{
+        const result = await mmService.addOccurrence(req.body);
+        res.json(result);
+    }catch(err){
+        res.json(err.detail);
+    }
+}
+
 module.exports = {
     login,
     addAccount,
@@ -120,5 +129,6 @@ module.exports = {
     addAPdetail,
     showAPdetail,
     UpdateAPdetail,
-    addIssuence
+    addIssuence,
+    addOccurrence
 }

@@ -181,6 +181,114 @@ async function addFollowUpOccurrence(req,res){
     }
 }
 
+async function addNCRInit(req,res){
+    try{
+        const result = await mmService.addNCRInit(req.body);
+        res.json(result);
+    }catch(err){
+        res.json(err.detail);
+    }
+}
+
+async function deleteNCRInit(req,res){
+    try{
+        const result = await mmService.deleteNCRInit(req.body);
+        res.json(result);
+    }catch(err){
+        res.json(err.detail);
+    }
+}
+
+async function UpdateNCRInit(req,res){
+    try{
+        const result = await mmService.UpdateNCRInit(req.body);
+        res.json(result);
+    }catch(err){
+        res.json(err.detail);
+    }
+}
+
+async function showNCRInit(req,res){
+    try{
+        const result = await mmService.showNCRInit(req.body);
+        res.json(result);
+    }catch(err){
+        res.json(err.detail);
+    }
+}
+
+async function addNCRReply(req,res){
+    try{
+        const result = await mmService.addNCRReply(req.body);
+        res.json(result);
+    }catch(err){
+        res.json(err.detail);
+    }
+}
+
+async function deleteNCRReply(req,res){
+    try{
+        const result = await mmService.deleteNCRReply(req.body);
+        res.json(result);
+    }catch(err){
+        res.json(err.detail);
+    }
+}
+
+async function UpdateNCRReply(req,res){
+    try{
+        const result = await mmService.UpdateNCRReply(req.body);
+        res.json(result);
+    }catch(err){
+        res.json(err.detail);
+    }
+}
+
+async function showNCRReply(req,res){
+    try{
+        const result = await mmService.showNCRReply(req.body);
+        res.json(result);
+    }catch(err){
+        res.json(err.detail);
+    }
+}
+
+async function addNCRFollowResult(req,res){
+    try{
+        const result = await mmService.addNCRFollowResult(req.body);
+        res.json(result);
+    }catch(err){
+        res.json(err.detail);
+    }
+}
+
+async function deleteNCRFollowResult(req,res){
+    try{
+        const result = await mmService.deleteNCRFollowResult(req.body);
+        res.json(result);
+    }catch(err){
+        res.json(err.detail);
+    }
+}
+
+async function UpdateNCRFollowResult(req,res){
+    try{
+        const result = await mmService.UpdateNCRFollowResult(req.body);
+        res.json(result);
+    }catch(err){
+        res.json(err.detail);
+    }
+}
+
+async function showNCRFollowResult(req,res){
+    try{
+        const result = await mmService.showNCRFollowResult(req.body);
+        res.json(result);
+    }catch(err){
+        res.json(err.detail);
+    }
+}
+
 module.exports = {
     login,
     addAccount,
@@ -201,5 +309,17 @@ module.exports = {
     updateOccurrence,
     deleteOccurrence,
     addCategoryIOR,
-    addFollowUpOccurrence
+    addFollowUpOccurrence,
+    addNCRInit,
+    deleteNCRInit,
+    showNCRInit,
+    UpdateNCRInit,
+    addNCRReply,
+    deleteNCRReply,
+    UpdateNCRReply,
+    showNCRReply,
+    addNCRFollowResult,
+    deleteNCRFollowResult,
+    UpdateNCRFollowResult,
+    showNCRFollowResult
 };

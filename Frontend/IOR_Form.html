@@ -4,46 +4,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
+    <title>IOR Form Page</title>
 </head>
 
 <body>
     <div id="app">
         <h2>{{ title }}</h2>
-        <!-- Login Form -->
-        <form @submit.prevent="login">
-            <label for="subject">Subject: </label>
-            <input type="text" id="subject" name="subject" v-model="IOR_data.subject" required><br><br>
-            <label for="occurrence-number">Occurrence number: </label>
-            <input type="text" id="occurrence-number" name="occurrence-number" v-model="IOR_data.occurrencenumber"
+
+        <form @submit.prevent="IOR">
+
+            <!--  -->
+            <label for="subject_ior">Subject: </label>
+            <input type="text" id="subject_ior" name="subject_ior" v-model="IOR_data.subject_ior" required><br><br>
+
+            <!--  -->
+            <label for="occur_nbr">Occurrence number: </label>
+            <input type="text" id="occur_nbr" name="occur_nbr" v-model="IOR_data.occur_nbr" required><br><br>
+            
+            <!--  -->
+            <label for="occur_date">Occurrence date: </label>
+            <input type="date" id="occur_date" name="occur_date" v-model="IOR_data.occur_date" required><br><br>
+
+            <!--  -->
+            <label for="reference_ior">Reference IOR: </label>
+            <input type="text" id="reference_ior" name="reference_ior" v-model="IOR_data.reference_ior"
                 required><br><br>
-            <label for="occur-date">Occurrence date: </label>
-            <input type="date" id="occur-date" name="occur-date" v-model="IOR_data.occur_date" required><br><br>
-            <label for="reference-ior">Reference IOR: </label>
-            <input type="text" id="reference-ior" name="reference-ior" v-model="IOR_data.reference_ior"
+
+            <!--  -->
+            <label for="to_uic">to_uic: </label>
+            <input type="text" id="to_uic" name="to_uic" v-model="IOR_data.to_uic" maxlength="4" required><br><br>
+
+            <!--  -->
+            <label for="cc_uic">cc_uic: </label>
+            <input type="text" id="cc_uic" name="cc_uic" v-model="IOR_data.cc_uic" maxlength="4" required><br><br>
+
+            <!--  -->
+            <label for="category_occur">category_occur: </label>
+            <input type="text" id="category_occur" name="category_occur" v-model="IOR_data.category_occur" maxlength="1"
                 required><br><br>
-            <label for="to_uic">to_uic :</label>
-            <input type="text" id="to_uic " name="to_uic" v-model="IOR_data.to_uic" required><br><br>
-            <label for="cc_uic">cc_uic :</label>
-            <input type="text" id="cc_uic  " name="cc_uic" v-model="IOR_data.cc_uic" required><br><br>
-            <label for="category_occur">category_occur : </label>
-            <input type="text" id="category_occur" name="category_occur   " v-model="IOR_data.category_occur"
+
+            <!--  -->
+            <label for="type_or_pnbr">type_or_pnbr: </label>
+            <input type="text" id="type_or_pnbr" name="type_or_pnbr" v-model="IOR_data.type_or_pnbr" maxlength="15"
                 required><br><br>
-            <label for="type_or_pnbr ">type_or_pnbr : </label>
-            <input type="text" id="type_or_pnbr" name="type_or_pnbr" v-model="IOR_data.type_or_pnbr" required><br><br>
-            <label for="level_type ">level_type : </label>
-            <input type="text" id="level_type" name="level_type" v-model="IOR_data.level_type" required><br><br>
-            <label for="detail_occurance">detail_occurance :</label>
-            <input type="text" id="detail_occurance " name="detail_occurance " v-model="IOR_data.detail_occurance "
+
+            <!--  -->
+            <label>level_type:</label>
+
+            <input type="radio" id="aircraft" name="level_type" value="Aircraft" v-model="IOR_data.level_type">
+            <label for="aircraft">Aircraft</label>
+
+            <input type="radio" id="engine" name="level_type" value="Engine" v-model="IOR_data.level_type">
+            <label for="engine">Engine</label>
+
+            <input type="radio" id="apu" name="level_type" value="APU" v-model="IOR_data.level_type">
+            <label for="apu">APU</label>
+
+            <input type="radio" id="others" name="level_type" value="Others" v-model="IOR_data.level_type">
+            <label for="others">Others</label><br><br>
+
+            <!--  -->
+            <label for="detail_occurance">detail_occurance: </label>
+            <input type="text" id="detail_occurance" name="detail_occurance" v-model="IOR_data.detail_occurance"
                 required><br><br>
-            <label for="detail_occurance">ReportedBy : </label>
-            <input type="text" id="ReportedBy  " name="ReportedBy" v-model="IOR_data.ReportedBy  " required><br><br>
-            <label for="detail_occurance">reporter_uic :</label>
-            <input type="text" id="reporter_uic   " name="reporter_uic " v-model="IOR_data.reporter_uic   "
+
+            <!--  -->
+            <label for="ReportedBy">ReportedBy: </label>
+            <input type="text" id="ReportedBy" name="ReportedBy" v-model="IOR_data.ReportedBy" required><br><br>
+
+            <!--  -->
+            <label for="reporter_uic">reporter_uic:</label>
+            <input type="text" id="reporter_uic" name="reporter_uic" v-model="IOR_data.reporter_uic" maxlength="4"
                 required><br><br>
-            <label for="detail_occurance">report_date : </label>
-            <input type="date" id="report_date    " name="report_date  " v-model="IOR_data.report_date    "
+
+            <!--  -->
+            <label for="report_date">report_date: </label>
+            <input type="date" id="report_date" name="report_date" v-model="IOR_data.report_date" required><br><br>
+
+            <!--  -->
+            <label for="reporter_identity">reporter_identity: </label>
+            <input type="radio" id="Shown" name="reporter_identity" value="Shown" v-model="IOR_data.reporter_identity">
+            <label for="Shown">Shown</label>
+            
+            <input type="radio" id="Hidden" name="reporter_identity" value="Hidden" v-model="IOR_data.reporter_identity">
+            <label for="Hidden">Hidden</label><br><br>
+            
+            <!--  -->
+            <label for="Data_reference">data_reference: </label>
+            <input type="radio" id="Yes1" name="Data_reference" value="Yes" v-model="IOR_data.Data_reference">
+            <label for="Yes1">Yes</label>
+            
+            <input type="radio" id="No1" name="Data_reference" value="No" v-model="IOR_data.Data_reference">
+            <label for="No1">No</label><br><br>
+            
+            <!--  -->
+            <label for="hirac_process">hirac_process: </label>
+            <input type="radio" id="Yes2" name="hirac_process" value="Yes" v-model="IOR_data.hirac_process">
+            <label for="Yes2">Yes</label>
+            
+            <input type="radio" id="No2" name="hirac_process" value="No" v-model="IOR_data.hirac_process">
+            <label for="No2">No</label><br><br>
+
+            <!--  -->
+            <label for="initial_probability">initial_probability: </label>
+            <input type="text" id="initial_probability" name="initial_probability"
+                v-model="IOR_data.initial_probability" maxlength="1" required><br><br>
+
+            <!--  -->
+            <label for="initial_severity">initial_severity: </label>
+            <input type="text" id="initial_severity" name="initial_severity" v-model="IOR_data.initial_severity"
+                maxlength="1" required><br><br>
+
+            <!--  -->
+            <label for="initial_riskindex">initial_riskindex: </label>
+            <input type="text" id="initial_riskindex" name="initial_riskindex" v-model="IOR_data.initial_riskindex"
                 required><br><br>
+
             <button type="submit">Submit</button>
         </form>
         <p>{{ loginMessage }}</p>
@@ -59,10 +135,10 @@
         createApp({
             data() {
                 return {
-                    title: "INTERNAL OCCURRENCE REPORT (IOR)",
+                    title: "IOR",
                     IOR_data: {
-                        subject: '',
-                        occurrencenumber: '',
+                        subject_ior: '',
+                        occur_nbr: '',
                         occur_date: '',
                         reference_ior: '',
                         to_uic: '',
@@ -70,28 +146,36 @@
                         category_occur: '',
                         type_or_pnbr: '',
                         level_type: '',
-                        detail_occuranceL: '',
+                        detail_occurance: '',
                         ReportedBy: '',
                         reporter_uic: '',
-                        report_date: ''
+                        report_date: '',
+                        reporter_identity: '',
+                        Data_reference: '',
+                        hirac_process: '',
+                        initial_probability: '',
+                        initial_severity: '',
+                        initial_riskindex: ''
                     },
-                    loginMessage: '' // New property for login message
+                    loginMessage: ''
                 };
             },
             methods: {
-                async login() {
-                    console.log("Sending data:", this.IOR_data); // Log data yang dikirim ke server
+                async IOR() {
+                    console.log("Sending data:", this.IOR_data);
                     try {
                         const response = await axios.post("http://localhost:3000/addOccurrence", this.IOR_data);
-                        console.log("Server response:", response.data); // Log respons dari server
-                        if (response.data.status === 200 && response.data.message === 'Login successful') {
-                            this.loginMessage = 'Login successful';
+                        // console.log("Server response:", response.data);
+                        console.log(this.IOR_data);
+
+                        if (response.data.status === 200 && response.data.message === 'Occurrence Created') {
+                            this.loginMessage = 'Occurrence added successfully';
                         } else {
-                            this.loginMessage = response.data.message;
+                            this.loginMessage = 'Failed to add occurrence';
                         }
                     } catch (error) {
                         console.error("Error during login:", error);
-                        this.loginMessage = 'Login gagal';
+                        this.loginMessage = 'Failed to add occurrence' + error;
                     }
                 }
             }

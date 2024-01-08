@@ -285,38 +285,41 @@ async function showissuence(temp) {
 //==========================================
 
 async function addOccurrence(mm) {
+    // Change 'occurrence-number' to 'occurrencenumber'
     const { subject_ior, occur_nbr, occur_date, reference_ior, to_uic, cc_uic, category_occur, type_or_pnbr, level_type, detail_occurance, ReportedBy, reporter_uic, report_date, reporter_identity,
-        data_reference, hirac_process, initial_probability, initial_severity, initial_riskindex } = mm;
+        Data_reference, hirac_process, initial_probability, initial_severity, initial_riskindex } = mm;
     const query = `INSERT INTO tbl_occurrence (
-            subject_ior,
-            occur_nbr,
-            occur_date,
-            reference_ior,
-            to_uic,
-            cc_uic,
-            category_occur,
-            type_or_pnbr,
-            level_type,
-            detail_occurance,
-            ReportedBy,
-            reporter_uic,
-            report_date,
-            reporter_identity,
-            data_reference,
-            hirac_process,
-            initial_probability,
-            initial_severity,
-            initial_riskindex
-        ) VALUES ('${subject_ior}','${occur_nbr}','${occur_date}','${reference_ior}','${to_uic}','${cc_uic}','${category_occur}','${type_or_pnbr}','${level_type}','${detail_occurance}',
-        '${ReportedBy}','${reporter_uic}','${report_date}',${reporter_identity},${data_reference},${hirac_process},'${initial_probability}','${initial_severity}','${initial_riskindex}')`;
+        subject_ior,
+        occur_nbr,
+        occur_date,
+        reference_ior,
+        to_uic,
+        cc_uic,
+        category_occur,
+        type_or_pnbr,
+        level_type, 
+        detail_occurance,
+        ReportedBy,
+        reporter_uic,
+        report_date,
+        reporter_identity,
+        Data_reference,  
+        hirac_process,
+        initial_probability,
+        initial_severity,
+        initial_riskindex
+    ) VALUES ('${subject_ior}','${occur_nbr}','${occur_date}','${reference_ior}','${to_uic}','${cc_uic}','${category_occur}','${type_or_pnbr}','${level_type}','${detail_occurance}',
+    '${ReportedBy}','${reporter_uic}','${report_date}','${reporter_identity}','${Data_reference}','${hirac_process}','${initial_probability}','${initial_severity}','${initial_riskindex}')`;
 
     const result = await db.query(query);
     if (result.rowCount === 1) {
         return {
+            status: 200,
             message: 'Occurrence Created'
         }
     } else {
         return {
+            status: 404,
             message: 'Error'
         }
     }

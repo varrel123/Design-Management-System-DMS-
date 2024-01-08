@@ -75,7 +75,7 @@
         <h2>{{ title }}</h2>
         <!-- Login Form -->
         <form @submit.prevent="login">
-            <label for="accountid">Account ID:</label>
+            <label for="accountid">ID Number :</label>
             <input type="text" id="accountid" v-model="loginData.accountid" required>
             <label for="password">Password:</label>
             <input type="password" id="Password" v-model="loginData.Password" required>
@@ -111,6 +111,7 @@
                         console.log("Server response:", response.data); // Log respons dari server
                         if (response.data.status === 200 && response.data.message === 'Login successful') {
                             this.loginMessage = 'Login successful';
+                            window.location.href = 'main_menu.html';
                         } else {
                             this.loginMessage = response.data.message;
                         }

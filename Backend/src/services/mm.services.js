@@ -8,27 +8,22 @@ const helper = require('../utils/helper');
 //===========================================
 
 async function login(mm) {
-    const { accountid, password } = mm;
-    const query = `SELECT * FROM account WHERE accountid = '${accountid}'`;
+    const { accountid, Password } = mm;
+
+    // Pastikan kedua accountid dan password diisi
+    const query = `SELECT * FROM account WHERE accountid = '${accountid}' AND Password = '${Password}'`;
     const result = await db.query(query);
-    if (result.rows.length === 0) {
-        return {
-            message: 'User not found'
-        }
-    } else {
+
+    if (result.rowCount === 1) {
         const user = result.rows[0];
-        if (user.password === password) {
-            return {
-                message: 'Login successful',
-                user
-            }
-        } else {
-            return {
-                message: 'Password is not correct'
-            }
-        }
+        return { status: 200, message: 'Login successful', user };
+    } else {
+        return { status: 404, message: 'Account not found' };
     }
 }
+
+
+
 
 async function addAccount(mm) {
     const { accountid, name, unit, password, role } = mm;
@@ -270,13 +265,13 @@ async function showissuence(temp) {
         if (result.rowCount > 0) {
             return {
                 status: 200,
-                message: 'Audit Plan Detail found',
+                message: 'issuence found',
                 account: result.rows[0],
             };
         } else {
             return {
                 status: 200,
-                message: 'Audit Plan Detail not found',
+                message: 'issuencel not found',
             };
         }
     } catch (error) {
@@ -353,6 +348,7 @@ async function showOccurrence(temp) {
 
 async function updateOccurrence(mm) {
     const {
+        id_IOR,
         subject_ior,
         occur_nbr,
         occur_date,
@@ -375,6 +371,7 @@ async function updateOccurrence(mm) {
     } = mm;
 
     const query = `UPDATE tbl_occurrence SET
+        id_IOR = '${id_IOR}',
         occur_nbr = '${occur_nbr}',
         occur_date = '${occur_date}',
         reference_ior = '${reference_ior}',
@@ -513,8 +510,12 @@ async function addFollowUpOccurrence(followUpData) {
     }
 }
 
-async function addNCRInit (mm) {
-    const {accountid, regulationbased, subject, audit_no, ncr_no, issued_date, responsible_office, audit_type, audit_scope, to_uic, attention, require_condition, level_finding, problem_analis, answer_duedate, issue_ian, ian_no, encounter_condition, audit_by, audit_date, acknowledge_by, acknowledge_date, status, temporarylink} = mm;
+//==========================================
+//============ tbl_follupOccur     =========
+//==========================================
+
+async function addNCRInit(mm) {
+    const { accountid, regulationbased, subject, audit_no, ncr_no, issued_date, responsible_office, audit_type, audit_scope, to_uic, attention, require_condition, level_finding, problem_analis, answer_duedate, issue_ian, ian_no, encounter_condition, audit_by, audit_date, acknowledge_by, acknowledge_date, status, temporarylink } = mm;
     const query = `INSERT INTO NCR_Initial ( AccountID, RegulationBased, Subject, Audit_Plan_No, NCR_No, Issued_Date,  Responsibility_Office, Audit_Type, Audit_Scope, To_UIC, Attention, Require_Condition_Reference, Level_Finding, Problem_Analysis, Answer_Due_Date, Issue_IAN, IAN_No, Encountered_Condition, Audit_by, Audit_Date, Acknowledge_by, Acknowledge_date, Status, TemporaryLink) VALUES ('${accountid}','${regulationbased}', '${subject}', '${audit_no}', '${ncr_no}', '${issued_date}', '${responsible_office}', '${audit_type}', '${audit_scope}', '${to_uic}', '${attention}', '${require_condition}', '${level_finding}', '${problem_analis}', '${answer_duedate}', '${issue_ian}', '${ian_no}', '${encounter_condition}', '${audit_by}', '${audit_date}', '${acknowledge_by}', '${acknowledge_date}', '${status}', '${temporarylink}')`;
     const result = await db.query(query);
     if (result.rowCount === 1) {
@@ -545,29 +546,29 @@ async function deleteNCRInit(temp) {
 }
 
 async function UpdateNCRInit(temp) {
-    const {accountid, ncr_init_id, regulationbased, subject, audit_no, ncr_no, issued_date, responsible_office, audit_type, audit_scope, to_uic, attention, require_condition, level_finding, problem_analis, answer_duedate, issue_ian, ian_no, encounter_condition, audit_by, audit_date, acknowledge_by, acknowledge_date, status, temporarylink} = temp;
+    const { accountid, ncr_init_id, regulationbased, subject, audit_no, ncr_no, issued_date, responsible_office, audit_type, audit_scope, to_uic, attention, require_condition, level_finding, problem_analis, answer_duedate, issue_ian, ian_no, encounter_condition, audit_by, audit_date, acknowledge_by, acknowledge_date, status, temporarylink } = temp;
     const query = `UPDATE NCR_Initial SET AccountID = '${accountid}', RegulationBased = '${regulationbased}', Subject = '${subject}', Audit_Plan_No = '${audit_no}', NCR_No = '${ncr_no}', Issued_Date = '${issued_date}', Responsibility_Office = '${responsible_office}', Audit_Type = '${audit_type}', Audit_Scope = '${audit_scope}', To_UIC = '${to_uic}', Attention = '${attention}', Require_Condition_Reference = '${require_condition}', Level_Finding = '${level_finding}', Problem_Analysis = '${problem_analis}', Answer_Due_Date = '${answer_duedate}', Issue_IAN = '${issue_ian}', IAN_No = '${ian_no}', Encountered_Condition = '${encounter_condition}', Audit_by = '${audit_by}', Audit_Date = '${audit_date}', Acknowledge_by = '${acknowledge_by}', Acknowledge_date = '${acknowledge_date}', Status = '${status}', TemporaryLink = '${temporarylink}' WHERE NCR_init_ID = '${ncr_init_id}'`;
     const result = await db.query(query);
     if (result.rowCount === 1) {
-      return {
-        status:200, message: 'Update Audit Plan successful'
-      }
+        return {
+            status: 200, message: 'Update Audit Plan successful'
+        }
     } else {
-      return {
-        status:404, message: 'Error'
-      }
+        return {
+            status: 404, message: 'Error'
+        }
     }
 }
 
 async function showNCRInit() {
     const query = `SELECT * FROM NCR_Initial`;
     const result = await db.query(query);
-    if(result.rowCount){
+    if (result.rowCount) {
         return {
             message: 'Showing NCR Intial',
-            showProduct : result.rows
+            showProduct: result.rows
         }
-    }else{
+    } else {
         return {
             message: 'No Data NCR Initial'
         }
@@ -575,8 +576,8 @@ async function showNCRInit() {
 }
 
 
-async function addNCRReply (mm) {
-    const {accountid, ncr_init_id, rca_problem, corrective_act, preventive_act, identified_by, identified_date, accept_by, audit_accept, temporarylink} = mm;
+async function addNCRReply(mm) {
+    const { accountid, ncr_init_id, rca_problem, corrective_act, preventive_act, identified_by, identified_date, accept_by, audit_accept, temporarylink } = mm;
     const query = `INSERT INTO NCR_reply ( AccountID, NCR_init_ID, RCA_problem, Corrective_Action, Preventive_Action, Identified_by_Auditee, Identified_Date, Accept_by_Auditor, Auditor_Accept_date, TemporaryLink) VALUES ('${accountid}', '${ncr_init_id}', '${rca_problem}', '${corrective_act}', '${preventive_act}', '${identified_by}', '${identified_date}', '${accept_by}', '${audit_accept}', '${temporarylink}')`;
     const result = await db.query(query);
     if (result.rowCount === 1) {
@@ -607,30 +608,30 @@ async function deleteNCRReply(temp) {
 }
 
 async function UpdateNCRReply(temp) {
-    const {accountid, ncr_init_id, rca_problem, corrective_act, preventive_act, identified_by, identified_date, accept_by, audit_accept, temporarylink} = temp;
+    const { accountid, ncr_init_id, rca_problem, corrective_act, preventive_act, identified_by, identified_date, accept_by, audit_accept, temporarylink } = temp;
     const query = `UPDATE NCR_reply SET AccountID = '${accountid}', RCA_problem  = '${rca_problem}', Corrective_Action  = '${corrective_act}', Preventive_Action  = '${preventive_act}', Identified_by_Auditee  = '${identified_by}', Identified_Date  = '${identified_date}', Accept_by_Auditor  = '${accept_by}', Auditor_Accept_date  = '${audit_accept}', TemporaryLink = '${temporarylink}' WHERE NCR_init_ID = '${ncr_init_id}'`;
     const result = await db.query(query);
     if (result.rowCount === 1) {
-      return {
-        status:200, message: 'Update NCR Reply successful'
-      }
+        return {
+            status: 200, message: 'Update NCR Reply successful'
+        }
     } else {
-      return {
-        status:404, message: 'Error'
-      }
+        return {
+            status: 404, message: 'Error'
+        }
     }
 }
 
 async function showNCRReply(mm) {
-    const {ncr_init_id} = mm;
+    const { ncr_init_id } = mm;
     const query = `SELECT * FROM NCR_reply WHERE ncr_init_id = '${ncr_init_id}' `;
     const result = await db.query(query);
-    if(result.rowCount){
+    if (result.rowCount) {
         return {
             message: 'Showing NCR Reply',
-            showProduct : result.rows
+            showProduct: result.rows
         }
-    }else{
+    } else {
         return {
             message: 'No NCR Reply'
         }
@@ -638,7 +639,7 @@ async function showNCRReply(mm) {
 }
 
 async function addNCRFollowResult(temp) {
-    const {accountid, ncr_init_id, close_corrective, proposed_close_audit, proposed_close_date, is_close, effective, refer_verif, sheet_no, new_ncr_issue_no, close_approvedby, close_approveddate, verif_chied, verif_date, temporarylink} = temp;
+    const { accountid, ncr_init_id, close_corrective, proposed_close_audit, proposed_close_date, is_close, effective, refer_verif, sheet_no, new_ncr_issue_no, close_approvedby, close_approveddate, verif_chied, verif_date, temporarylink } = temp;
     const query = `INSERT INTO NCR_FollowResult ( AccountID, NCR_init_ID, Close_Corrective_Actions , Proposed_Close_Auditee , Proposed_Close_Date , Is_close , effectiveness , Refer_Verification , Sheet_No , New_NCR_Issue_nbr ,  Close_approved_by ,Close_approved_date , Verified_Chief_IM , Verified_Date ,  TemporaryLink) VALUES ('${accountid}', '${ncr_init_id}', '${close_corrective}', '${proposed_close_audit}', '${proposed_close_date}', '${is_close}', '${effective}', '${refer_verif}', '${sheet_no}', '${new_ncr_issue_no}', '${close_approvedby}', '${close_approveddate}', '${verif_chied}', '${verif_date}', '${temporarylink}')`;
     const result = await db.query(query);
     if (result.rowCount === 1) {
@@ -669,30 +670,30 @@ async function deleteNCRFollowResult(temp) {
 }
 
 async function UpdateNCRFollowResult(temp) {
-    const {accountid, ncr_init_id, close_corrective, proposed_close_audit, proposed_close_date, is_close, effective, refer_verif, sheet_no, new_ncr_issue_no, close_approvedby, close_approveddate, verif_chied, verif_date, temporarylink} = temp;
+    const { accountid, ncr_init_id, close_corrective, proposed_close_audit, proposed_close_date, is_close, effective, refer_verif, sheet_no, new_ncr_issue_no, close_approvedby, close_approveddate, verif_chied, verif_date, temporarylink } = temp;
     const query = `UPDATE NCR_FollowResult SET AccountID = '${accountid}', Close_Corrective_Actions   = '${close_corrective}', Proposed_Close_Auditee   = '${proposed_close_audit}', Proposed_Close_Date   = '${proposed_close_date}', Is_close   = '${is_close}', effectiveness   = '${effective}', Refer_Verification   = '${refer_verif}', Sheet_No   = '${sheet_no}', New_NCR_Issue_nbr    = '${new_ncr_issue_no}', Close_approved_by    = '${close_approvedby}', Close_approved_date    = '${close_approveddate}', Verified_Chief_IM    = '${verif_chied}', Verified_Date     = '${verif_date}', TemporaryLink     = '${temporarylink}' WHERE NCR_init_ID = '${ncr_init_id}'`;
     const result = await db.query(query);
     if (result.rowCount === 1) {
-      return {
-        status:200, message: 'Update NCR Follow Result successful'
-      }
+        return {
+            status: 200, message: 'Update NCR Follow Result successful'
+        }
     } else {
-      return {
-        status:404, message: 'Error'
-      }
+        return {
+            status: 404, message: 'Error'
+        }
     }
 }
 
 async function showNCRFollowResult(mm) {
-    const {ncr_init_id} = mm;
+    const { ncr_init_id } = mm;
     const query = `SELECT * FROM NCR_FollowResult WHERE ncr_init_id = '${ncr_init_id}' `;
     const result = await db.query(query);
-    if(result.rowCount){
+    if (result.rowCount) {
         return {
             message: 'Showing NCR Reply',
-            showProduct : result.rows
+            showProduct: result.rows
         }
-    }else{
+    } else {
         return {
             message: 'No NCR Reply'
         }

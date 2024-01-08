@@ -11,7 +11,7 @@ const app = express();
 
 const corsOptions = {
     origin: '*',
-    Credentials: true,
+    credentials: true,
     optionsSuccessStatus: 200
 };
 
@@ -32,7 +32,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 app.get('/', (req, res) => {
     if(req.user){
-        res.send(req.user);and
+        res.send(req.user);
     }else{
         res.send('Not logged in');
     }

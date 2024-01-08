@@ -27,6 +27,8 @@ router.put('/UpdateAPdetail', mmController.UpdateAPdetail);
 
 router.post('/addIssuence', mmController.addIssuence);
 
+router.put('/UpdateaddIssuence', mmController.UpdateaddIssuence);
+
 router.post('/addOccurrence', mmController.addOccurrence);
 
 router.get('/showOccurrence', mmController.showOccurrence);
@@ -41,7 +43,6 @@ router.post('/addCategoryIOR', mmController.addCategoryIOR);
 
 router.post('/addFollowUpOccurrence', mmController.addFollowUpOccurrence);
 
-
 router.post('/addNCRInit', mmController.addNCRInit);
 
 router.delete('/deleteNCRInit', mmController.deleteNCRInit);
@@ -49,7 +50,6 @@ router.delete('/deleteNCRInit', mmController.deleteNCRInit);
 router.put('/UpdateNCRInit', mmController.UpdateNCRInit);
 
 router.get('/showNCRInit', mmController.showNCRInit);
-
 
 
 router.post('/addNCRReply', mmController.addNCRReply);

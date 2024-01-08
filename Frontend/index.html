@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        #app {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        p {
+            text-align: center;
+            color: #dc3545;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app">
+        <h2>{{ title }}</h2>
+
+        <!-- Login Form -->
+        <form @submit.prevent="login">
+            <label for="accountid">Account ID:</label>
+            <input type="text" id="accountid" v-model="loginData.accountid" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="Password" v-model="loginData.Password" required>
+
+            <button type="submit">Login</button>
+        </form>
+
+        <!-- Display Login Message -->
+        <p>{{ loginMessage }}</p>
+    </div>
+
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.5/axios.min.js"
+     integrity="sha512-TjBzDQIDnc6pWyeM1bhMnDxtWH0QpOXMcVooglXrali/Tj7W569/wd4E8EDjk1CwOAOPSJon1VfcEt1BI4xIrA=="
+     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+ <script type="module">
+    
+     import { createApp, ref } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js';
+
+     createApp({
+         data() {
+             return {
+               title: "Login",
+               loginData: {
+                  accountid: '',
+                  Password: ''
+               },
+               loginMessage: '' // New property for login message
+             };
+         },
+         methods: {
+             async login() {
+               console.log("Sending data:", this.loginData); // Log data yang dikirim ke server
+               try {
+                  const response = await axios.post("http://localhost:3000/login", this.loginData);
+                  console.log("Server response:", response.data); // Log respons dari server
+                  if (response.data.status === 200 && response.data.message === 'Login successful') {
+                      this.loginMessage = 'Login successful';
+                  } else {
+                      this.loginMessage = response.data.message;
+                  }
+               } catch (error) {
+                  console.error("Error during login:", error);
+                  this.loginMessage = 'Login gagal';
+               }
+             }
+         }
+     }).mount('#app');
+ </script>
+
+</body>
+
+</html>

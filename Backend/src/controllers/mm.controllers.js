@@ -3,9 +3,10 @@ const mmService = require('../services/mm.services');
 
 async function login(req,res){
     try{
-        res.json({message: 'success'});
+        const result = await mmService.login(req.body);
+        res.json(result);
     }catch(err){
-        res.json(err);
+        res.json(err.detail);
     }
 }
 

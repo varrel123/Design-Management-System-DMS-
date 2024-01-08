@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+</head>
+
+<body>
+    <div id="app">
+        <h2>{{ title }}</h2>
+        <!-- Login Form -->
+        <form @submit.prevent="login">
+            <label for="subject">Subject: </label>
+            <input type="text" id="subject" name="subject" v-model="IOR_data.subject" required><br><br>
+            <label for="occurrence-number">Occurrence number: </label>
+            <input type="text" id="occurrence-number" name="occurrence-number" v-model="IOR_data.occurrencenumber"
+                required><br><br>
+            <label for="occur-date">Occurrence date: </label>
+            <input type="date" id="occur-date" name="occur-date" v-model="IOR_data.occur_date" required><br><br>
+            <label for="reference-ior">Reference IOR: </label>
+            <input type="text" id="reference-ior" name="reference-ior" v-model="IOR_data.reference_ior"
+                required><br><br>
+            <label for="to_uic">to_uic :</label>
+            <input type="text" id="to_uic " name="to_uic" v-model="IOR_data.to_uic" required><br><br>
+            <label for="cc_uic">cc_uic :</label>
+            <input type="text" id="cc_uic  " name="cc_uic" v-model="IOR_data.cc_uic" required><br><br>
+            <label for="category_occur">category_occur : </label>
+            <input type="text" id="category_occur" name="category_occur   " v-model="IOR_data.category_occur"
+                required><br><br>
+            <label for="type_or_pnbr ">type_or_pnbr : </label>
+            <input type="text" id="type_or_pnbr" name="type_or_pnbr" v-model="IOR_data.type_or_pnbr" required><br><br>
+            <label for="level_type ">level_type : </label>
+            <input type="text" id="level_type" name="level_type" v-model="IOR_data.level_type" required><br><br>
+            <label for="detail_occurance">detail_occurance :</label>
+            <input type="text" id="detail_occurance " name="detail_occurance " v-model="IOR_data.detail_occurance "
+                required><br><br>
+            <label for="detail_occurance">ReportedBy : </label>
+            <input type="text" id="ReportedBy  " name="ReportedBy" v-model="IOR_data.ReportedBy  " required><br><br>
+            <label for="detail_occurance">reporter_uic :</label>
+            <input type="text" id="reporter_uic   " name="reporter_uic " v-model="IOR_data.reporter_uic   "
+                required><br><br>
+            <label for="detail_occurance">report_date : </label>
+            <input type="date" id="report_date    " name="report_date  " v-model="IOR_data.report_date    "
+                required><br><br>
+            <button type="submit">Submit</button>
+        </form>
+        <p>{{ loginMessage }}</p>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.5/axios.min.js"
+        integrity="sha512-TjBzDQIDnc6pWyeM1bhMnDxtWH0QpOXMcVooglXrali/Tj7W569/wd4E8EDjk1CwOAOPSJon1VfcEt1BI4xIrA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="module">
+
+        import { createApp, ref } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js';
+
+        createApp({
+            data() {
+                return {
+                    title: "INTERNAL OCCURRENCE REPORT (IOR)",
+                    IOR_data: {
+                        subject: '',
+                        occurrencenumber: '',
+                        occur_date: '',
+                        reference_ior: '',
+                        to_uic: '',
+                        cc_uic: '',
+                        category_occur: '',
+                        type_or_pnbr: '',
+                        level_type: '',
+                        detail_occuranceL: '',
+                        ReportedBy: '',
+                        reporter_uic: '',
+                        report_date: ''
+                    },
+                    loginMessage: '' // New property for login message
+                };
+            },
+            methods: {
+                async login() {
+                    console.log("Sending data:", this.IOR_data); // Log data yang dikirim ke server
+                    try {
+                        const response = await axios.post("http://localhost:3000/addOccurrence", this.IOR_data);
+                        console.log("Server response:", response.data); // Log respons dari server
+                        if (response.data.status === 200 && response.data.message === 'Login successful') {
+                            this.loginMessage = 'Login successful';
+                        } else {
+                            this.loginMessage = response.data.message;
+                        }
+                    } catch (error) {
+                        console.error("Error during login:", error);
+                        this.loginMessage = 'Login gagal';
+                    }
+                }
+            }
+        }).mount('#app');
+    </script>
+</body>
+
+</html>

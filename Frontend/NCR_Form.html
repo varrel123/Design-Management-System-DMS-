@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NCR Form</title>
+</head>
+
+<body>
+    <div id="app">
+        <h2>{{ title }}</h2>
+
+        <form @submit.prevent="NCR_Form">
+
+            <!--  -->
+            <label for="accountid">accountid: </label>
+            <input type="text" id="accountid" name="accountid" v-model="NCR_data.accountid" required><br><br>
+
+            <!--  -->
+            <label for="regulationbased">regulation based:</label>
+            
+            <input type="radio" id="DGCA" name="DGCA" value="DGCA" v-model="NCR_data.regulationbased">
+            <label for="DGCA">DGCA</label>
+
+            <input type="radio" id="EASA" name="EASA" value="EASA" v-model="NCR_data.regulationbased">
+            <label for="EASA">EASA</label><br><br>
+
+            <!--  -->
+            <label for="subject">subject: </label>
+            <input type="text" id="subject" name="subject" v-model="NCR_data.subject" required><br><br>
+
+            <!-- BELUM -->
+            <label for="audit_no">audit no: </label>
+            <input type="number" id="audit_no" name="audit_no" v-model="NCR_data.audit_no"
+                required><br><br>
+
+            <!-- BELUM -->
+            <label for="ncr_no">ncr no: </label>
+            <input type="number" id="ncr_no" name="ncr_no" v-model="NCR_data.ncr_no" maxlength="4" required><br><br>
+
+            <!--  -->
+            <label for="issued_date">issued date: </label>
+            <input type="date" id="issued_date" name="issued_date" v-model="NCR_data.issued_date" maxlength="4" required><br><br><br>
+
+            <!--  -->
+            <label for="responsible_office">responsible office: </label><br><br>    
+
+            <input type="radio" id="AO: Airworthiness Office" name="AO: Airworthiness Office" value="AO: Airworthiness Office" v-model="NCR_data.responsible_office">
+            <label for="AO: Airworthiness Office">AO: Airworthiness Office</label>
+
+            <input type="radio" id="DO: Design Office" name="DO: Design Office" value="DO: Design Office" v-model="NCR_data.responsible_office">
+            <label for="DO: Design Office">DO: Design Office</label>       
+            
+            <input type="radio" id="IM: Independent Monitoring" name="IM: Independent Monitoring" value="IM: Independent Monitoring" v-model="NCR_data.responsible_office">
+            <label for="IM: Independent Monitoring">IM: Independent Monitoring</label><br><br>
+
+            <input type="radio" id="PR: Partner" name="PR: Partner" value="PR: Partner" v-model="NCR_data.responsible_office">
+            <label for="PR: Partner">PR: Partner</label>     
+
+            <input type="radio" id="SC: Subcontractor" name="SC: Subcontractor" value="SC: Subcontractor" v-model="NCR_data.responsible_office">
+            <label for="SC: Subcontractor">SC: Subcontractor</label>
+
+            <input type="radio" id="BR: BRIN" name="BR: BRIN" value="BR: BRIN" v-model="NCR_data.responsible_office">
+            <label for="BR: BRIN">BR: BRIN</label><br><br>     
+
+            <input type="radio" id="GF: GMF AeroAsia" name="GF: GMF AeroAsia" value="GF: GMF AeroAsia" v-model="NCR_data.responsible_office">
+            <label for="GF: GMF AeroAsia">GF: GMF AeroAsia</label>
+
+            <input type="radio" id="BA: BIFA Flying School" name="BA: BIFA Flying School" value="BA: BIFA Flying School" v-model="NCR_data.responsible_office">
+            <label for="BA: BIFA Flying School">BA: BIFA Flying School</label>     
+            
+            <input type="radio" id="EL: Elang Lintas Indonesia" name="EL: Elang Lintas Indonesia" value="EL: Elang Lintas Indonesia" v-model="NCR_data.responsible_office">
+            <label for="EL: Elang Lintas Indonesia">EL: Elang Lintas Indonesia </label><br><br><br>
+
+            <!--  -->
+            <label for="audit_type">audit type: </label>
+            
+            <input type="radio" id="Procedure" name="Procedure" value="Procedure" v-model="NCR_data.audit_type">
+            <label for="Procedure">Procedure</label>
+
+            <input type="radio" id="Product" name="Product" value="Product" v-model="NCR_data.audit_type">
+            <label for="Product">Product</label>
+
+            <input type="radio" id="Surveillance" name="Surveillance" value="Surveillance" v-model="NCR_data.audit_type">
+            <label for="Surveillance">Surveillance</label><br><br>
+
+            <!--  -->
+            <label for="audit_scope">audit scope: </label>
+
+            <input type="radio" id="Authority" name="Authority" value="Authority" v-model="NCR_data.audit_scope">
+            <label for="Authority">Authority</label>
+
+            <input type="radio" id="Internal" name="Internal" value="Internal" v-model="NCR_data.audit_scope">
+            <label for="Internal">Internal</label>
+
+            <input type="radio" id="External" name="External" value="External" v-model="NCR_data.audit_scope">
+            <label for="External">External</label>
+
+            <input type="radio" id="Subcontractor" name="Subcontractor" value="Subcontractor" v-model="NCR_data.audit_scope">
+            <label for="Subcontractor">Subcontractor</label><br><br>
+
+            <!--  -->
+            <label for="to_uic">to uic: </label>
+
+            <input type="radio" id="Chief Design Office" name="Chief Design Office" value="Chief Design Office" v-model="NCR_data.to_uic">
+            <label for="Chief Design Office">Chief Design Office</label>
+
+            <input type="radio" id="Chief Airworthiness Office" name="Chief Airworthiness Office" value="Chief Airworthiness Office" v-model="NCR_data.to_uic">
+            <label for="Chief Airworthiness Office">Chief Airworthiness Office</label>
+
+            <input type="radio" id="Chief Independent Monitoring" name="Chief Independent Monitoring" value="Chief Independent Monitoring" v-model="NCR_data.to_uic">
+            <label for="Chief Independent Monitoring">Chief Independent Monitoring</label>
+
+            <input type="radio" id="Head of DOA" name="Head of DOA" value="Head of DOA" v-model="NCR_data.to_uic">
+            <label for="Head of DOA">Head of DOA</label><br><br>
+
+            <!-- BELUM -->
+            <label for="attention">attention:</label>
+            <input type="text" id="attention" name="attention" v-model="NCR_data.attention" maxlength="4"
+                required><br><br>
+
+            <!--  -->
+            <label for="require_condition">require condition: </label>
+            <input type="date" id="require_condition" name="require_condition" v-model="NCR_data.require_condition" required><br><br>
+
+            <!--  -->
+            <label for="level_finding">level finding: </label>
+
+            <input type="radio" id="1" name="1" value="1" v-model="NCR_data.level_finding">
+            <label for="1">1</label>
+
+            <input type="radio" id="2" name="2" value="2" v-model="NCR_data.level_finding">
+            <label for="2">2</label>
+
+            <input type="radio" id="3" name="3" value="3" v-model="NCR_data.level_finding">
+            <label for="3">3</label><br><br>
+
+             <!--  -->
+             <label for="problem_analis">problem analis: </label>
+
+             <input type="radio" id="Required" name="Required" value="Required" v-model="NCR_data.problem_analis">
+             <label for="Required">Required</label>
+ 
+             <input type="radio" id="Not required" name="Not required" value="Not required" v-model="NCR_data.problem_analis">
+             <label for="Not required">Not required</label><br><br>
+
+             <!--  -->
+             <label for="answer_duedate">answer duedate: </label>
+             <input type="date" id="answer_duedate" name="answer_duedate" v-model="NCR_data.answer_duedate" required><br><br>
+
+             <!--  -->
+             <label for="issue_ian">issue_ian: </label>
+
+             <input type="radio" id="Yes" name="Yes" value="Yes" v-model="NCR_data.issue_ian">
+             <label for="Yes">Yes</label>
+ 
+             <input type="radio" id="No" name="No" value="No" v-model="NCR_data.issue_ian">
+             <label for="No">No</label><br><br>
+
+             <!--  -->
+             <label for="ian_no">ian_no: </label>
+             <input type="text" id="ian_no" name="ian_no" v-model="NCR_data.ian_no" required><br><br>
+
+             <!--  -->
+             <label for="audit_by">audit_by: </label>
+             <input type="text" id="audit_by" name="audit_by" v-model="NCR_data.audit_by" required><br><br>
+
+             <!--  -->
+             <label for="audit_date">audit_date: </label>
+             <input type="date" id="audit_date" name="audit_date" v-model="NCR_data.audit_date" required><br><br>
+
+             <!--  -->
+             <label for="acknowledge_by">acknowledge_by: </label>
+             <input type="text" id="acknowledge_by" name="acknowledge_by" v-model="NCR_data.acknowledge_by" required><br><br>
+
+             <!--  -->
+             <label for="acknowledge_date">acknowledge_date: </label>
+             <input type="date" id="acknowledge_date" name="acknowledge_date" v-model="NCR_data.acknowledge_date" required><br><br>
+
+             <!--BELUM-->
+             <label for="status">status: </label>
+             <input type="text" id="status" name="status" v-model="NCR_data.status" required><br><br>
+
+            <!-- BELUM -->
+            <label for="temporarylink">temporarylink: </label>
+            <input type="text" id="temporarylink" name="temporarylink" v-model="NCR_data.temporarylink" required><br><br>
+
+            <button type="submit">Submit</button>
+        </form>
+        <p>{{ loginMessage }}</p>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.5/axios.min.js"
+        integrity="sha512-TjBzDQIDnc6pWyeM1bhMnDxtWH0QpOXMcVooglXrali/Tj7W569/wd4E8EDjk1CwOAOPSJon1VfcEt1BI4xIrA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="module">
+
+        import { createApp, ref } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js';
+
+        createApp({
+            data() {
+                return {
+                    title: "NCR_Form",
+                    NCR_data: {
+                        accountid: '',
+                        regulationbased: '',
+                        subject: '',
+                        audit_no: '',
+                        ncr_no: '',
+                        issued_date: '',
+                        responsible_office: '',
+                        audit_type: '',
+                        audit_scope: '',
+                        to_uic: '',
+                        attention: '',
+                        require_condition: '',
+                        level_finding: '',
+                        problem_analis: '',
+                        answer_duedate: '',
+                        issue_ian: '',
+                        ian_no: '',
+                        audit_by: '',
+                        audit_date: '',
+                        acknowledge_by: '', 
+                        acknowledge_date: '', 
+                        status: '',
+                        temporarylink: '' 
+                    },
+                    loginMessage: ''
+                };
+            },
+            methods: {
+                async NCR_Form() {
+                    console.log("Sending data:", this.NCR_data);
+                    try {
+                        const response = await axios.post("http://localhost:3000/addNCRInit", this.NCR_data);
+                        // console.log("Server response:", response.data);
+                        console.log(this.NCR_data);
+
+                        if (response.data.status === 200) {
+                            this.loginMessage = 'NCR added successfully';
+                        } else {
+                            this.loginMessage = 'Failed to add NCR';
+                        }
+                    } catch (error) {
+                        this.loginMessage = 'Failed to add NCR' + error;
+                    }
+                }
+            }
+        }).mount('#app');
+    </script>
+</body>
+
+</html>

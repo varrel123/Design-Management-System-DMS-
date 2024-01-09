@@ -1,52 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome Page</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f4f4;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-        }
-
-        .welcome-message {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .go-to-index-btn {
-            display: inline-block;
-            padding: 10px 20px;
-            margin-top: 20px;
-            text-decoration: none;
-            background-color: #007bff;
-            color: #fff;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Main Menu</title>
+  <link rel="stylesheet" href="main_menu.css">
 </head>
 <body>
-    <div class="container">
-        <div class="welcome-message">
-            <h1>MAIN MENU</h1>
-            <p>Tester</p>
-            <a href="IOR_Form.html" class="go-to-index-btn">IOR Form</a>
-        </div>
+
+  <h2>Design Monitoring Apps</h2>
+  <div id="app">
+    <div v-for="(radio, index) in radios" :key="index">
+      <input type="radio" :id="'radio-' + index" v-model="selectedRadio" :value="index">
+      <label :for="'radio-' + index">{{ radio.label }}</label>
     </div>
+    <p></p>
+    <p>Anda memilih: {{ radios[selectedRadio].label }}</p>
+    <button @click="movePage">Submit</button>
+  </div>
+
+  <button>Exit</button>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  <script src="main_menu.js"></script>
 </body>
 </html>

@@ -1,0 +1,75 @@
+<form action="/your-server-side-code" method="post">
+    <label for="subject">Subject</label>
+    <select id="subject" name="subject">
+      <option value="Facility (Air Conditioning)">Facility (Air Conditioning)</option>
+    </select>
+    <br><br>
+    <label for="occurrence-number">Occurrence number:</label>
+    <input type="text" id="occurrence-number" name="occurrence-number" value="2023-03-001">
+    <br><br>
+    <label for="to">To :</label>
+    <input type="text" id="to" name="to" value="CDO">
+    <br><br>
+    <label for="copy">Copy :</label>
+    <input type="text" id="copy" name="copy" value="HDO">
+    <br><br>
+    <label for="occurrence-date">Occurrence Date:</label>
+    <input type="date" id="occurrence-date" name="occurrence-date" value="2023-03-16">
+    <br><br>
+    <label for="reference">Reference:</label>
+    <input type="text" id="reference" name="reference" value="DOH 1.1.2.1">
+    <br><br>
+    <label for="detail-occurrence">Detail Occurrence:</label>
+    <textarea id="detail-occurrence" name="detail-occurrence" rows="4" cols="50">Air conditioning in TEJ area produce warm air, this cause unpleasant working environment</textarea>
+    <br><br>
+    <label for="name-id-no">Name/ID No:</label>
+    <input type="text" id="name-id-no" name="name-id-no" value="FORDIYANTO">
+    <br><br>
+    <label for="unit">Unit:</label>
+    <input type="text" id="unit" name="unit" value="DO">
+    <br><br>
+    <label for="date">Date:</label>
+    <input type="date" id="date" name="date" value="2023-03-17">
+    <br><br>
+    <label for="initial-probability">Initial Probability:</label>
+    <select id="initial-probability" name="initial-probability">
+      <option value="1">1</option>
+      <option value="2" selected>2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+    </select>
+    <br><br>
+    <label for="initial-severity">Initial Severity:</label>
+    <select id="initial-severity" name="initial-severity">
+      <option value="A">A</option>
+      <option value="B">B</option>
+      <option value="C">C</option>
+      <option value="D" selected>D</option>
+      <option value="E">E</option>
+    </select>
+    <br><br>
+    <label for="risk-index">Risk Index:</label>
+    <select id="risk-index" name="risk-index">
+      <option value="Unacceptable region">Unacceptable region</option>
+      <option value="Acceptable region" selected>Acceptable region</option>
+      <option value="Tolerable region">Tolerable region</option>
+      <option value="As low as reasonably practicable (ALARP) region">As low as reasonably practicable (ALARP) region</option>
+      <option value="Negligible region">Negligible region</option>
+    </select>
+    <br><br>
+    <label for="category">Category:</label>
+    <select id="category" name="category">
+      <option value="Facility">Facility</option>
+      <option value="Equipment">Equipment</option>
+      <option value="Material">Material</option>
+      <option value="Human">Human</option>
+      <option value="Environment">Environment</option>
+    </select>
+    <br><br>
+    <label for="level-type">Level Type:</label>
+    <br>
+    <input type="checkbox" id="aircraft" name="level-type" value="Aircraft">
+    <label for="aircraft">Aircraft</label><br>
+    <input type="checkbox" id="engine" name="level-type" value="Engine">
+    <label for="engine">Engine

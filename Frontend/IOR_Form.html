@@ -18,38 +18,38 @@
             <input type="text" id="subject_ior" name="subject_ior" v-model="IOR_data.subject_ior" required><br><br>
 
             <!--  -->
-            <label for="occur_nbr">Occurrence number: </label>
+            <label for="occur_nbr">Occurrence Number: </label>
             <input type="text" id="occur_nbr" name="occur_nbr" v-model="IOR_data.occur_nbr" required><br><br>
             
             <!--  -->
-            <label for="occur_date">Occurrence date: </label>
+            <label for="occur_date">Occurrence Date: </label>
             <input type="date" id="occur_date" name="occur_date" v-model="IOR_data.occur_date" required><br><br>
 
             <!--  -->
-            <label for="reference_ior">Reference IOR: </label>
+            <label for="reference_ior">Reference: </label>
             <input type="text" id="reference_ior" name="reference_ior" v-model="IOR_data.reference_ior"
                 required><br><br>
 
             <!--  -->
-            <label for="to_uic">to_uic: </label>
+            <label for="to_uic">To: </label>
             <input type="text" id="to_uic" name="to_uic" v-model="IOR_data.to_uic" maxlength="4" required><br><br>
 
             <!--  -->
-            <label for="cc_uic">cc_uic: </label>
+            <label for="cc_uic">Copy: </label>
             <input type="text" id="cc_uic" name="cc_uic" v-model="IOR_data.cc_uic" maxlength="4" required><br><br>
 
             <!--  -->
-            <label for="category_occur">category_occur: </label>
+            <label for="category_occur">Category: </label>
             <input type="text" id="category_occur" name="category_occur" v-model="IOR_data.category_occur" maxlength="1"
                 required><br><br>
 
             <!--  -->
-            <label for="type_or_pnbr">type_or_pnbr: </label>
+            <label for="type_or_pnbr">Type or P/N: </label>
             <input type="text" id="type_or_pnbr" name="type_or_pnbr" v-model="IOR_data.type_or_pnbr" maxlength="15"
                 required><br><br>
 
             <!--  -->
-            <label>level_type:</label>
+            <label>level Type:</label>
 
             <input type="radio" id="aircraft" name="level_type" value="Aircraft" v-model="IOR_data.level_type">
             <label for="aircraft">Aircraft</label>
@@ -64,25 +64,25 @@
             <label for="others">Others</label><br><br>
 
             <!--  -->
-            <label for="detail_occurance">detail_occurance: </label>
+            <label for="detail_occurance">Detail Occurance: </label>
             <input type="text" id="detail_occurance" name="detail_occurance" v-model="IOR_data.detail_occurance"
                 required><br><br>
 
             <!--  -->
-            <label for="ReportedBy">ReportedBy: </label>
+            <label for="ReportedBy">Name/ID No: </label>
             <input type="text" id="ReportedBy" name="ReportedBy" v-model="IOR_data.ReportedBy" required><br><br>
 
             <!--  -->
-            <label for="reporter_uic">reporter_uic:</label>
+            <label for="reporter_uic">Unit:</label>
             <input type="text" id="reporter_uic" name="reporter_uic" v-model="IOR_data.reporter_uic" maxlength="4"
                 required><br><br>
 
             <!--  -->
-            <label for="report_date">report_date: </label>
+            <label for="report_date">Date: </label>
             <input type="date" id="report_date" name="report_date" v-model="IOR_data.report_date" required><br><br>
 
             <!--  -->
-            <label for="reporter_identity">reporter_identity: </label>
+            <label for="reporter_identity">Reporter Identity: </label><br>
             <input type="radio" id="Shown" name="reporter_identity" value="Shown" v-model="IOR_data.reporter_identity">
             <label for="Shown">Shown</label>
             
@@ -90,7 +90,7 @@
             <label for="Hidden">Hidden</label><br><br>
             
             <!--  -->
-            <label for="Data_reference">data_reference: </label>
+            <label for="Data_reference">Data Reference: </label><br>
             <input type="radio" id="Yes1" name="Data_reference" value="Yes" v-model="IOR_data.Data_reference">
             <label for="Yes1">Yes</label>
             
@@ -98,27 +98,44 @@
             <label for="No1">No</label><br><br>
             
             <!--  -->
-            <label for="hirac_process">hirac_process: </label>
+            <label for="hirac_process">Hirac Process: </label><br>
             <input type="radio" id="Yes2" name="hirac_process" value="Yes" v-model="IOR_data.hirac_process">
             <label for="Yes2">Yes</label>
             
             <input type="radio" id="No2" name="hirac_process" value="No" v-model="IOR_data.hirac_process">
-            <label for="No2">No</label><br><br>
+            <label for="No2">No</label><br> <br>
 
             <!--  -->
-            <label for="initial_probability">initial_probability: </label>
-            <input type="text" id="initial_probability" name="initial_probability"
-                v-model="IOR_data.initial_probability" maxlength="1" required><br><br>
+            <label for="initial_probability">Initial Probability: </label>
+            <select id="initial_probability" name="initial_probability" v-model="IOR_data.initial_probability">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+              <br><br>
+            <!--  -->
+            <label for="initial_severity">Initial Severity: </label>
+            <select id="initial-severity" name="initial-severity" v-model="IOR_data.initial_severity">
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D" selected>D</option>
+                <option value="E">E</option>
+              </select>
+              <br><br>
 
             <!--  -->
-            <label for="initial_severity">initial_severity: </label>
-            <input type="text" id="initial_severity" name="initial_severity" v-model="IOR_data.initial_severity"
-                maxlength="1" required><br><br>
-
-            <!--  -->
-            <label for="initial_riskindex">initial_riskindex: </label>
-            <input type="text" id="initial_riskindex" name="initial_riskindex" v-model="IOR_data.initial_riskindex"
-                required><br><br>
+            <label for="initial_riskindex">Risk Index: </label>
+            <select id="initial_riskindex" name="initial_riskindex" v-model="IOR_data.initial_riskindex">
+                <option value="Unacceptable region">Unacceptable region</option>
+                <option value="Acceptable region" selected>Acceptable region</option>
+                <option value="Tolerable region">Tolerable region</option>
+                <option value="As low as reasonably practicable (ALARP) region">As low as reasonably practicable (ALARP) region</option>
+                <option value="Negligible region">Negligible region</option>
+              </select>
+              <br><br>
 
             <button type="submit">Submit</button>
         </form>

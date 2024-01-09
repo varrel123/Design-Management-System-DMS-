@@ -14,7 +14,9 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #f4f4f4;
+            background-image: url('image/2591833781.jpg');
+            background-size: cover;
+            background-position: center;
         }
 
         #app {
@@ -68,9 +70,11 @@
         }
     </style>
 </head>
+
 <body>
     <div id="app">
-        <img src="image/gmf8.png" alt="Login Image" style="width: 50%; max-width: 200px; margin-bottom: 0px; margin-left: 70px;">
+        <img src="image/gmf8.png" alt="Login Image"
+            style="width: 50%; max-width: 200px; margin-bottom: 0px; margin-left: 70px;">
         <h2>{{ title }}</h2>
         <!-- Login Form -->
         <form @submit.prevent="login">
@@ -123,4 +127,5 @@
         }).mount('#app');
     </script>
 </body>
+
 </html>

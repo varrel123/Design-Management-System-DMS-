@@ -32,12 +32,12 @@
 
             <!-- BELUM -->
             <label for="audit_no">audit no: </label>
-            <input type="number" id="audit_no" name="audit_no" v-model="NCR_data.audit_no"
+            <input type="text" id="audit_no" name="audit_no" v-model="NCR_data.audit_no"
                 required><br><br>
 
             <!-- BELUM -->
             <label for="ncr_no">ncr no: </label>
-            <input type="number" id="ncr_no" name="ncr_no" v-model="NCR_data.ncr_no" maxlength="4" required><br><br>
+            <input type="text" id="ncr_no" name="ncr_no" v-model="NCR_data.ncr_no" maxlength="4" required><br><br>
 
             <!--  -->
             <label for="issued_date">issued date: </label>
@@ -152,10 +152,10 @@
              <!--  -->
              <label for="issue_ian">issue_ian: </label>
 
-             <input type="radio" id="Yes" name="Yes" value="Yes" v-model="NCR_data.issue_ian">
+             <input type="radio" id="Yes" name="Yes" value="true" v-model="NCR_data.issue_ian">
              <label for="Yes">Yes</label>
  
-             <input type="radio" id="No" name="No" value="No" v-model="NCR_data.issue_ian">
+             <input type="radio" id="No" name="No" value="false" v-model="NCR_data.issue_ian">
              <label for="No">No</label><br><br>
 
              <!--  -->

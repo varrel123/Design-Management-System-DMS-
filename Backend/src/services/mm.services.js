@@ -523,10 +523,12 @@ async function addNCRInit(mm) {
     const result = await db.query(query);
     if (result.rowCount === 1) {
         return {
+            status: 200,
             message: 'NRC Intial Created'
         }
     } else {
         return {
+            status: 404,
             message: 'Error'
         }
     }

@@ -74,7 +74,7 @@
 <body>
     <div id="app">
         <img src="image/gmf8.png" alt="Login Image"
-            style="width: 50%; max-width: 200px; margin-bottom: 0px; margin-left: 70px;">
+            style="width: 80%; max-width: 200px; margin-bottom: 0px; margin-left: 45px;">
         <h2>{{ title }}</h2>
         <!-- Login Form -->
         <form @submit.prevent="login">
@@ -98,7 +98,6 @@
         createApp({
             data() {
                 return {
-                    title: "Login",
                     loginData: {
                         accountid: '',
                         Password: ''
@@ -108,13 +107,22 @@
             },
             methods: {
                 async login() {
-                    console.log("Sending data:", this.loginData); // Log data yang dikirim ke server
+                    console.log("Sending data:", this.loginData);
                     try {
                         const response = await axios.post("http://localhost:3000/login", this.loginData);
-                        console.log("Server response:", response.data); // Log respons dari server
+                        console.log("Server response:", response.data);
+
                         if (response.data.status === 200 && response.data.message === 'Login successful') {
-                            this.loginMessage = 'Login successful';
-                            window.location.href = 'main_menu.html';
+                            const userRole = response.data.user.role; 
+                            if (userRole === 'Admin') {
+                                this.loginMessage = 'Login successful';
+                                console.log(userRole);
+                                window.location.href = 'main_menu.html';
+                            } else if (userRole === 'DO' || userRole === 'AO' || userRole === 'IM') {
+                                this.loginMessage = 'Login successful';
+                                console.log(userRole);
+                                window.location.href = 'main_menu2.html';
+                            }
                         } else {
                             this.loginMessage = response.data.message;
                         }
@@ -124,6 +132,7 @@
                     }
                 }
             }
+
         }).mount('#app');
     </script>
 </body>

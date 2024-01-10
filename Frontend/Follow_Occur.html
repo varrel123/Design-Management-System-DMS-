@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IOR Form Page</title>
+</head>
+
+<body>
+    <div id="app">
+        <h2>{{ title }}</h2>
+
+        <form @submit.prevent="Follow_Occur">
+
+            <!--  -->
+            <label for="id_IOR">id_IOR: </label>
+            <input type="text" id="id_IOR" name="id_IOR" v-model="FollowIOR_data.id_IOR" required><br><br>
+
+            <!--  -->
+            <label for="follup_detail">Follow On Status: </label>
+            <input type="text" id="follup_detail" name="follup_detail" v-model="FollowIOR_data.follup_detail"
+                required><br><br>
+
+            <!--  -->
+            <label for="follupby">follow by: </label>
+            <input type="text" id="follupby" name="follupby" v-model="FollowIOR_data.follupby" required><br><br>
+
+            <!--  -->
+            <label for="follup_uic">Unit: </label>
+            <input type="text" id="follup_uic" name="follup_uic" v-model="FollowIOR_data.follup_uic" maxlength="4"
+                required><br><br>
+            
+            <!--  -->
+            <label for="follup_date">Date: </label>
+            <input type="date" id="follup_date" name="follup_date" v-model="FollowIOR_data.follup_date"
+                required><br><br>
+
+            <!--BOOLEAN  -->
+            <label for="follup_datarefer">Data Reference: </label><br>
+
+            <input type="radio" id="Yes2" name="follup_datarefer" value="true" v-model="FollowIOR_data.follup_datarefer">
+            <label for="Yes2">Yes</label>
+
+            <input type="radio" id="No2" name="hirac_process" value="false" v-model="FollowIOR_data.follup_datarefer">
+            <label for="No2">No</label><br> 
+
+            <!-- BOOLEAN -->
+            <label for="follup_status">Status: </label><br>
+
+            <input type="radio" id="Closed" name="Closed" value="Closed" v-model="FollowIOR_data.follup_status">
+            <label for="Closed">Closed</label>
+
+            <input type="radio" id="Open" name="Open" value="Open" v-model="FollowIOR_data.follup_status">
+            <label for="Open">Open</label>
+
+            <input type="radio" id="Monitor" name="Monitor" value="Monitor" v-model="FollowIOR_data.follup_status">
+            <label for="Monitor">Monitor</label><br><br>
+
+            <!--  -->
+            <label for="nextuic_follup ">Next Unit : </label>
+            <input type="text" id="nextuic_follup " name="nextuic_follup " v-model="FollowIOR_data.nextuic_follup "
+                maxlength="4" required><br><br>
+
+            <!--  -->
+            <label for="current_probability ">Probability : </label>
+            <input type="text" id="current_probability " name="current_probability "
+                v-model="FollowIOR_data.current_probability " maxlength="1" required><br><br>
+
+            <!--  -->
+            <label for="current_severity">Severity: </label>
+            <input type="text" id="current_severity" name="current_severity" v-model="FollowIOR_data.current_severity"
+                maxlength="1" required><br><br>
+
+            <!--  -->
+            <label for="current_riskindex">Risk Index: </label>
+            <input type="text" id="current_riskindex" name="current_riskindex"
+                v-model="FollowIOR_data.current_riskindex" required><br><br>
+
+            <button type="submit">Submit</button>
+        </form>
+        <p>{{ loginMessage }}</p>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.5/axios.min.js"
+        integrity="sha512-TjBzDQIDnc6pWyeM1bhMnDxtWH0QpOXMcVooglXrali/Tj7W569/wd4E8EDjk1CwOAOPSJon1VfcEt1BI4xIrA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="module">
+
+        import { createApp, ref } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js';
+
+        createApp({
+            data() {
+                return {
+                    title: "FollowUp Occurrence",
+                    FollowIOR_data: {
+                        id_IOR: '',
+                        follup_detail: '',
+                        follupby: '',
+                        follup_uic: '',
+                        follup_date: '',
+                        follup_datarefer: '',
+                        follup_status: '',
+                        nextuic_follup: '',
+                        current_probability: '',
+                        current_severity: '',
+                        current_riskindex: ''
+                    },
+                    loginMessage: ''
+                };
+            },
+            methods: {
+                async Follow_Occur() {
+                    console.log("Sending data:", this.FollowIOR_data);
+                    try {
+                        const response = await axios.post("http://localhost:3000/addFollowUpOccurrence", this.FollowIOR_data);
+                        // console.log("Server response:", response.data);
+                        console.log(this.FollowIOR_data);
+
+                        if (response.data.status === 200 && response.data.message === 'Follow-Up Occurrence Created') {
+                            this.loginMessage = 'Occurrence added successfully';
+                        } else {
+                            this.loginMessage = 'Failed to add occurrence';
+                        }
+                    } catch (error) {
+                        console.error("Error during login:", error);
+                        this.loginMessage = 'Failed to add occurrence' + error;
+                    }
+                }
+            }
+        }).mount('#app');
+    </script>
+</body>
+
+</html>

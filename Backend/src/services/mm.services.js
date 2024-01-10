@@ -504,10 +504,12 @@ async function addFollowUpOccurrence(followUpData) {
 
     if (result.rowCount === 1) {
         return {
+            status:200,
             message: 'Follow-Up Occurrence Created'
         };
     } else {
         return {
+            status:404,
             message: 'Error'
         };
     }

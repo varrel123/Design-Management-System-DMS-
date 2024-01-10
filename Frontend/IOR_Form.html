@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IOR Form Page</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -14,13 +15,13 @@
         <form @submit.prevent="IOR">
 
             <!--  -->
-            <label for="subject_ior">Subject: </label>
-            <input type="text" id="subject_ior" name="subject_ior" v-model="IOR_data.subject_ior" required><br><br>
+              <label for="subject_ior">Subject: </label>
+              <input type="text" id="subject_ior" name="subject_ior" v-model="IOR_data.subject_ior" required><br><br>
 
             <!--  -->
             <label for="occur_nbr">Occurrence Number: </label>
             <input type="text" id="occur_nbr" name="occur_nbr" v-model="IOR_data.occur_nbr" required><br><br>
-            
+
             <!--  -->
             <label for="occur_date">Occurrence Date: </label>
             <input type="date" id="occur_date" name="occur_date" v-model="IOR_data.occur_date" required><br><br>
@@ -85,23 +86,24 @@
             <label for="reporter_identity">Reporter Identity: </label><br>
             <input type="radio" id="Shown" name="reporter_identity" value="Shown" v-model="IOR_data.reporter_identity">
             <label for="Shown">Shown</label>
-            
-            <input type="radio" id="Hidden" name="reporter_identity" value="Hidden" v-model="IOR_data.reporter_identity">
+
+            <input type="radio" id="Hidden" name="reporter_identity" value="Hidden"
+                v-model="IOR_data.reporter_identity">
             <label for="Hidden">Hidden</label><br><br>
-            
+
             <!--  -->
             <label for="Data_reference">Data Reference: </label><br>
             <input type="radio" id="Yes1" name="Data_reference" value="Yes" v-model="IOR_data.Data_reference">
             <label for="Yes1">Yes</label>
-            
+
             <input type="radio" id="No1" name="Data_reference" value="No" v-model="IOR_data.Data_reference">
             <label for="No1">No</label><br><br>
-            
+
             <!--  -->
             <label for="hirac_process">Hirac Process: </label><br>
             <input type="radio" id="Yes2" name="hirac_process" value="Yes" v-model="IOR_data.hirac_process">
             <label for="Yes2">Yes</label>
-            
+
             <input type="radio" id="No2" name="hirac_process" value="No" v-model="IOR_data.hirac_process">
             <label for="No2">No</label><br> <br>
 
@@ -113,8 +115,9 @@
                 <option value="3">3</option>
                 <option value="4">4</option>
                 <option value="5">5</option>
-              </select>
-              <br><br>
+            </select>
+            <br><br>
+
             <!--  -->
             <label for="initial_severity">Initial Severity: </label>
             <select id="initial-severity" name="initial-severity" v-model="IOR_data.initial_severity">
@@ -123,8 +126,8 @@
                 <option value="C">C</option>
                 <option value="D" selected>D</option>
                 <option value="E">E</option>
-              </select>
-              <br><br>
+            </select>
+            <br><br>
 
             <!--  -->
             <label for="initial_riskindex">Risk Index: </label>
@@ -132,10 +135,11 @@
                 <option value="Unacceptable region">Unacceptable region</option>
                 <option value="Acceptable region" selected>Acceptable region</option>
                 <option value="Tolerable region">Tolerable region</option>
-                <option value="As low as reasonably practicable (ALARP) region">As low as reasonably practicable (ALARP) region</option>
+                <option value="As low as reasonably practicable (ALARP) region">As low as reasonably practicable (ALARP)
+                    region</option>
                 <option value="Negligible region">Negligible region</option>
-              </select>
-              <br><br>
+            </select>
+            <br><br>
 
             <button type="submit">Submit</button>
         </form>
@@ -199,5 +203,4 @@
         }).mount('#app');
     </script>
 </body>
-
 </html>

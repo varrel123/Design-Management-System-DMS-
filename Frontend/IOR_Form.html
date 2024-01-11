@@ -1,162 +1,90 @@
 <!DOCTYPE html>
+<!-- Coding By CodingNepal - codingnepalweb.com -->
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IOR Form Page</title>
-    <link rel="stylesheet" href="style.css">
+    <!----======== CSS ======== -->
+    <link rel="stylesheet" href="IOR.css">
+    <!----===== Iconscout CSS ===== -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <title>INTERNAL OCCURRENCE REPORT (IOR)</title>
 </head>
 
+<style>
+    /* Add styles for button spacing and appearance */
+    .container header button {
+        margin-right: 10px; /* Adjust the margin as needed */
+        background-color: #4070f4; /* Blue background color */
+        color: #fff; /* White text color */
+        font-weight: normal; /* Bold text */
+        padding: 5px 10px; /* Adjust padding as needed */
+        border: none; /* Remove button border */
+        border-radius: 5px; /* Add border-radius for rounded corners */
+        cursor: pointer;
+    }
+
+    .container header button:hover {
+        background-color: #265df2; /* Darker blue on hover */
+    }
+</style>
+
 <body>
-    <div id="app">
-        <h2>{{ title }}</h2>
-
-        <div class="button-container">
-            <button @click="redirectToFollowOccur('Occurence')">Occurence</button>
-            <button @click="redirectToFollowOccur('FollowOn')">Follow On</button>
-        </div>
-        <br>
-
-        <form @submit.prevent="IOR">
-
-            <!--  -->
-            <label for="subject_ior">Subject: </label>
-            <input type="text" id="subject_ior" name="subject_ior" v-model="IOR_data.subject_ior" required><br><br>
-
-            <!--  -->
-            <label for="occur_nbr">Occurrence Number: </label>
-            <input type="text" id="occur_nbr" name="occur_nbr" v-model="IOR_data.occur_nbr" required><br><br>
-
-            <!--  -->
-            <label for="occur_date">Occurrence Date: </label>
-            <input type="date" id="occur_date" name="occur_date" v-model="IOR_data.occur_date" required><br><br>
-
-            <!--  -->
-            <label for="reference_ior">Reference: </label>
-            <input type="text" id="reference_ior" name="reference_ior" v-model="IOR_data.reference_ior"
-                required><br><br>
-
-            <!--  -->
-            <label for="to_uic">To: </label>
-            <input type="text" id="to_uic" name="to_uic" v-model="IOR_data.to_uic" maxlength="4" required><br><br>
-
-            <!--  -->
-            <label for="cc_uic">Copy: </label>
-            <input type="text" id="cc_uic" name="cc_uic" v-model="IOR_data.cc_uic" maxlength="4" required><br><br>
-
-            <!--  -->
-            <label for="category_occur">Category: </label>
-            <input type="text" id="category_occur" name="category_occur" v-model="IOR_data.category_occur" maxlength="1"
-                required><br><br>
-
-            <!--  -->
-            <label for="type_or_pnbr">Type or P/N: </label>
-            <input type="text" id="type_or_pnbr" name="type_or_pnbr" v-model="IOR_data.type_or_pnbr" maxlength="15"
-                required><br><br>
-
-            <!--  -->
-            <label>level Type:</label>
-
-            <input type="radio" id="aircraft" name="level_type" value="Aircraft" v-model="IOR_data.level_type">
-            <label for="aircraft">Aircraft</label>
-
-            <input type="radio" id="engine" name="level_type" value="Engine" v-model="IOR_data.level_type">
-            <label for="engine">Engine</label>
-
-            <input type="radio" id="apu" name="level_type" value="APU" v-model="IOR_data.level_type">
-            <label for="apu">APU</label>
-
-            <input type="radio" id="others" name="level_type" value="Others" v-model="IOR_data.level_type">
-            <label for="others">Others</label><br><br>
-
-            <!--  -->
-            <label for="detail_occurance">Detail Occurance: </label>
-            <input type="text" id="detail_occurance" name="detail_occurance" v-model="IOR_data.detail_occurance"
-                required><br><br>
-
-            <!--  -->
-            <label for="ReportedBy">Name/ID No: </label>
-            <input type="text" id="ReportedBy" name="ReportedBy" v-model="IOR_data.ReportedBy" required><br><br>
-
-            <!--  -->
-            <label for="reporter_uic">Unit:</label>
-            <input type="text" id="reporter_uic" name="reporter_uic" v-model="IOR_data.reporter_uic" maxlength="4"
-                required><br><br>
-
-            <!--  -->
-            <label for="report_date">Date: </label>
-            <input type="date" id="report_date" name="report_date" v-model="IOR_data.report_date" required><br><br>
-
-            <!--  -->
-            <label for="reporter_identity">Reporter Identity: </label><br>
-            <input type="radio" id="Shown" name="reporter_identity" value="Shown" v-model="IOR_data.reporter_identity">
-            <label for="Shown">Shown</label>
-
-            <input type="radio" id="Hidden" name="reporter_identity" value="Hidden"
-                v-model="IOR_data.reporter_identity">
-            <label for="Hidden">Hidden</label><br><br>
-
-            <!--  -->
-            <label for="Data_reference">Data Reference: </label><br>
-            <input type="radio" id="Yes1" name="Data_reference" value="Yes" v-model="IOR_data.Data_reference">
-            <label for="Yes1">Yes</label>
-
-            <input type="radio" id="No1" name="Data_reference" value="No" v-model="IOR_data.Data_reference">
-            <label for="No1">No</label><br><br>
-
-            <!--  -->
-            <label for="hirac_process">Hirac Process: </label><br>
-            <input type="radio" id="Yes2" name="hirac_process" value="Yes" v-model="IOR_data.hirac_process">
-            <label for="Yes2">Yes</label>
-
-            <input type="radio" id="No2" name="hirac_process" value="No" v-model="IOR_data.hirac_process">
-            <label for="No2">No</label><br> <br>
-
-            <!--  -->
-            <label for="initial_probability">Initial Probability: </label>
-            <select id="initial_probability" name="initial_probability" v-model="IOR_data.initial_probability">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-            </select>
-            <br><br>
-
-            <!--  -->
-            <label for="initial_severity">Initial Severity: </label>
-            <select id="initial-severity" name="initial-severity" v-model="IOR_data.initial_severity">
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D" selected>D</option>
-                <option value="E">E</option>
-            </select>
-            <br><br>
-
-            <!--  -->
-            <label for="initial_riskindex">Risk Index: </label>
-            <select id="initial_riskindex" name="initial_riskindex" v-model="IOR_data.initial_riskindex">
-                <option value="Unacceptable region">Unacceptable region</option>
-                <option value="Acceptable region" selected>Acceptable region</option>
-                <option value="Tolerable region">Tolerable region</option>
-                <option value="As low as reasonably practicable (ALARP) region">As low as reasonably practicable (ALARP)
-                    region</option>
-                <option value="Negligible region">Negligible region</option>
-            </select>
-            <br><br>
-
-            <button type="submit">Submit</button>
+    <div class="container" id="app">
+        <header>
+            INTERNAL OCCURRENCE REPORT (IOR)
+            <header>
+                <button @click="redirectToFollowOccur('Occurence')">Occurence</button>
+                <button @click="redirectToFollowOccur('FollowOn')">Follow On</button>
+            </header><br>
+            <span>Occurence</span>
+        </header>
+        <form @submit.prevent="IOR" action="#">
+            <!-- Use @submit.prevent to prevent the default form submission behavior -->
+            <div class="form first">
+                <div class="details personal">
+                    <div class="fields">
+                        <div class="input-field" v-for="(value, key) in IOR_data" :key="key">
+                            <label>{{ key.replace(/_/g, ' ') }}</label>
+                            <!-- Use appropriate input types based on specifications -->
+                            <input v-if="key === 'occur_date'||key === 'report_date'" type="date" v-model="IOR_data[key]" required>
+                            <input v-else-if="key === 'occur_nbr'" type="text" placeholder="YYYY-MM-SSS" pattern="\d{4}-\d{2}-\d{3}" v-model="IOR_data[key]" required>
+                            <select v-else-if="key === 'level_type'" v-model="IOR_data[key]">
+                                <option value="Aircraft" selected>Aircraft</option>
+                                <option value="Engine">Engine</option>
+                                <option value="APU">APU</option>
+                                <option value="Others">Others</option>
+                            </select>
+                            <input v-else-if="key === 'data_reference'" type="checkbox" v-model="IOR_data[key]">
+                            <select v-else-if="key === 'reporter_identity'" v-model="IOR_data[key]">
+                                <option value="Shown" selected>Shown</option>
+                                <option value="Hidden ">Hidden </option>
+                            </select>
+                            <select v-else-if="key === 'hirac_process'" v-model="IOR_data[key]">
+                                <option value="Yes" selected>Yes</option>
+                                <option value="No">No </option>
+                            </select>
+                            <textarea v-else-if="key === 'detail_occurance'" placeholder=" Enter your data" rows="2" v-model="IOR_data[key]" required></textarea>
+                            <input v-else type="text" placeholder="Enter your data" v-model="IOR_data[key]" required>
+                        </div>
+                    </div>
+                </div>
+                <button class="nextBtn" type="submit">
+                    <!-- Change the button to submit -->
+                    <span class="btnText">Submit</span>
+                    <i class="uil uil-navigator"></i>
+                </button>
+            </div>
         </form>
         <p>{{ loginMessage }}</p>
     </div>
-
+    <script src="https://unpkg.com/vue@3/dist/vue.esm-browser.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.5/axios.min.js"
         integrity="sha512-TjBzDQIDnc6pWyeM1bhMnDxtWH0QpOXMcVooglXrali/Tj7W569/wd4E8EDjk1CwOAOPSJon1VfcEt1BI4xIrA=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script type="module">
-
         import { createApp, ref } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js';
 
         createApp({
@@ -192,7 +120,6 @@
                     console.log("Sending data:", this.IOR_data);
                     try {
                         const response = await axios.post("http://localhost:3000/addOccurrence", this.IOR_data);
-                        // console.log("Server response:", response.data);
                         console.log(this.IOR_data);
 
                         if (response.data.status === 200 && response.data.message === 'Occurrence Created') {
@@ -209,7 +136,7 @@
                 redirectToFollowOccur(buttonType) {
                     if (buttonType === 'Occurence') {
                         // Redirect to the Occurence page
-                        window.location.href = 'IOR_Form.html';
+                        window.location.href = 'index.html';
                     } else if (buttonType === 'FollowOn') {
                         // Redirect to the Follow_Occur page
                         window.location.href = 'Follow_Occur.html';
@@ -219,4 +146,5 @@
         }).mount('#app');
     </script>
 </body>
+
 </html>

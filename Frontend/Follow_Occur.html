@@ -1,129 +1,130 @@
 <!DOCTYPE html>
+<!-- Coding By CodingNepal - codingnepalweb.com -->
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IOR Form Page</title>
+    <!----======== CSS ======== -->
+    <link rel="stylesheet" href="IOR.css">
+    <!----===== Iconscout CSS ===== -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <title>INTERNAL OCCURRENCE REPORT (IOR)</title>
 </head>
 
+<style>
+    /* Add styles for button spacing and appearance */
+    .container header button {
+        margin-right: 10px;
+        /* Adjust the margin as needed */
+        background-color: #4070f4;
+        /* Blue background color */
+        color: #fff;
+        /* White text color */
+        font-weight: normal;
+        /* Bold text */
+        padding: 5px 10px;
+        /* Adjust padding as needed */
+        border: none;
+        /* Remove button border */
+        border-radius: 5px;
+        /* Add border-radius for rounded corners */
+        cursor: pointer;
+    }
+
+    .container header button:hover {
+        background-color: #265df2;
+        /* Darker blue on hover */
+    }
+</style>
+
 <body>
-    <div id="app">
-        <h2>{{ title }}</h2>
+    <div class="container" id="app">
+        <header>
+            INTERNAL OCCURRENCE REPORT (IOR)
+            <header>
+                <!-- Replace the title with buttons -->
+                <button @click="redirectToFollowOccur('Occurence')">Occurence</button>
+                <button @click="redirectToFollowOccur('FollowOn')">Follow On</button>
+            </header><br>
+            <span>Follow On</span>
+        </header>
+        <form @submit.prevent="IOR" action="#">
+            <!-- Use @submit.prevent to prevent the default form submission behavior -->
+            <div class="form first">
+                <div class="details personal">
+                    <div class="fields">
+                        <div class="input-field" v-for="(value, key) in FollIOR_data" :key="key">
+                            <label>{{ key.replace(/_/g, ' ') }}</label>
 
-        <div class="button-container">
-            <button @click="redirectToFollowOccur('Occurence')">Occurence</button>
-            <button @click="redirectToFollowOccur('FollowOn')">Follow On</button>
-        </div>
-        <br>
+                            <input v-if="key === 'follup_date'" type="date" v-model="FollIOR_data[key]" required>
 
-        <form @submit.prevent="Follow_Occur">
+                            <input v-else-if="key === 'current_probability' || key === 'current_severity'" type="text" placeholder=" Enter your data" maxlength="1" v-model="FollIOR_data[key]" required>
 
-            <!--  -->
-            <label for="id_IOR">id_IOR: </label>
-            <input type="text" id="id_IOR" name="id_IOR" v-model="FollowIOR_data.id_IOR" required><br><br>
+                            <select v-else-if="key === 'follup_uic'" v-model="FollIOR_data[key]">
+                                <option value="IM" selected>IM</option>
+                                <option value="DO">DO</option>
+                                <option value="AO">AO</option>
+                                <option value="Others">Others</option>
+                            </select>
 
-            <!--  -->
-            <label for="follup_detail">Follow On Status: </label>
-            <input type="text" id="follup_detail" name="follup_detail" v-model="FollowIOR_data.follup_detail"
-                required><br><br>
+                            <select v-else-if="key === 'follup_status'" v-model="FollIOR_data[key]">
+                                <option value="Open" selected>Open</option>
+                                <option value="Closed ">Closed </option>
+                                <option value="Monitor ">Monitor </option>
+                            </select>
 
-            <!--  -->
-            <label for="follupby">follow by: </label>
-            <input type="text" id="follupby" name="follupby" v-model="FollowIOR_data.follupby" required><br><br>
+                            <textarea v-else-if="key === 'follup_detail'" rows="2" v-model="FollIOR_data[key]" placeholder=" Enter your data" required></textarea>
 
-            <!--  -->
-            <label for="follup_uic">Unit: </label>
-            <input type="text" id="follup_uic" name="follup_uic" v-model="FollowIOR_data.follup_uic" maxlength="4"
-                required><br><br>
-            
-            <!--  -->
-            <label for="follup_date">Date: </label>
-            <input type="date" id="follup_date" name="follup_date" v-model="FollowIOR_data.follup_date"
-                required><br><br>
-
-            <!--BOOLEAN  -->
-            <label for="follup_datarefer">Data Reference: </label><br>
-
-            <input type="radio" id="Yes2" name="follup_datarefer" value="true" v-model="FollowIOR_data.follup_datarefer">
-            <label for="Yes2">Yes</label>
-
-            <input type="radio" id="No2" name="hirac_process" value="false" v-model="FollowIOR_data.follup_datarefer">
-            <label for="No2">No</label><br> 
-
-            <!-- BOOLEAN -->
-            <label for="follup_status">Status: </label><br>
-
-            <input type="radio" id="Closed" name="Closed" value="Closed" v-model="FollowIOR_data.follup_status">
-            <label for="Closed">Closed</label>
-
-            <input type="radio" id="Open" name="Open" value="Open" v-model="FollowIOR_data.follup_status">
-            <label for="Open">Open</label>
-
-            <input type="radio" id="Monitor" name="Monitor" value="Monitor" v-model="FollowIOR_data.follup_status">
-            <label for="Monitor">Monitor</label><br><br>
-
-            <!--  -->
-            <label for="nextuic_follup ">Next Unit : </label>
-            <input type="text" id="nextuic_follup " name="nextuic_follup " v-model="FollowIOR_data.nextuic_follup "
-                maxlength="4" required><br><br>
-
-            <!--  -->
-            <label for="current_probability ">Probability : </label>
-            <input type="text" id="current_probability " name="current_probability "
-                v-model="FollowIOR_data.current_probability " maxlength="1" required><br><br>
-
-            <!--  -->
-            <label for="current_severity">Severity: </label>
-            <input type="text" id="current_severity" name="current_severity" v-model="FollowIOR_data.current_severity"
-                maxlength="1" required><br><br>
-
-            <!--  -->
-            <label for="current_riskindex">Risk Index: </label>
-            <input type="text" id="current_riskindex" name="current_riskindex"
-                v-model="FollowIOR_data.current_riskindex" required><br><br>
-
-            <button type="submit">Submit</button>
+                            <input v-else type="text" placeholder="Enter your data" v-model="FollIOR_data[key]" required>
+                        </div>
+                    </div>
+                </div>
+                <button class="nextBtn" type="submit">
+                    <!-- Change the button to submit -->
+                    <span class="btnText">Submit</span>
+                    <i class="uil uil-navigator"></i>
+                </button>
+            </div>
         </form>
         <p>{{ loginMessage }}</p>
     </div>
-
+    <script src="https://unpkg.com/vue@3/dist/vue.esm-browser.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.5/axios.min.js"
         integrity="sha512-TjBzDQIDnc6pWyeM1bhMnDxtWH0QpOXMcVooglXrali/Tj7W569/wd4E8EDjk1CwOAOPSJon1VfcEt1BI4xIrA=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script type="module">
-
         import { createApp, ref } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js';
 
         createApp({
             data() {
                 return {
-                    title: "FollowUp Occurrence",
-                    FollowIOR_data: {
-                        id_IOR: '',
-                        follup_detail: '',
-                        follupby: '',
-                        follup_uic: '',
-                        follup_date: '',
-                        follup_datarefer: '',
-                        follup_status: '',
-                        nextuic_follup: '',
-                        current_probability: '',
-                        current_severity: '',
-                        current_riskindex: ''
+                    title: "IOR",
+                    FollIOR_data: {
+                        id_IOR:'',
+                        follup_detail:'',
+                        follupby:'',
+                        follup_uic:'',
+                        follup_date:'',
+                        follup_datarefer:'',
+                        follup_status:'',
+                        nextuic_follup:'',
+                        current_probability:'',
+                        current_severity:'',
+                        current_riskindex:''
                     },
                     loginMessage: ''
                 };
             },
             methods: {
-                async Follow_Occur() {
-                    console.log("Sending data:", this.FollowIOR_data);
+                async IOR() {
+                    console.log("Sending data:", this.FollIOR_data);
                     try {
-                        const response = await axios.post("http://localhost:3000/addFollowUpOccurrence", this.FollowIOR_data);
-                        // console.log("Server response:", response.data);
-                        console.log(this.FollowIOR_data);
+                        const response = await axios.post("http://localhost:3000/addOccurrence", this.FollIOR_data);
+                        console.log(this.FollIOR_data);
 
-                        if (response.data.status === 200 && response.data.message === 'Follow-Up Occurrence Created') {
+                        if (response.data.status === 200 && response.data.message === 'Occurrence Created') {
                             this.loginMessage = 'Occurrence added successfully';
                         } else {
                             this.loginMessage = 'Failed to add occurrence';
@@ -133,7 +134,7 @@
                         this.loginMessage = 'Failed to add occurrence' + error;
                     }
                 },
-            
+
                 redirectToFollowOccur(buttonType) {
                     if (buttonType === 'Occurence') {
                         // Redirect to the Occurence page

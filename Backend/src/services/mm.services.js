@@ -647,14 +647,17 @@ async function showNCRReply(mm) {
 
 async function addNCRFollowResult(temp) {
     const { accountid, ncr_init_id, close_corrective, proposed_close_audit, proposed_close_date, is_close, effective, refer_verif, sheet_no, new_ncr_issue_no, close_approvedby, close_approveddate, verif_chied, verif_date, temporarylink } = temp;
+    console.log(temp);
     const query = `INSERT INTO NCR_FollowResult ( AccountID, NCR_init_ID, Close_Corrective_Actions , Proposed_Close_Auditee , Proposed_Close_Date , Is_close , effectiveness , Refer_Verification , Sheet_No , New_NCR_Issue_nbr ,  Close_approved_by ,Close_approved_date , Verified_Chief_IM , Verified_Date ,  TemporaryLink) VALUES ('${accountid}', '${ncr_init_id}', '${close_corrective}', '${proposed_close_audit}', '${proposed_close_date}', '${is_close}', '${effective}', '${refer_verif}', '${sheet_no}', '${new_ncr_issue_no}', '${close_approvedby}', '${close_approveddate}', '${verif_chied}', '${verif_date}', '${temporarylink}')`;
     const result = await db.query(query);
     if (result.rowCount === 1) {
         return {
+            status: 200,
             message: 'NRC Follow Result Created'
         }
     } else {
         return {
+            status: 404,
             message: 'Error'
         }
     }

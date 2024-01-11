@@ -11,6 +11,12 @@
     <div id="app">
         <h2>{{ title }}</h2>
 
+        <div class="button-container">
+            <button @click="redirectToFollowOccur('Occurence')">Occurence</button>
+            <button @click="redirectToFollowOccur('FollowOn')">Follow On</button>
+        </div>
+        <br>
+
         <form @submit.prevent="Follow_Occur">
 
             <!--  -->
@@ -125,6 +131,16 @@
                     } catch (error) {
                         console.error("Error during login:", error);
                         this.loginMessage = 'Failed to add occurrence' + error;
+                    }
+                },
+            
+                redirectToFollowOccur(buttonType) {
+                    if (buttonType === 'Occurence') {
+                        // Redirect to the Occurence page
+                        window.location.href = 'IOR_Form.html';
+                    } else if (buttonType === 'FollowOn') {
+                        // Redirect to the Follow_Occur page
+                        window.location.href = 'Follow_Occur.html';
                     }
                 }
             }

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NCR Follow Form Page</title>
+</head>
+
+<body>
+    <div id="app">
+        <h2>{{ title }}</h2>
+
+        <form @submit.prevent="Follow_NCR">
+
+            <!--  -->
+            <label for="accountid">accountid: </label>
+            <input type="text" id="accountid" name="accountid" v-model="FollowNCR_data.accountid" required><br><br>
+
+            <!--  -->
+            <label for="ncr_init_id">ncr_init_id: </label>
+            <input type="text" id="ncr_init_id" name="ncr_init_id" v-model="FollowNCR_data.ncr_init_id"
+                required><br><br>
+
+            <!--  -->
+            <label for="close_corrective">close_corrective: </label>
+            <input type="text" id="close_corrective" name="close_corrective" v-model="FollowNCR_data.close_corrective" required><br><br>
+
+            <!--  -->
+            <label for="proposed_close_audit">proposed_close_audit: </label>
+            <input type="text" id="proposed_close_audit" name="proposed_close_audit" v-model="FollowNCR_data.proposed_close_audit" 
+                required><br><br>
+            
+            <!--  -->
+            <label for="proposed_close_date">proposed_close_date: </label>
+            <input type="date" id="proposed_close_date" name="proposed_close_date" v-model="FollowNCR_data.proposed_close_date"
+                required><br><br>
+
+            <!--BOOLEAN  -->
+            <label for="is_close">is_close: </label><br>
+            <input type="radio" id="Open" name="Open" value="true" v-model="FollowNCR_data.is_close">
+            <label for="Open">Open</label>
+
+            <input type="radio" id="Closed" name="Closed" value="false" v-model="FollowNCR_data.is_close">
+            <label for="Closed">Closed</label><br><br>
+
+
+            <!-- BOOLEAN -->
+            <label for="Effective">Effective: </label><br>
+            <input type="radio" id="Effective" name="Effective" value="Effective" v-model="FollowNCR_data.effective">
+            <label for="Effective">Effective</label>
+
+            <input type="radio" id="Not Effective" name="Not Effective" value="Not Effective" v-model="FollowNCR_data.effective">
+            <label for="Not Effective">Not Effective</label><br><br>
+
+            <!--  -->
+            <label for="refer_verif ">refer_verif : </label>
+            <input type="text" id="refer_verif " name="refer_verif " v-model="FollowNCR_data.refer_verif "
+              required><br><br>
+
+            <!--  -->
+            <label for="sheet_no ">sheet_no : </label>
+            <input type="text" id="sheet_no " name="sheet_no "
+                v-model="FollowNCR_data.sheet_no " required><br><br>
+
+            <!--  -->
+            <label for="new_ncr_issue_no">new_ncr_issue_no: </label>
+            <input type="text" id="new_ncr_issue_no" name="new_ncr_issue_no" v-model="FollowNCR_data.new_ncr_issue_no"
+                required><br><br>
+
+            <!--  -->
+            <label for="close_approvedby">close_approvedby: </label>
+            <input type="text" id="close_approvedby" name="close_approvedby" v-model="FollowNCR_data.close_approvedby" required><br><br>
+
+            <!--  -->
+            <label for="close_approveddate">close_approveddate: </label>
+            <input type="date" id="close_approveddate" name="close_approveddate" v-model="FollowNCR_data.close_approveddate"
+            required><br><br>
+
+            <!--  -->
+            <label for="verif_chied">verif_chied: </label>
+            <input type="text" id="verif_chied" name="verif_chied" v-model="FollowNCR_data.verif_chied"
+            required><br><br>
+
+            <!--  -->
+            <label for="verif_date">verif_chied: </label>
+            <input type="date" id="verif_date" name="verif_date" v-model="FollowNCR_data.verif_date"
+            required><br><br>
+
+            <!--  -->
+            <label for="temporarylink">temporarylink: </label>
+            <input type="text" id="temporarylink" name="temporarylink" v-model="FollowNCR_data.temporarylink"
+            required><br><br>
+
+            <button type="submit">Submit</button>
+        </form>
+        <p>{{ loginMessage }}</p>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.5/axios.min.js"
+        integrity="sha512-TjBzDQIDnc6pWyeM1bhMnDxtWH0QpOXMcVooglXrali/Tj7W569/wd4E8EDjk1CwOAOPSJon1VfcEt1BI4xIrA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="module">
+
+        import { createApp, ref } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js';
+
+        createApp({
+            data() {
+                return {
+                    title: "FollowUp NCR",
+                    FollowNCR_data: {
+                        accountid: '', 
+                        ncr_init_id:'' ,
+                        close_corrective:'', 
+                        proposed_close_audit:'',  
+                        proposed_close_date:'',  
+                        is_close:'',  
+                        effective:'',  
+                        refer_verif:'',  
+                        sheet_no:'',  
+                        new_ncr_issue_no:'',  
+                        close_approvedby:'',  
+                        close_approveddate:'',  
+                        verif_chied:'',  
+                        verif_date:'',  
+                        temporarylink:''
+                    },
+                    loginMessage: ''
+                };
+            },
+            methods: {
+                async Follow_NCR() {
+                    console.log("Sending data:", this.FollowNCR_data);
+                    try {
+                        const response = await axios.post("http://localhost:3000/addNCRFollowResult", this.FollowNCR_data);
+                        // console.log("Server response:", response.data);
+                        console.log(this.FollowNCR_data);
+
+                        if (response.data.status === 200 && response.data.message === 'NRC Follow Result Created') {
+                            this.loginMessage = 'Occurrence added successfully';
+                        } else {
+                            this.loginMessage = 'Failed to add occurrence';
+                        }
+                    } catch (error) {
+                        console.error("Error during login:", error);
+                        this.loginMessage = 'Failed to add occurrence' + error;
+                    }
+                }
+            }
+        }).mount('#app');
+    </script>
+</body>
+
+</html>

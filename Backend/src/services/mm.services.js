@@ -582,7 +582,7 @@ async function showNCRInit() {
     }
 }
 
-async function showNCRInit_ID() {
+async function showNCRInit_ID(temp) {
     const { ncr_init_id } = temp;
     const query = `SELECT * FROM NCR_Initial WHERE ncr_init_id = '${ncr_init_id}'`;
     const result = await db.query(query);

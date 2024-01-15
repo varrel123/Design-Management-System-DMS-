@@ -51,6 +51,7 @@ router.put('/UpdateNCRInit', mmController.UpdateNCRInit);
 
 router.get('/showNCRInit', mmController.showNCRInit);
 
+router.get('/showNCRInit_ID', mmController.showNCRInit_ID);
 
 router.post('/addNCRReply', mmController.addNCRReply);
 
@@ -59,7 +60,6 @@ router.delete('/deleteNCRReply', mmController.deleteNCRReply);
 router.put('/UpdateNCRReply', mmController.UpdateNCRReply);
 
 router.get('/showNCRReply', mmController.showNCRReply);
-
 
 router.post('/addNCRFollowResult', mmController.addNCRFollowResult);
 

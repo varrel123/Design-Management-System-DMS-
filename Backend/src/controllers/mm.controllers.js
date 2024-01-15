@@ -218,6 +218,16 @@ async function showNCRInit(req,res){
     }
 }
 
+async function showNCRInit_ID(req,res){
+    try{
+        const result = await mmService.showNCRInit_ID(req.body);
+        res.json(result);
+    }catch(err){
+        res.json(err.detail);
+    }
+}
+
+
 async function addNCRReply(req,res){
     try{
         const result = await mmService.addNCRReply(req.body);
@@ -322,5 +332,6 @@ module.exports = {
     addNCRFollowResult,
     deleteNCRFollowResult,
     UpdateNCRFollowResult,
-    showNCRFollowResult
+    showNCRFollowResult,
+    showNCRInit_ID
 };

@@ -582,6 +582,21 @@ async function showNCRInit() {
     }
 }
 
+async function showNCRInit_ID() {
+    const { ncr_init_id } = temp;
+    const query = `SELECT * FROM NCR_Initial WHERE ncr_init_id = '${ncr_init_id}'`;
+    const result = await db.query(query);
+    if (result.rowCount) {
+        return {
+            message: 'Showing NCR Intial by ID',
+            showProduct: result.rows
+        }
+    } else {
+        return {
+            message: 'No Data NCR Initial by ID'
+        }
+    }
+}
 
 async function addNCRReply(mm) {
     const { accountid, ncr_init_id, rca_problem, corrective_act, preventive_act, identified_by, identified_date, accept_by, audit_accept, temporarylink } = mm;
@@ -742,5 +757,6 @@ module.exports = {
     addNCRFollowResult,
     deleteNCRFollowResult,
     UpdateNCRFollowResult,
-    showNCRFollowResult
+    showNCRFollowResult,
+    showNCRInit_ID
 };

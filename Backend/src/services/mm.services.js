@@ -572,6 +572,7 @@ async function showNCRInit() {
     const result = await db.query(query);
     if (result.rowCount) {
         return {
+            status:200,
             message: 'Showing NCR Intial',
             showProduct: result.rows
         }

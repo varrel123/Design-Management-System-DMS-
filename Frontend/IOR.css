@@ -30,7 +30,7 @@ body{
     font-weight: 600;
     color: #333;
 }
-.container header::before{
+/* .container header::before{
     content: "";
     position: absolute;
     left: 0;
@@ -38,8 +38,8 @@ body{
     height: 3px;
     width: 27px;
     border-radius: 8px;
-    background-color: #4070f4;
-}
+    background-color: #ffffff;
+} */
 .container form {
   position: relative;
   margin-top: 16px;

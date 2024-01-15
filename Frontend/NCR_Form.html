@@ -11,10 +11,43 @@
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     <title>NON-CONFORMANCE REPORT (NCR)</title>
 </head>
+
+<style>
+    /* Add styles for button spacing and appearance */
+    .container header button {
+        margin-right: 10px;
+        /* Adjust the margin as needed */
+        background-color: #4070f4;
+        /* Blue background color */
+        color: #fff;
+        /* White text color */
+        font-weight: normal;
+        /* Bold text */
+        padding: 5px 10px;
+        /* Adjust padding as needed */
+        border: none;
+        /* Remove button border */
+        border-radius: 5px;
+        /* Add border-radius for rounded corners */
+        cursor: pointer;
+    }
+
+    .container header button:hover {
+        background-color: #265df2;
+        /* Darker blue on hover */
+    }
+</style>
+
 <body>
     <div class="container" id="app">
         <header>
             NON-CONFORMANCE REPORT (NCR)
+            <header>
+                <!-- Replace the title with buttons -->
+                <button @click="redirectToFollowOccur('NCR')">NCR</button>
+                <button @click="redirectToFollowOccur('FollowOn')">Follow On</button>
+            </header><br>
+            <span>NCR</span>
         </header>
         <form @submit.prevent="IOR" action="#">
             <!-- Use @submit.prevent to prevent the default form submission behavior -->
@@ -161,12 +194,11 @@
                 },
 
                 redirectToFollowOccur(buttonType) {
-                    if (buttonType === 'Occurrence') {
+                    if (buttonType === 'NCR') {
                         // Redirect to the Occurrence page
-                        window.location.href = 'Satu.html';
                     } else if (buttonType === 'FollowOn') {
                         // Stay on the Follow_On page
-                        // You can add additional logic if needed
+                        window.location.href = 'Follow_NCR.html';
                     }
                 }
             }

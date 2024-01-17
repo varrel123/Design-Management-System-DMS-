@@ -3,6 +3,7 @@ var myObject = new Vue({
   el: '#app',
   data: {
     radios: [
+      { label: 'Account Info', url: 'Account.html' },
       { label: 'Entry NCR', url: 'NCR_Form.html' },
       { label: 'Entry IOR', url: 'IOR_Form.html' },
       { label: 'DOA Project', url: 'doaProject.html' },

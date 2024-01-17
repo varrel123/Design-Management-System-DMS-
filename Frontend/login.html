@@ -68,6 +68,14 @@
             color: #dc3545;
             margin-top: 10px;
         }
+
+        #accountidDisplay {
+            text-align: center;
+            margin-top: 10px;
+            font-weight: bold;
+            color: #28a745;
+            /* Green color for visibility */
+        }
     </style>
 </head>
 
@@ -85,7 +93,9 @@
             <button type="submit">Login</button>
         </form>
         <!-- Display Login Message -->
-        <p>{{ loginMessage }}</p>
+        <p id="accountidDisplay">{{ loginMessage }}</p>
+        <!-- Display accountid -->
+        <p id="accountidDisplay">{{ $data.accountid ? 'Account ID: ' + $data.accountid : '' }}</p>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.5/axios.min.js"
@@ -102,7 +112,8 @@
                         accountid: '',
                         Password: ''
                     },
-                    loginMessage: '' // New property for login message
+                    loginMessage: '', // New property for login message
+                    accountid: null // New property for storing accountid
                 };
             },
             methods: {
@@ -113,14 +124,16 @@
                         console.log("Server response:", response.data);
 
                         if (response.data.status === 200 && response.data.message === 'Login successful') {
-                            const userRole = response.data.user.role; 
-                            if (userRole === 'Admin') {
-                                this.loginMessage = 'Login successful';
-                                console.log(userRole);
-                                window.location.href = 'main_menu.html';
+                            const userRole = response.data.user.role;
+                            this.accountid = response.data.user.accountid; // Save accountid in the data
+                            this.loginMessage = 'Account ID: ' + this.accountid; // Display accountid
+                            sessionStorage.setItem('accountid', this.accountid); // Save accountid in sessionStorage
+
+                            if (userRole === 'Admin' || userRole === 'DO' || userRole === 'AO' || userRole === 'IM') {
+                                this.loginMessage += ' - Redirecting...';
+                                window.location.href = 'Account.html';
                             } else if (userRole === 'DO' || userRole === 'AO' || userRole === 'IM') {
-                                this.loginMessage = 'Login successful';
-                                console.log(userRole);
+                                this.loginMessage += ' - Redirecting...';
                                 window.location.href = 'main_menu2.html';
                             }
                         } else {
@@ -132,7 +145,6 @@
                     }
                 }
             }
-
         }).mount('#app');
     </script>
 </body>

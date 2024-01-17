@@ -12,43 +12,14 @@
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     <title>INTERNAL OCCURRENCE REPORT (IOR)</title>
 </head>
-
-<style>
-    /* Add styles for button spacing and appearance */
-    .container header button {
-        margin-right: 10px;
-        /* Adjust the margin as needed */
-        background-color: #ffffff;
-        /* Blue background color */
-        color: #000000;
-        border-color: #265df2;
-        /* White text color */
-        font-weight: normal;
-        /* Bold text */
-        padding: 5px 10px;
-        /* Adjust padding as needed */
-        /* Remove button border */
-        border-radius: 5px;
-        /* Add border-radius for rounded corners */
-        cursor: pointer;
-    }
-
-    .container header button:hover {
-        background-color: #265df2;
-        /* Darker blue on hover */
-    }
-
-</style>
-
 <body>
     <div class="container" id="app">
         <header>
-            INTERNAL OCCURRENCE REPORT (IOR)
-            <header>
+            <div class="ncr-title">INTERNAL OCCURRENCE REPORT</div>
+            <header><br>
                 <button @click="redirectToFollowOccur('Occurence')">Occurence</button>
                 <button @click="redirectToFollowOccur('FollowOn')">Follow On</button>
-            </header><br>
-            <span>Occurence</span>
+            </header>
         </header>
         <form @submit.prevent="IOR" action="#">
             <!-- Use @submit.prevent to prevent the default form submission behavior -->
@@ -57,7 +28,6 @@
                     <div class="fields">
                         <div class="input-field" v-for="(value, key) in IOR_data" :key="key">
                             <label>{{ key.replace(/_/g, ' ') }}</label>
-                            <!-- Use appropriate input types based on specifications -->
                             <input v-if="key === 'occur_date'||key === 'report_date'" type="date" v-model="IOR_data[key]" required>
                             <input v-else-if="key === 'occur_nbr'" type="text" placeholder="YYYY-MM-SSS" pattern="\d{4}-\d{2}-\d{3}" v-model="IOR_data[key]" required>
                             <select v-else-if="key === 'level_type'" v-model="IOR_data[key]">
@@ -71,7 +41,7 @@
                                 <option value="Shown" selected>Shown</option>
                                 <option value="Hidden ">Hidden </option>
                             </select>
-                            <select v-else-if="key === 'hirac_process'" v-model="IOR_data[key]">
+                            <select  v-else-if="key === 'hirac_process'" v-model="IOR_data[key]">   class="input-field full-width"
                                 <option value="Yes" selected>Yes</option>
                                 <option value="No">No </option>
                             </select>
@@ -80,6 +50,8 @@
                         </div>
                     </div>
                 </div>
+
+
                 <button class="nextBtn" type="submit">
                     <!-- Change the button to submit -->
                     <span class="btnText">Submit</span>

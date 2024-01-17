@@ -11,43 +11,15 @@
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     <title>NON-CONFORMANCE REPORT (NCR)</title>
 </head>
-
-<style>
-    /* Add styles for button spacing and appearance */
-    .container header button {
-        margin-right: 10px;
-        /* Adjust the margin as needed */
-        background-color: #ffffff;
-        /* Blue background color */
-        color: #000000;
-        border-color: #265df2;
-        /* White text color */
-        font-weight: normal;
-        /* Bold text */
-        padding: 5px 10px;
-        /* Adjust padding as needed */
-        /* Remove button border */
-        border-radius: 5px;
-        /* Add border-radius for rounded corners */
-        cursor: pointer;
-    }
-
-    .container header button:hover {
-        background-color: #265df2;
-        /* Darker blue on hover */
-    }
-</style>
-
 <body>
     <div class="container" id="app">
         <header>
-            NON-CONFORMANCE REPORT (NCR)
-            <header>
+           <div class="ncr-title">FOLLOW ON NON-CONFORMANCE REPORT</div>
+            <header><br>
                 <!-- Replace the title with buttons -->
                 <button @click="redirectToFollowOccur('NCR')">NCR</button>
                 <button @click="redirectToFollowOccur('FollowOn')">Follow On</button>
-            </header><br>
-            <span>Follow On</span>
+            </header>
         </header>
         <form @submit.prevent="FollowNCR" action="#">
             <div class="form first">

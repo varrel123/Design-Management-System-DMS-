@@ -65,6 +65,28 @@ async function showAccount(temp) {
     }
 }
 
+async function showAllAccount() {
+    try {
+        const query = `SELECT * FROM account`;
+        const result = await db.query(query);
+
+        if (result.rowCount > 0) {
+            return {
+                status: 200,
+                message: 'Account found',
+                account: result.rows,
+            };
+        } else {
+            return {
+                status: 200,
+                message: 'Account not found',
+            };
+        }
+    } catch (error) {
+        console.error('Error fetching account information:', error);
+        throw error;
+    }
+}
 
 async function deleteAccount(temp) {
     const { accountid } = temp;
@@ -759,5 +781,6 @@ module.exports = {
     deleteNCRFollowResult,
     UpdateNCRFollowResult,
     showNCRFollowResult,
-    showNCRInit_ID
+    showNCRInit_ID,
+    showAllAccount
 };

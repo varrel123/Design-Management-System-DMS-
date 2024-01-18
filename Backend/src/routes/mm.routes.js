@@ -33,6 +33,8 @@ router.post('/addOccurrence', mmController.addOccurrence);
 
 router.get('/showOccurrence', mmController.showOccurrence);
 
+router.get('/showAllAccount', mmController.showAllAccount);
+
 router.get('/showissuence', mmController.showissuence);
 
 router.put('/updateOccurrence', mmController.updateOccurrence);

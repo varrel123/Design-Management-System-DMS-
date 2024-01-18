@@ -28,6 +28,15 @@ async function showAccount(req,res){
     }
 }
 
+async function showAllAccount(req,res){
+    try{
+        const result = await mmService.showAllAccount(req.body);
+        res.json(result);
+    }catch(err){
+        res.json(err);
+    }
+}
+
 async function deleteAccount(req,res){
     try{
         const result = await mmService.deleteAccount(req.body);
@@ -333,5 +342,6 @@ module.exports = {
     deleteNCRFollowResult,
     UpdateNCRFollowResult,
     showNCRFollowResult,
-    showNCRInit_ID
+    showNCRInit_ID,
+    showAllAccount
 };

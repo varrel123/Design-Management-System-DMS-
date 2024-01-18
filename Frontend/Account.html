@@ -21,10 +21,12 @@
             <div class="row no-gutters row-bordered row-border-light">
                 <div class="col-md-3 pt-0">
                     <div class="list-group list-group-flush account-settings-links">
-                        <a class="list-group-item list-group-item-action active" data-toggle="list"
-                            href="#account-general" @click="changeTab('general')">General</a>
-                        <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-info"
+                        <a class="list-group-item list-group-item-action active" href="#account-general"
+                            @click="changeTab('general')">General</a>
+                        <a class="list-group-item list-group-item-action" href="#account-info"
                             @click="changeTab('info')">Info</a>
+                        <a class="list-group-item list-group-item-action active" href="#add-account"
+                            @click="changeTab('add')" :class="{ 'active': activeTab === 'add' }">Add Account</a>
                     </div>
                 </div>
                 <div class="col-md-9">
@@ -51,8 +53,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="account-info" v-show="activeTab === 'info'">
-                            <div class="card-body">
+                        <div class="tab-pane fade active show" id="account-info" v-show="activeTab === 'info'">
+                            <div class="card-body" style="overflow: auto;">
                                 <!-- Content for Info tab -->
                                 <h5 class="font-weight-bold mb-3 position-relative">
                                     <span class="account-info-background"></span> <!-- Pseudo-element -->
@@ -64,6 +66,7 @@
                                             <th>AccountID</th>
                                             <th>Name</th>
                                             <th>Unit</th>
+                                            <th>Password</th>
                                             <th>Role</th>
                                         </tr>
                                     </thead>
@@ -72,20 +75,54 @@
                                             <td>{{ account.accountid }}</td>
                                             <td>{{ account.name }}</td>
                                             <td>{{ account.unit }}</td>
+                                            <td>{{ account.password }}</td> <!-- Change to 'password' if available -->
                                             <td>{{ account.role }}</td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
+                        <div class="tab-pane fade active show" id="add-account" v-show="activeTab === 'add'">
+                            <div class="card-body">
+                                <!-- Content for Add Account tab -->
+                                <h5 class="font-weight-bold mb-3 position-relative">
+                                    <span class="account-info-background"></span> <!-- Pseudo-element -->
+                                    Add Account
+                                </h5>
+                                <form @submit.prevent="addAccount">
+                                    <div class="form-group">
+                                        <label class="form-label">AccountID</label>
+                                        <input type="text" class="form-control" v-model="newAccount.accountid" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Name</label>
+                                        <input type="text" class="form-control" v-model="newAccount.name" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Unit</label>
+                                        <input type="text" class="form-control" v-model="newAccount.unit" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Password</label>
+                                        <input type="password" class="form-control" v-model="newAccount.password"
+                                            required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Role</label>
+                                        <input type="text" class="form-control" v-model="newAccount.role" required>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Add Account</button>
+                                </form>
 
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="text-right mt-3">
             <!-- <button type="button" class="btn btn-primary" @click="changePassword">Save changes</button>&nbsp;
-            <button type="button" class="btn btn-primary">Cancel</button> -->
+                <button type="button" class="btn btn-primary">Cancel</button> -->
         </div>
     </div>
     <script src="https://unpkg.com/vue@3/dist/vue.esm-browser.js"></script>
@@ -108,7 +145,20 @@
                     },
                     loginMessage: '',
                     activeTab: 'general', // Added to track the active tab
-                    allAccounts: [] // Added to store all accounts for the Info tab
+                    allAccounts: [{
+                        accountid: '',
+                        name: '',
+                        unit: '',
+                        Password: '',
+                        Role: ''
+                    }], // Added to store all accounts for the Info tab
+                    newAccount: {
+                        accountid: '',
+                        name: '',
+                        unit: '',
+                        password: '',
+                        role: ''
+                    }
                 };
             },
             mounted() {
@@ -128,7 +178,6 @@
             methods: {
                 async fetchAccountData(accountid) {
                     try {
-                        // Use axios.post and send accountid in the request body
                         const response = await axios.post('http://localhost:3000/showAccount', { accountid });
                         this.Account_data = response.data.account;
                         this.loginMessage = ''; // Reset loginMessage on successful fetch
@@ -142,9 +191,28 @@
                         const response = await axios.get('http://localhost:3000/showAllAccount');
                         console.log("Fetched accounts:", response.data.account); // Log the entire response
                         this.allAccounts = response.data.account;
+                        console.log(this.allAccounts);
                     } catch (error) {
                         console.error("Error fetching all accounts:", error);
                         console.error("Entire error object:", error); // Log the entire error object
+                    }
+                },
+                async addAccount() {
+                    try {
+                        const response = await axios.post('http://localhost:3000/addAccount', this.newAccount);
+                        console.log("Added account:", response.data.account); // Log the added account
+                        // Fetch all accounts after adding a new one
+                        this.fetchAllAccounts();
+                        // Reset the form
+                        this.newAccount = {
+                            accountid: '',
+                            name: '',
+                            unit: '',
+                            password: '',
+                            role: ''
+                        };
+                    } catch (error) {
+                        console.error("Error adding account:", error);
                     }
                 },
                 changeTab(tabName) {
@@ -153,6 +221,11 @@
                     if (tabName === 'info') {
                         this.fetchAllAccounts(); // Fetch all accounts when switching to the 'info' tab
                     }
+                },
+                switchToAddTab() {
+                    this.activeTab = 'add';
+                    console.log(`Switched to add tab`);
+                    // Do not call this.addAccount() here
                 }
             }
         }).mount('#app');

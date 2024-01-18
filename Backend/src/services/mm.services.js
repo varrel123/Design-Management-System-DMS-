@@ -22,9 +22,6 @@ async function login(mm) {
     }
 }
 
-
-
-
 async function addAccount(mm) {
     const { accountid, name, unit, password, role } = mm;
     const pass = await helper.hashPassword(password);

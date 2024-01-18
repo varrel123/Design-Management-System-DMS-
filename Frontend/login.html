@@ -14,7 +14,6 @@
         <div class="blue-block"></div>
         <h1 class="header">DOA Dashboard Apps</h1>
         <h2>{{ title }}</h2>
-        <!-- Login Form -->
         <form @submit.prevent="login">
             <label for="accountid">ID Number :</label>
             <input type="text" id="accountid" v-model="loginData.accountid" required>
@@ -22,9 +21,7 @@
             <input type="password" id="Password" v-model="loginData.Password" required>
             <button type="submit">Login</button>
         </form>
-        <!-- Display Login Message -->
         <p id="accountidDisplay">{{ loginMessage }}</p>
-        <!-- Display accountid -->
         <p id="accountidDisplay">{{ $data.accountid ? 'Account ID: ' + $data.accountid : '' }}</p>
     </div>
 
@@ -42,8 +39,8 @@
                         accountid: '',
                         Password: ''
                     },
-                    loginMessage: '', // New property for login message
-                    accountid: null // New property for storing accountid
+                    loginMessage: '', 
+                    accountid: null 
                 };
             },
             methods: {
@@ -55,9 +52,9 @@
 
                         if (response.data.status === 200 && response.data.message === 'Login successful') {
                             const userRole = response.data.user.role;
-                            this.accountid = response.data.user.accountid; // Save accountid in the data
-                            this.loginMessage = 'Account ID: ' + this.accountid; // Display accountid
-                            sessionStorage.setItem('accountid', this.accountid); // Save accountid in sessionStorage
+                            this.accountid = response.data.user.accountid; 
+                            this.loginMessage = 'Account ID: ' + this.accountid; 
+                            sessionStorage.setItem('accountid', this.accountid); 
 
                             if (userRole === 'Admin' || userRole === 'DO' || userRole === 'AO' || userRole === 'IM') {
                                 this.loginMessage += ' - Redirecting...';

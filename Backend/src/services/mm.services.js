@@ -38,6 +38,26 @@ async function addAccount(mm) {
     }
 }
 
+async function updatePassword(mm) {
+    const { accountid, password} = mm;
+    // const pass = await helper.hashPassword(newPassword);
+    const query = `UPDATE account SET password = '${password}' WHERE accountid = '${accountid}'`;
+    const result = await db.query(query);
+
+    if (result.rowCount === 1) {
+        return {
+            status:200,
+            message: 'Password Updated'
+        };
+    } else {
+        return {
+            status:404,
+            message: 'User not found or Error updating password'
+        };
+    }
+}
+
+
 async function showAccount(temp) {
     try {
         const { accountid } = temp;
@@ -779,5 +799,6 @@ module.exports = {
     UpdateNCRFollowResult,
     showNCRFollowResult,
     showNCRInit_ID,
-    showAllAccount
+    showAllAccount,
+    updatePassword
 };

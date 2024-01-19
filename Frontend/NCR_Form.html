@@ -11,8 +11,12 @@
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     <title>NON-CONFORMANCE REPORT (NCR)</title>
 </head>
+
 <body>
     <div class="container" id="app">
+        <div class="text-right mt-3">
+            <button type="button" class="btn btn-primary" @click="redirectToMainMenu">Back to Main Menu</button>
+        </div><br>
         <header>
             <div class="ncr-title">NON-CONFORMANCE REPORT</div>
             <header><br>
@@ -30,7 +34,9 @@
                         <div class="input-field" v-for="(value, key) in NCR_data" :key="key">
                             <label>{{ key.replace(/_/g, ' ') }}</label>
 
-                            <input v-if="key === 'issued_date' ||key === 'answer_duedate'||key === 'audit_date'||key === 'acknowledge_date'" type="date" v-model="NCR_data[key]" required> 
+                            <input
+                                v-if="key === 'issued_date' ||key === 'answer_duedate'||key === 'audit_date'||key === 'acknowledge_date'"
+                                type="date" v-model="NCR_data[key]" required>
 
                             <select v-else-if="key === 'problem_analis'" v-model="NCR_data[key]">
                                 <option value="Required">Required</option>
@@ -83,7 +89,7 @@
                                 <option value="Closed">Closed</option>
                                 <option value="Monitor">Monitor</option>
                             </select>
-                            
+
                             <select v-else-if="key === 'responsible_office'" v-model="NCR_data[key]">
                                 <option value="AO: Airworthiness Office">AO: Airworthiness Office</option>
                                 <option value="DO: Design Office">DO: Design Office</option>
@@ -96,7 +102,8 @@
                                 <option value="EL: Elang Lintas Indonesia">EL: Elang Lintas Indonesia</option>
                             </select>
 
-                            <textarea v-else-if="key === 'subject'" rows="2" v-model="NCR_data[key]" placeholder=" Enter your data" required></textarea>
+                            <textarea v-else-if="key === 'subject'" rows="2" v-model="NCR_data[key]"
+                                placeholder=" Enter your data" required></textarea>
 
                             <input v-else type="text" placeholder="Enter your data" v-model="NCR_data[key]" required>
                         </div>
@@ -114,7 +121,7 @@
         integrity="sha512-TjBzDQIDnc6pWyeM1bhMnDxtWH0QpOXMcVooglXrali/Tj7W569/wd4E8EDjk1CwOAOPSJon1VfcEt1BI4xIrA=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script type="module">
-        
+
         import { createApp, ref } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js';
 
         createApp({
@@ -139,7 +146,7 @@
                         answer_duedate: '',
                         issue_ian: '',
                         ian_no: '',
-                        encounter_condition:'',
+                        encounter_condition: '',
                         audit_by: '',
                         audit_date: '',
                         acknowledge_by: '',
@@ -151,6 +158,9 @@
                 };
             },
             methods: {
+                redirectToMainMenu() {
+                    window.location.href = 'main_menu.html';
+                },
                 async IOR() {
                     console.log("Sending data:", this.NCR_data);
                     try {

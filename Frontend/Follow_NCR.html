@@ -11,10 +11,14 @@
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     <title>NON-CONFORMANCE REPORT (NCR)</title>
 </head>
+
 <body>
     <div class="container" id="app">
+        <div class="text-right mt-3">
+            <button type="button" class="btn btn-primary" @click="redirectToMainMenu">Back to Main Menu</button>
+        </div><br>
         <header>
-           <div class="ncr-title">FOLLOW ON NON-CONFORMANCE REPORT</div>
+            <div class="ncr-title">FOLLOW ON NON-CONFORMANCE REPORT</div>
             <header><br>
                 <!-- Replace the title with buttons -->
                 <button @click="redirectToFollowOccur('NCR')">NCR</button>
@@ -28,8 +32,9 @@
                         <div class="input-field" v-for="(value, key) in FollowNCR_data" :key="key">
                             <label>{{ key.replace(/_/g, ' ') }}</label>
 
-                            <input v-if="key === 'proposed_close_date' || key === 'close_approveddate' || key === 'verif_date'" type="date"
-                                v-model="FollowNCR_data[key]" required>
+                            <input
+                                v-if="key === 'proposed_close_date' || key === 'close_approveddate' || key === 'verif_date'"
+                                type="date" v-model="FollowNCR_data[key]" required>
 
                             <select v-else-if="key === 'is_close'" v-model="FollowNCR_data[key]">
                                 <option value="true">Close</option>
@@ -41,7 +46,8 @@
                                 <option value="Not Effective">Not Effective</option>
                             </select>
 
-                            <input v-else type="text" placeholder="Enter your data" v-model="FollowNCR_data[key]" required>
+                            <input v-else type="text" placeholder="Enter your data" v-model="FollowNCR_data[key]"
+                                required>
                         </div>
                     </div>
                 </div>
@@ -85,6 +91,10 @@
                 };
             },
             methods: {
+                redirectToMainMenu() {
+                    window.location.href = 'main_menu.html';
+                },
+                
                 async FollowNCR() {
                     console.log("Sending data:", this.FollowNCR_data);
                     try {

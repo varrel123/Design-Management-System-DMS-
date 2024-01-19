@@ -37,6 +37,15 @@ async function showAllAccount(req,res){
     }
 }
 
+async function updatePassword(req,res){
+    try{
+        const result = await mmService.updatePassword(req.body);
+        res.json(result);
+    }catch(err){
+        res.json(err);
+    }
+}
+
 async function deleteAccount(req,res){
     try{
         const result = await mmService.deleteAccount(req.body);
@@ -343,5 +352,6 @@ module.exports = {
     UpdateNCRFollowResult,
     showNCRFollowResult,
     showNCRInit_ID,
-    showAllAccount
+    showAllAccount,
+    updatePassword
 };

@@ -7,6 +7,8 @@ router.post('/login', mmController.login);
 
 router.post('/addAccount', mmController.addAccount);
 
+router.post('/updatePassword', mmController.updatePassword);
+
 router.post('/showAccount', mmController.showAccount);
 
 router.delete('/deleteAccount', mmController.deleteAccount);

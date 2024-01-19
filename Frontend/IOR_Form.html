@@ -12,8 +12,12 @@
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     <title>INTERNAL OCCURRENCE REPORT (IOR)</title>
 </head>
+
 <body>
     <div class="container" id="app">
+        <div class="text-right mt-3">
+            <button type="button" class="btn btn-primary" @click="redirectToMainMenu">Back to Main Menu</button>
+        </div><br>
         <header>
             <div class="ncr-title">INTERNAL OCCURRENCE REPORT</div>
             <header><br>
@@ -28,8 +32,10 @@
                     <div class="fields">
                         <div class="input-field" v-for="(value, key) in IOR_data" :key="key">
                             <label>{{ key.replace(/_/g, ' ') }}</label>
-                            <input v-if="key === 'occur_date'||key === 'report_date'" type="date" v-model="IOR_data[key]" required>
-                            <input v-else-if="key === 'occur_nbr'" type="text" placeholder="YYYY-MM-SSS" pattern="\d{4}-\d{2}-\d{3}" v-model="IOR_data[key]" required>
+                            <input v-if="key === 'occur_date'||key === 'report_date'" type="date"
+                                v-model="IOR_data[key]" required>
+                            <input v-else-if="key === 'occur_nbr'" type="text" placeholder="YYYY-MM-SSS"
+                                pattern="\d{4}-\d{2}-\d{3}" v-model="IOR_data[key]" required>
                             <select v-else-if="key === 'level_type'" v-model="IOR_data[key]">
                                 <option value="Aircraft" selected>Aircraft</option>
                                 <option value="Engine">Engine</option>
@@ -41,11 +47,13 @@
                                 <option value="Shown" selected>Shown</option>
                                 <option value="Hidden ">Hidden </option>
                             </select>
-                            <select  v-else-if="key === 'hirac_process'" v-model="IOR_data[key]">   class="input-field full-width"
+                            <select v-else-if="key === 'hirac_process'" v-model="IOR_data[key]"> class="input-field
+                                full-width"
                                 <option value="Yes" selected>Yes</option>
                                 <option value="No">No </option>
                             </select>
-                            <textarea v-else-if="key === 'detail_occurance'" placeholder=" Enter your data" rows="2" v-model="IOR_data[key]" required></textarea>
+                            <textarea v-else-if="key === 'detail_occurance'" placeholder=" Enter your data" rows="2"
+                                v-model="IOR_data[key]" required></textarea>
                             <input v-else type="text" placeholder="Enter your data" v-model="IOR_data[key]" required>
                         </div>
                     </div>
@@ -97,6 +105,9 @@
                 };
             },
             methods: {
+                redirectToMainMenu() {
+                    window.location.href = 'main_menu.html';
+                },
                 async IOR() {
                     console.log("Sending data:", this.IOR_data);
                     try {

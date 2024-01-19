@@ -56,7 +56,7 @@
                             this.loginMessage = 'Account ID: ' + this.accountid; 
                             sessionStorage.setItem('accountid', this.accountid); 
 
-                            if (userRole === 'Admin' || userRole === 'DO' || userRole === 'AO' || userRole === 'IM') {
+                            if (userRole === 'Admin') {
                                 this.loginMessage += ' - Redirecting...';
                                 window.location.href = 'main_menu.html';
                             } else if (userRole === 'DO' || userRole === 'AO' || userRole === 'IM') {
@@ -68,7 +68,7 @@
                         }
                     } catch (error) {
                         console.error("Error during login:", error);
-                        this.loginMessage = 'Login gagal';
+                        this.loginMessage = response.data.message;
                     }
                 }
             }

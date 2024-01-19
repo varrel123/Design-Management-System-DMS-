@@ -11,6 +11,10 @@ async function login(mm) {
     const { accountid, Password } = mm;
 
     // Pastikan kedua accountid dan password diisi
+    if (!accountid || !Password) {
+        return { status: 400, message: 'Accountid and Password are required' };
+    }
+
     const query = `SELECT * FROM account WHERE accountid = '${accountid}' AND Password = '${Password}'`;
     const result = await db.query(query);
 
@@ -18,14 +22,24 @@ async function login(mm) {
         const user = result.rows[0];
         return { status: 200, message: 'Login successful', user };
     } else {
-        return { status: 404, message: 'Account not found' };
+        // Pisahkan penanganan jika accountid atau password salah
+        const accountExists = await db.query(`SELECT * FROM account WHERE accountid = '${accountid}'`);
+        const passwordMatches = await db.query(`SELECT * FROM account WHERE accountid = '${accountid}' AND Password = '${Password}'`);
+
+        if (accountExists.rowCount === 0) {
+            return { status: 404, message: 'Accountid not found' };
+        } else if (passwordMatches.rowCount === 0) {
+            return { status: 401, message: 'Incorrect password' };
+        } else {
+            return { status: 404, message: 'Account not found' };
+        }
     }
 }
 
+
 async function addAccount(mm) {
     const { accountid, name, unit, password, role } = mm;
-    const pass = await helper.hashPassword(password);
-    const query = `INSERT INTO account (accountid, name, unit, password, role) VALUES ('${accountid}',  '${name}',  '${unit}', '${pass}', '${role}')`;
+    const query = `INSERT INTO account (accountid, name, unit, password, role) VALUES ('${accountid}',  '${name}',  '${unit}', '${password}', '${role}')`;
     const result = await db.query(query);
     if (result.rowCount === 1) {
         return {

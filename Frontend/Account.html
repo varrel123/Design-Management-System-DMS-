@@ -41,11 +41,10 @@
                         <div class="tab-pane fade active show" id="account-general" v-show="activeTab === 'general'">
                             <hr class="border-light m-0">
                             <div class="card-body">
-                                <h5 class="font-weight-bold mb-3 position-relative">
+                                <h5 class="font-weight-bold mb-3 position-relative blue-text">
                                     <span class="account-info-background"></span>
                                     My Account Information
                                 </h5>
-                                <!-- Content for General tab -->
                                 <div class="form-group">
                                     <label class="form-label">Name</label>
                                     <input type="text" class="form-control mb-1" v-model="Account_data.name" readonly>
@@ -67,9 +66,9 @@
 
                         <div class="tab-pane fade active show" id="account-info" v-show="activeTab === 'info'">
                             <div class="card-body" style="overflow: auto;">
-                                <h5 class="font-weight-bold mb-3 position-relative">
+                                <h5 class="font-weight-bold mb-3 position-relative blue-text">
                                     <span class="account-info-background"></span>
-                                    information of all accounts
+                                    Information Of All Accounts
                                 </h5>
                                 <table class="table">
                                     <thead>
@@ -96,9 +95,9 @@
 
                         <div class="tab-pane fade active show" id="add-account" v-show="activeTab === 'add'">
                             <div class="card-body">
-                                <h5 class="font-weight-bold mb-3 position-relative">
+                                <h5 class="font-weight-bold mb-3 position-relative blue-text">
                                     <span class="account-info-background"></span>
-                                    Add Account
+                                    Add New Account
                                 </h5>
                                 <form @submit.prevent="addAccount">
                                     <div class="form-group">
@@ -129,7 +128,7 @@
 
                         <div class="tab-pane fade active show" id="Change-Password" v-show="activeTab === 'ChangePW'">
                             <div class="card-body">
-                                <h5 class="font-weight-bold mb-3 position-relative">
+                                <h5 class="font-weight-bold mb-3 position-relative blue-text">
                                     <span class="account-info-background"></span>
                                     Change Password
                                 </h5>
@@ -165,7 +164,7 @@
             data() {
                 return {
                     title: "Account",
-                    selectedAccountID: '',
+                    currentAccountID: '',
                     changePasswordMessage: '',
                     Account_data: {
                         accountid: '',
@@ -202,6 +201,7 @@
                 if (accountid) {
                     this.fetchAccountData(accountid);
                     this.fetchAllAccounts();
+                    this.currentAccountID = accountid;
                 } else {
                     window.location.href = 'login.html';
                 }
@@ -250,7 +250,11 @@
                 },
                 async changePassword() {
                     try {
-                        const response = await axios.post('http://localhost:3000/updatePassword', this.ChangePass);
+                        const response = await axios.post('http://localhost:3000/updatePassword', {
+                            accountid: this.currentAccountID,
+                            password: this.ChangePass.password
+                        });
+
                         console.log("Update Password :", response.data.account);
 
                         if (response.data.status === 200) {
@@ -261,7 +265,6 @@
 
                         this.fetchAllAccounts();
                         this.ChangePass = {
-                            accountid: '',
                             password: ''
                         };
                     } catch (error) {

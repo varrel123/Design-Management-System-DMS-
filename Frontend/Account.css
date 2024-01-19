@@ -29,6 +29,10 @@ label.btn {
     cursor: pointer;
 }
 
+.blue-text {
+    color: rgb(58, 58, 243);
+}
+
 .text-light {
     color: #babbbc !important;
 }

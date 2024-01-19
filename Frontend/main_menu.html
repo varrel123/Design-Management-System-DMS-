@@ -11,7 +11,7 @@
 <body>
   <img src="image/gmf9.png" alt="Login Image"
     style="width: 100%; max-width: 500px; margin-bottom: 0px; margin-left: 0px;">
-  <h2>Design Monitoring Apps</h2>
+  <h2>Main Menu</h2>
   <div id="app">
     <div v-for="(radio, index) in radios" :key="index">
       <input type="radio" :id="'radio-' + index" v-model="selectedRadio" :value="index">
@@ -22,7 +22,12 @@
     <button @click="movePage">Submit</button>
   </div>
 
-  <button>Exit</button>
+  <button onclick="redirectToLogin()">Exit</button>
+  <script>
+    function redirectToLogin() {
+      window.location.href = 'login.html';
+    }
+  </script>
 
   <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
   <script src="main_menu.js"></script>

@@ -11,13 +11,81 @@
 .nav-links {
     display: flex;
     align-items: center;
-    background: #fff;
+    background: #0b4685;
     padding: 20px 15px;
     border-radius: 12px;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
     width: 100%;
   }
 
+  .nav-links2 {
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    padding: 1px 15px;
+    border-radius: 1px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    width: 30%;
+  }
+
+  .nav-links2 li {
+    list-style: none;
+    margin: 0 12px;
+  }
+  
+  .nav-links2 li a {
+    position: relative;
+    color: #0b4685;
+    font-size: 20px;
+    font-weight: 500;
+    padding: 6px 0;
+    text-decoration: none;
+  }
+  
+  .nav-links2 li a:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: 0%;
+    background: #34efdf;
+    border-radius: 12px;
+    transition: all 0.4s ease;
+  }
+  
+  .nav-links2 li a:hover:before {
+    width: 100%;
+  }
+  
+  .nav-links2 li.center a:before {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .nav-links2 li.upward a:before {
+    width: 100%;
+    bottom: -5px;
+    opacity: 0;
+  }
+  
+  .nav-links2 li.upward a:hover:before {
+    bottom: 0px;
+    opacity: 1;
+  }
+  
+  .nav-links2 li.forward a:before {
+    width: 100%;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.4s ease;
+  }
+  
+  .nav-links2 li.forward a:hover:before {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+/*  */
 .nav-links li {
   list-style: none;
   margin: 0 12px;
@@ -25,7 +93,7 @@
 
 .nav-links li a {
   position: relative;
-  color: #333;
+  color: #ffffff;
   font-size: 20px;
   font-weight: 500;
   padding: 6px 0;
@@ -82,13 +150,13 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    background: #4070f4;
+    background: #0b4685;
     background-image: url('image/2591833781.jpg');
     margin: 0; /* Tambahkan ini untuk menghilangkan margin default */
   }
 
 .ncr-title {
-  background-color: #4070f4;
+  background-color: #0b4685;
   color: #fff;
   padding: 10px;
   border-radius: 6px;
@@ -97,8 +165,8 @@ body {
 
 .container {
     position: relative;
-    max-width: 900px;
-    width: 70%;
+    max-width: 1000px;
+    width: 100%;
     border-radius: 6px;
     padding: 30px;
     margin: 15px 0; /* Ubah margin untuk memberikan ruang di atas container */
@@ -117,7 +185,7 @@ body {
   margin-right: 10px;
   background-color: #ffffff;
   color: #000000;
-  border-color: #265df2;
+  border-color: #0b4685;
   font-weight: normal;
   padding: 5px 10px;
   border-radius: 5px;
@@ -125,13 +193,13 @@ body {
 }
 
 .container header button:hover {
-  background-color: #265df2;
+  background-color: #0b4685;
 }
 
 .container form {
   position: relative;
   margin-top: 16px;
-  min-height: 490px;
+  min-height: 600px;
   background-color: #fff;
 }
 
@@ -238,7 +306,7 @@ select {
   color: #fff;
   border-radius: 5px;
   margin: 25px 0;
-  background-color: #4070f4;
+  background-color: #0b4685;
   transition: all 0.3s linear;
   cursor: pointer;
 }
@@ -251,7 +319,7 @@ select {
 
 .container form button:hover,
 .btn5-hover:hover {
-  background-color: #265df2;
+  background-color: #0b4685;
 }
 
 form button i,

@@ -10,7 +10,7 @@
 .nav-links{
   display: flex;
   align-items: center;
-  background: #fff;
+  background: #0b4685;
   padding: 20px 15px;
   border-radius: 12px;
   box-shadow: 0 5px 10px rgba(0,0,0,0.2);
@@ -21,7 +21,7 @@
 }
 .nav-links li a{
   position: relative;
-  color: #333;
+  color: #ffffff;
   font-size: 20px;
   font-weight: 500;
   padding: 6px 0;
@@ -77,9 +77,9 @@ body {
 }
 
 .btn-default {
-    border-color: rgba(24, 28, 33, 0.1);
-    background  : rgba(0, 0, 0, 0);
-    color       : #4E5155;
+    border-color: #0b4685;
+    background  : #0b4685;
+    color       : #0b4685;
 }
 
 label.btn {
@@ -87,9 +87,9 @@ label.btn {
 }
 
 .btn-outline-primary {
-    border-color: #26B4FF;
-    background  : transparent;
-    color       : #26B4FF;
+    border-color: #0b4685;
+    background  : #0b4685;
+    color       : #0b4685;
 }
 
 .btn {
@@ -97,23 +97,11 @@ label.btn {
 }
 
 .blue-text {
-    color: rgb(58, 58, 243);
+    color: #0b4685;
 }
 
 .text-light {
     color: #babbbc !important;
-}
-
-.btn-facebook {
-    border-color: rgba(0, 0, 0, 0);
-    background  : #3B5998;
-    color       : #fff;
-}
-
-.btn-instagram {
-    border-color: rgba(0, 0, 0, 0);
-    background  : #000;
-    color       : #fff;
 }
 
 .card {
@@ -134,9 +122,9 @@ label.btn {
 }
 
 .block-button.active {
-    background-color: #007BFF !important;
-    color: #fff !important;
-    border-color: #007BFF !important;
+    background-color: #0b4685 !important;
+    color: #0b4685!important;
+    border-color: #0b4685 !important;
 }
 
 .account-settings-links .list-group-item {

@@ -1,3 +1,70 @@
+/* Google Fonts Import Link */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+.nav-links{
+  display: flex;
+  align-items: center;
+  background: #fff;
+  padding: 20px 15px;
+  border-radius: 12px;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+}
+.nav-links li{
+  list-style: none;
+  margin: 0 12px;
+}
+.nav-links li a{
+  position: relative;
+  color: #333;
+  font-size: 20px;
+  font-weight: 500;
+  padding: 6px 0;
+  text-decoration: none;
+}
+.nav-links li a:before{
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: #34efdf;
+  border-radius: 12px;
+  transition: all 0.4s ease;
+}
+.nav-links li a:hover:before{
+  width: 100%;
+}
+.nav-links li.center a:before{
+  left: 50%;
+  transform: translateX(-50%);
+}
+.nav-links li.upward a:before{
+  width: 100%;
+  bottom: -5px;
+  opacity: 0;
+}
+.nav-links li.upward a:hover:before{
+  bottom: 0px;
+  opacity: 1;
+}
+.nav-links li.forward a:before{
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s ease;
+}
+.nav-links li.forward a:hover:before{
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
 body {
     background: #ffffff;
     margin-top: 20px;
@@ -66,8 +133,26 @@ label.btn {
     opacity   : 0;
 }
 
+.block-button.active {
+    background-color: #007BFF !important;
+    color: #fff !important;
+    border-color: #007BFF !important;
+}
+
+.account-settings-links .list-group-item {
+    padding: 0.85rem 1.5rem;
+    border-color: rgba(24, 28, 33, 0.03) !important;
+    transition: background-color 0.3s; /* Efek transisi untuk perubahan warna latar belakang */
+}
+
+.account-settings-links .list-group-item.active,
+.account-settings-links .list-group-item:hover {
+    background-color: rgba(0, 123, 255, 0.25); /* Warna biru pada hover dan aktif */
+}
+
 .account-settings-links .list-group-item.active {
-    font-weight: bold !important;
+    font-weight: normal !important;
+    color: #4e5155 !important;
 }
 
 html:not(.dark-style) .account-settings-links .list-group-item.active {
@@ -113,3 +198,4 @@ html:not(.dark-style) .account-settings-links .list-group-item.active {
     padding     : 0.85rem 1.5rem;
     border-color: rgba(24, 28, 33, 0.03) !important;
 }
+

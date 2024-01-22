@@ -11,6 +11,11 @@ body {
     background-position: center;
 }
 
+.button-container {
+    text-align: center;
+    margin-top: 20px; /* Atur margin sesuai kebutuhan untuk penempatan vertikal yang sesuai di tengah */
+}
+
 .header {
     text-align: center;
     color: #811818;
@@ -18,6 +23,17 @@ body {
     margin-bottom: 20px;
 }
 
+.button-container button {
+    background-color: transparent; /* Menghilangkan warna latar belakang */
+    color: black; /* Mengubah warna teks menjadi hitam */
+    border: none; /* Menghilangkan border */
+    cursor: pointer;
+    transition: color 0.3s; /* Efek transisi untuk perubahan warna teks */
+}
+
+.button-container button:hover {
+    color: #ffffff; /* Warna teks saat hover (jika diperlukan) */
+}
 
 #app {
     background-color: #fff;

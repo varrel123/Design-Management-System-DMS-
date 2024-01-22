@@ -1,16 +1,16 @@
 const {Client} = require('pg');
 
 const db = new Client({
-    user: 'rafinoval72',
-    host: 'ep-cold-mode-215887.ap-southeast-1.aws.neon.tech',
-    database: 'GMF',
-    password: 'HcvUqeRQx98M',
+    user: 'edynoer',
+    host: 'ep-misty-glade-a1ma21wk.ap-southeast-1.aws.neon.tech',
+    database: 'DOA_GMF',
+    password: '5oW4RqOsJkLP',
     port: 5432,
     sslmode: 'require',
     ssl: true
 });
 
-// psql 'postgresql://rafinoval72:HcvUqeRQx98M@ep-cold-mode-215887.ap-southeast-1.aws.neon.tech/GMF?sslmode=require'
+// psql 'postgresql://edynoer:5oW4RqOsJkLP@ep-misty-glade-a1ma21wk.ap-southeast-1.aws.neon.tech/DOA_GMF?sslmode=require'
 
 db.connect((err) => {
     if (err) {

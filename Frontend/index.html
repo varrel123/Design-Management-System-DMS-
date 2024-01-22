@@ -7,7 +7,6 @@
     <title>Login Page</title>
     <link rel="stylesheet" href="login.css">
 </head>
-
 <body>
     <div id="app">
         <img src="image/gmf9.png" alt="Login Image" style="width: 100%; max-width: 300px; margin: 10px 0 0 10px;">
@@ -21,6 +20,7 @@
             <input type="password" id="Password" v-model="loginData.Password" required>
             <button type="submit">Login</button>
         </form>
+        <div class="button-container"><button @click="forgotPassword">Lupa Password?</button></div>
         <p id="accountidDisplay">{{ loginMessage }}</p>
         <p id="accountidDisplay">{{ $data.accountid ? 'Account ID: ' + $data.accountid : '' }}</p>
     </div>
@@ -39,8 +39,8 @@
                         accountid: '',
                         Password: ''
                     },
-                    loginMessage: '', 
-                    accountid: null 
+                    loginMessage: '',
+                    accountid: null
                 };
             },
             methods: {
@@ -52,9 +52,9 @@
 
                         if (response.data.status === 200 && response.data.message === 'Login successful') {
                             const userRole = response.data.user.role;
-                            this.accountid = response.data.user.accountid; 
-                            this.loginMessage = 'Account ID: ' + this.accountid; 
-                            sessionStorage.setItem('accountid', this.accountid); 
+                            this.accountid = response.data.user.accountid;
+                            this.loginMessage = 'Account ID: ' + this.accountid;
+                            sessionStorage.setItem('accountid', this.accountid);
 
                             if (userRole === 'Admin') {
                                 this.loginMessage += ' - Redirecting...';
@@ -70,6 +70,9 @@
                         console.error("Error during login:", error);
                         this.loginMessage = response.data.message;
                     }
+                },
+                forgotPassword() {
+                    this.loginMessage = "Hubungi Admin dengan nomor 123456";
                 }
             }
         }).mount('#app');

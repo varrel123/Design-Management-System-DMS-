@@ -15,17 +15,14 @@
 <body>
 
     <ul class="nav-links">
-        <img src="image/gmf9.png" alt="Login Image"
-            style="width: 95%; max-width: 300px; margin-bottom: 0px; margin-left: 0px;">
-        <li><a href="main_menu.html">Main Menu</a></li>
-        <li class="center"><a href="Account.html">Account</a></li>
-        <li><a href="NCR_Form.html">Audit</a></li>
-        <li class="upward"><a href="IOR_Form.html">Occurrence</a></li>
+        <img src="image/gmf9.png" alt="Login Image" style="width: 95%; max-width: 300px; margin-bottom: 0px; margin-left: 0px;">
+        <li><a href="main_menu2.html">Main Menu</a></li>
+        <li class="center"><a href="Account2.html">Account</a></li>
         <li class="forward"><a href="#">Personel</a></li>
         <li class="forward"><a href="#">Project</a></li>
         <li class="forward"><a href="#">Link</a></li>
         <li class="forward"><a href="index.html">Exit</a></li>
-    </ul>
+      </ul>
 
 
     <div id="app" class="container light-style flex-grow-1 container-p-y">
@@ -37,18 +34,10 @@
                 <div class="col-md-3 pt-0">
                     <div class="list-group list-group-flush account-settings-links">
                         <a class="list-group-item list-group-item-action block-button" href="#account-general"
-                            @click="changeTab('general')" :class="{ 'active': activeTab === 'general' }">Account
-                            Info</a>
-
+                            @click="changeTab('general')">Account Info</a>
                         <a class="list-group-item list-group-item-action block-button" href="#Change-Password"
                             @click="changeTab('ChangePW')" :class="{ 'active': activeTab === 'ChangePW' }">Change
                             Password</a>
-
-                        <a class="list-group-item list-group-item-action block-button" href="#account-info"
-                            @click="changeTab('info')" :class="{ 'active': activeTab === 'info' }">Info All Account</a>
-
-                        <a class="list-group-item list-group-item-action block-button" href="#add-account"
-                            @click="changeTab('add')" :class="{ 'active': activeTab === 'add' }">Add New Account</a>
                     </div>
                 </div>
                 <div class="col-md-9">
@@ -81,68 +70,6 @@
                                     <label class="form-label">Role</label>
                                     <input type="text" class="form-control" v-model="Account_data.role" readonly>
                                 </div>
-                            </div>
-                        </div>
-
-                        <div class="tab-pane fade active show" id="account-info" v-show="activeTab === 'info'">
-                            <div class="card-body" style="overflow: auto;">
-                                <h5 class="font-weight-bold mb-3 position-relative blue-text">
-                                    <span class="account-info-background"></span>
-                                    Information Of All Accounts
-                                </h5>
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>AccountID</th>
-                                            <th>Name</th>
-                                            <th>Unit</th>
-                                            <th>Password</th>
-                                            <th>Role</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr v-for="account in allAccounts" :key="account.accountid">
-                                            <td>{{ account.accountid }}</td>
-                                            <td>{{ account.name }}</td>
-                                            <td>{{ account.unit }}</td>
-                                            <td>{{ account.password }}</td>
-                                            <td>{{ account.role }}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
-                        <div class="tab-pane fade active show" id="add-account" v-show="activeTab === 'add'">
-                            <div class="card-body">
-                                <h5 class="font-weight-bold mb-3 position-relative blue-text">
-                                    <span class="account-info-background"></span>
-                                    Add New Account
-                                </h5>
-                                <form @submit.prevent="addAccount">
-                                    <div class="form-group">
-                                        <label class="form-label">AccountID</label>
-                                        <input type="text" class="form-control" v-model="newAccount.accountid" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label">Name</label>
-                                        <input type="text" class="form-control" v-model="newAccount.name" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label">Unit</label>
-                                        <input type="text" class="form-control" v-model="newAccount.unit" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label">Password</label>
-                                        <input type="password" class="form-control" v-model="newAccount.password"
-                                            required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label">Role</label>
-                                        <input type="text" class="form-control" v-model="newAccount.role" required>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">Add Account</button>
-                                </form>
                             </div>
                         </div>
 
@@ -195,20 +122,6 @@
                     },
                     loginMessage: '',
                     activeTab: 'general', // Added to track the active tab
-                    allAccounts: [{
-                        accountid: '',
-                        name: '',
-                        unit: '',
-                        Password: '',
-                        Role: ''
-                    }], // Added to store all accounts for the Info tab
-                    newAccount: {
-                        accountid: '',
-                        name: '',
-                        unit: '',
-                        password: '',
-                        role: ''
-                    },
                     ChangePass: {
                         accountid: '',
                         password: ''

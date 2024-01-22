@@ -101,7 +101,7 @@ label.btn {
 }
 
 .text-light {
-    color: #babbbc !important;
+    color: #f1f2f3 !important;
 }
 
 .card {
@@ -124,27 +124,28 @@ label.btn {
 .block-button.active {
     background-color: #0b4685 !important;
     color: #0b4685!important;
-    border-color: #0b4685 !important;
+    border-color: #000000 !important;
 }
 
 .account-settings-links .list-group-item {
     padding: 0.85rem 1.5rem;
-    border-color: rgba(24, 28, 33, 0.03) !important;
+    border-color: #ffffff !important;
+    color: #000000!important;
     transition: background-color 0.3s; /* Efek transisi untuk perubahan warna latar belakang */
 }
 
 .account-settings-links .list-group-item.active,
 .account-settings-links .list-group-item:hover {
-    background-color: rgba(0, 123, 255, 0.25); /* Warna biru pada hover dan aktif */
+    background-color: #0b4685; /* Warna biru pada hover dan aktif */
 }
 
 .account-settings-links .list-group-item.active {
-    font-weight: normal !important;
-    color: #4e5155 !important;
+    background-color: #05376b;
+    color: #ffffff; /* Warna teks pada tab yang aktif */
 }
 
 html:not(.dark-style) .account-settings-links .list-group-item.active {
-    background: transparent !important;
+    background: #0b4685 !important;
 }
 
 .account-settings-multiselect~.select2-container {
@@ -153,25 +154,25 @@ html:not(.dark-style) .account-settings-links .list-group-item.active {
 
 .light-style .account-settings-links .list-group-item {
     padding     : 0.85rem 1.5rem;
-    border-color: rgba(24, 28, 33, 0.03) !important;
+    border-color: #ffffff !important;
 }
 
 .light-style .account-settings-links .list-group-item.active {
-    color: #4e5155 !important;
+    color: #ffffff!important;
 }
 
 .material-style .account-settings-links .list-group-item {
     padding     : 0.85rem 1.5rem;
-    border-color: rgba(24, 28, 33, 0.03) !important;
+    border-color: #ffffff !important;
 }
 
 .material-style .account-settings-links .list-group-item.active {
-    color: #4e5155 !important;
+    color: #ffffff !important;
 }
 
 .dark-style .account-settings-links .list-group-item {
     padding     : 0.85rem 1.5rem;
-    border-color: rgba(255, 255, 255, 0.03) !important;
+    border-color: #ffffff !important;
 }
 
 .dark-style .account-settings-links .list-group-item.active {
@@ -179,11 +180,16 @@ html:not(.dark-style) .account-settings-links .list-group-item.active {
 }
 
 .light-style .account-settings-links .list-group-item.active {
-    color: #4E5155 !important;
+    color: #ffffff !important;
 }
 
 .light-style .account-settings-links .list-group-item {
     padding     : 0.85rem 1.5rem;
-    border-color: rgba(24, 28, 33, 0.03) !important;
+    border-color: #ffffff !important;
 }
+
+.account-info-background {
+    color: #ffffff;
+}
+
 

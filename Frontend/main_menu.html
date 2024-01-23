@@ -9,18 +9,40 @@
 </head>
 
 <body>
-  <ul class="nav-links">
-    <img src="image/gmf9.png" alt="Login Image" style="width: 95%; max-width: 300px; margin-bottom: 0px; margin-left: 0px;">
-    <li><a href="main_menu.html">Main Menu</a></li>
-    <li class="center"><a href="Account.html">Account</a></li>
-    <li><a href="NCR_Form.html">Audit</a></li>
-    <li class="upward"><a href="IOR_Form.html">Occurrence</a></li>
-    <li class="forward"><a href="#">Personel</a></li>
-    <li class="forward"><a href="#">Project</a></li>
-    <li class="forward"><a href="#">Link</a></li>
-    <li class="forward"><a href="index.html">Exit</a></li>
-  </ul>
+
+    <ul class="nav-links">
+        <img src="image/gmf9.png" alt="Login Image"
+            style="width: 95%; max-width: 300px; margin-bottom: 0px; margin-left: 0px;">
+        <li><a href="main_menu.html">Main Menu</a></li>
+        <li class="center"><a href="Account.html">Account</a></li>
+        <li class="upward dropdown">
+            <a href="#">Audit</a>
+            <ul class="dropdown-content">
+                <li><a href="NCR_Form.html">NCR Form</a></li>
+                <li><a href="Follow_NCR.html">Follow On</a></li>
+            </ul>
+        </li>
+        <li class="upward dropdown">
+            <a href="#">Occurrence</a>
+            <ul class="dropdown-content">
+                <li><a href="IOR_Form.html">IOR Form</a></li>
+                <li><a href="Follow_Occur.html">Follow On</a></li>
+            </ul>
+        </li>
+        <li><a href="#">Personel</a></li>
+        <li><a href="#">Project</a></li>
+        <li class="upward dropdown">
+            <a href="#">Link</a>
+            <ul class="dropdown-content">
+                <li><a href="https://imsis-djpu.dephub.go.id/PortalDKPPU/">DGCA</a></li>
+                <li><a href="https://www.easa.europa.eu/en/regulations">EASA</a></li>
+            </ul>
+        </li>
+        <li class="forward"><a href="index.html">Exit</a></li>
+    </ul>
+
   <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
   <script src="main_menu.js"></script>
 </body>
+
 </html>

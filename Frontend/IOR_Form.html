@@ -25,6 +25,7 @@
             <ul class="dropdown-content">
                 <li><a href="NCR_Form.html">NCR Form</a></li>
                 <li><a href="Follow_NCR.html">Follow On</a></li>
+                <li><a href="#">Edit NCR</a></li>
             </ul>
         </li>
         <li class="upward dropdown">
@@ -32,6 +33,7 @@
             <ul class="dropdown-content">
                 <li><a href="IOR_Form.html">IOR Form</a></li>
                 <li><a href="Follow_Occur.html">Follow On</a></li>
+                <li><a href="#">Edit IOR</a></li>
             </ul>
         </li>
         <li><a href="#">Personel</a></li>
@@ -68,6 +70,7 @@
                             <input v-else-if="key === 'occur_nbr'" type="text" placeholder="YYYY-MM-SSS"
                                 pattern="\d{4}-\d{2}-\d{3}" v-model="IOR_data[key]" required>
                             <select v-else-if="key === 'level_type'" v-model="IOR_data[key]">
+                                <option value="" disabled selected>Select Your Data</option>
                                 <option value="Aircraft" selected>Aircraft</option>
                                 <option value="Engine">Engine</option>
                                 <option value="APU">APU</option>
@@ -75,11 +78,13 @@
                             </select>
                             <input v-else-if="key === 'data_reference'" type="checkbox" v-model="IOR_data[key]">
                             <select v-else-if="key === 'reporter_identity'" v-model="IOR_data[key]">
+                                <option value="" disabled selected>Select Your Data</option>
                                 <option value="Shown" selected>Shown</option>
                                 <option value="Hidden ">Hidden </option>
                             </select>
                             <select v-else-if="key === 'hirac_process'" v-model="IOR_data[key]"> class="input-field
                                 full-width"
+                                <option value="" disabled selected>Select Your Data</option>
                                 <option value="Yes" selected>Yes</option>
                                 <option value="No">No </option>
                             </select>

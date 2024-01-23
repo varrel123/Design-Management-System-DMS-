@@ -24,6 +24,7 @@
             <ul class="dropdown-content">
                 <li><a href="NCR_Form.html">NCR Form</a></li>
                 <li><a href="Follow_NCR.html">Follow On</a></li>
+                <li><a href="#">Edit NCR</a></li>
             </ul>
         </li>
         <li class="upward dropdown">
@@ -31,6 +32,7 @@
             <ul class="dropdown-content">
                 <li><a href="IOR_Form.html">IOR Form</a></li>
                 <li><a href="Follow_Occur.html">Follow On</a></li>
+                <li><a href="#">Edit IOR</a></li>
             </ul>
         </li>
         <li><a href="#">Personel</a></li>
@@ -67,11 +69,13 @@
                                 type="date" v-model="FollowNCR_data[key]" required>
 
                             <select v-else-if="key === 'is_close'" v-model="FollowNCR_data[key]">
+                                <option value="" disabled selected>Select Your Data</option>
                                 <option value="true">Close</option>
                                 <option value="false">Open</option>
                             </select>
 
                             <select v-else-if="key === 'effective'" v-model="FollowNCR_data[key]">
+                                <option value="" disabled selected>Select Your Data</option>
                                 <option value="Effective">Effective</option>
                                 <option value="Not Effective">Not Effective</option>
                             </select>

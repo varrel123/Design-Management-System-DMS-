@@ -23,6 +23,7 @@
             <ul class="dropdown-content">
                 <li><a href="NCR_Form.html">NCR Form</a></li>
                 <li><a href="Follow_NCR.html">Follow On</a></li>
+                <li><a href="#">Edit NCR</a></li>
             </ul>
         </li>
         <li class="upward dropdown">
@@ -30,6 +31,7 @@
             <ul class="dropdown-content">
                 <li><a href="IOR_Form.html">IOR Form</a></li>
                 <li><a href="Follow_Occur.html">Follow On</a></li>
+                <li><a href="#">Edit IOR</a></li>
             </ul>
         </li>
         <li><a href="#">Personel</a></li>
@@ -68,22 +70,26 @@
                                 type="date" v-model="NCR_data[key]" required>
 
                             <select v-else-if="key === 'problem_analis'" v-model="NCR_data[key]">
+                                <option value="" disabled selected>Select Your Data</option>
                                 <option value="Required">Required</option>
                                 <option value="Not Required">Not Required</option>
                             </select>
 
                             <select v-else-if="key === 'regulationbased'" v-model="NCR_data[key]">
+                                <option value="" disabled selected>Select Your Data</option>
                                 <option value="DGCA">DGCA</option>
                                 <option value="EASA">EASA</option>
                             </select>
 
                             <select v-else-if="key === 'audit_type'" v-model="NCR_data[key]">
+                                <option value="" disabled selected>Select Your Data</option>
                                 <option value="Procedure">Procedure</option>
                                 <option value="Product">Product</option>
                                 <option value="Surveillance">Surveillance</option>
                             </select>
 
                             <select v-else-if="key === 'audit_scope'" v-model="NCR_data[key]">
+                                <option value="" disabled selected>Select Your Data</option>
                                 <option value="Authority">Authority</option>
                                 <option value="Internal">Internal</option>
                                 <option value="External">External</option>
@@ -91,6 +97,7 @@
                             </select>
 
                             <select v-else-if="key === 'to_uic'" v-model="NCR_data[key]">
+                                <option value="" disabled selected>Select Your Data</option>
                                 <option value="Chief Design Office">Chief Design Office</option>
                                 <option value="Chief Airworthiness Office">Chief Airworthiness Office</option>
                                 <option value="Chief Independent Monitoring">Chief Independent Monitoring</option>
@@ -98,28 +105,33 @@
                             </select>
 
                             <select v-else-if="key === 'level_finding'" v-model="NCR_data[key]">
+                                <option value="" disabled selected>Select Your Data</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
                             </select>
 
                             <select v-else-if="key === 'problem_analis'" v-model="NCR_data[key]">
+                                <option value="" disabled selected>Select Your Data</option>
                                 <option value="Required">Required</option>
                                 <option value="Not required">Not required</option>
                             </select>
 
                             <select v-else-if="key === 'issue_ian'" v-model="NCR_data[key]">
+                                <option value="" disabled selected>Select Your Data</option>
                                 <option value="true">Yes</option>
                                 <option value="false">No</option>
                             </select>
 
-                            <select v-else-if="key === 'status'" v-model="NCR_data[key]">
+                            <select v-else-if="key === 'status'" v-model="NCR_data[key]" placeholder="Select Responsible Office">
+                                <option value="" disabled selected>Select Your Data</option>
                                 <option value="Open">Open</option>
                                 <option value="Closed">Closed</option>
                                 <option value="Monitor">Monitor</option>
                             </select>
 
                             <select v-else-if="key === 'responsible_office'" v-model="NCR_data[key]">
+                                <option value="" disabled selected>Select Your Data</option>
                                 <option value="AO: Airworthiness Office">AO: Airworthiness Office</option>
                                 <option value="DO: Design Office">DO: Design Office</option>
                                 <option value="IM: Independent Monitoring">IM: Independent Monitoring</option>
@@ -130,10 +142,7 @@
                                 <option value="BA: BIFA Flying School">BA: BIFA Flying School</option>
                                 <option value="EL: Elang Lintas Indonesia">EL: Elang Lintas Indonesia</option>
                             </select>
-
-                            <textarea v-else-if="key === 'subject'" rows="2" v-model="NCR_data[key]"
-                                placeholder=" Enter your data" required></textarea>
-
+                            
                             <input v-else type="text" placeholder="Enter your data" v-model="NCR_data[key]" required>
                         </div>
                     </div>

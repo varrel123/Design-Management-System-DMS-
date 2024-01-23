@@ -24,6 +24,7 @@
             <ul class="dropdown-content">
                 <li><a href="NCR_Form.html">NCR Form</a></li>
                 <li><a href="Follow_NCR.html">Follow On</a></li>
+                <li><a href="#">Edit NCR</a></li>
             </ul>
         </li>
         <li class="upward dropdown">
@@ -31,6 +32,7 @@
             <ul class="dropdown-content">
                 <li><a href="IOR_Form.html">IOR Form</a></li>
                 <li><a href="Follow_Occur.html">Follow On</a></li>
+                <li><a href="#">Edit IOR</a></li>
             </ul>
         </li>
         <li><a href="#">Personel</a></li>
@@ -69,6 +71,7 @@
                                 placeholder=" Enter your data" maxlength="1" v-model="FollIOR_data[key]" required>
 
                             <select v-else-if="key === 'follup_uic'" v-model="FollIOR_data[key]">
+                                <option value="" disabled selected>Select Your Data</option>
                                 <option value="IM" selected>IM</option>
                                 <option value="DO">DO</option>
                                 <option value="AO">AO</option>
@@ -76,13 +79,14 @@
                             </select>
 
                             <select v-else-if="key === 'follup_status'" v-model="FollIOR_data[key]">
+                                <option value="" disabled selected>Select Your Data</option>
                                 <option value="Open" selected>Open</option>
                                 <option value="Closed ">Closed </option>
                                 <option value="Monitor ">Monitor </option>
                             </select>
 
-                            <textarea v-else-if="key === 'follup_detail'" rows="2" v-model="FollIOR_data[key]"
-                                placeholder=" Enter your data" required></textarea>
+                            <!-- <textarea v-else-if="key === 'follup_detail'" rows="2" v-model="FollIOR_data[key]"
+                                placeholder=" Enter your data" required></textarea> -->
 
                             <input v-else type="text" placeholder="Enter your data" v-model="FollIOR_data[key]"
                                 required>

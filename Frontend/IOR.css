@@ -232,11 +232,11 @@ body {
 
 .container {
     position: relative;
-    max-width: 1000px;
+    max-width: 900px;
     width: 100%;
     border-radius: 6px;
-    padding: 30px;
-    margin: 15px 0; /* Ubah margin untuk memberikan ruang di atas container */
+    padding: 35px;
+    margin: 15px -2px; /* Ubah margin untuk memberikan ruang di atas container */
     background-color: #fff;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
   }

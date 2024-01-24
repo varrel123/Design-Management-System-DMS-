@@ -17,7 +17,7 @@
     <ul class="nav-links">
         <img src="image/gmf9.png" alt="Login Image"
             style="width: 95%; max-width: 300px; margin-bottom: 0px; margin-left: 0px;">
-        <li><a href="main_menu.html">Main Menu</a></li>
+        <li><a href="main_menu.html">Home</a></li>
         <li class="center"><a href="Account.html">Account</a></li>
         <li class="upward dropdown">
             <a href="#">Audit</a>
@@ -40,11 +40,11 @@
         <li class="upward dropdown">
             <a href="#">Link</a>
             <ul class="dropdown-content">
-                <li><a href="https://imsis-djpu.dephub.go.id/PortalDKPPU/">DGCA</a></li>
-                <li><a href="https://www.easa.europa.eu/en/regulations">EASA</a></li>
+                <li><a href="https://imsis-djpu.dephub.go.id/PortalDKPPU/" target="_blank">DGCA</a></li>
+                <li><a href="https://www.easa.europa.eu/en/regulations" target="_blank">EASA</a></li>
             </ul>
         </li>
-        <li class="forward"><a href="index.html">Exit</a></li>
+        <li class="forward"><a href="index.html">Log Out</a></li>
     </ul>
 
     <div class="container" id="app">
@@ -63,7 +63,8 @@
                 <div class="details personal">
                     <div class="fields">
                         <div class="input-field" v-for="(value, key) in FollIOR_data" :key="key">
-                            <label>{{ key.replace(/_/g, ' ') }}</label>
+                            <label>{{ key.replace(/_/g, ' ').replace(/(?:^|\s)\S/g, match =>
+                                match.toUpperCase()).replace(/Id/gi,'ID').replace(/Follup/gi, 'Follow UP')}}</label>
 
                             <input v-if="key === 'follup_date'" type="date" v-model="FollIOR_data[key]" required>
 

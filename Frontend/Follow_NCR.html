@@ -17,7 +17,7 @@
     <ul class="nav-links">
         <img src="image/gmf9.png" alt="Login Image"
             style="width: 95%; max-width: 300px; margin-bottom: 0px; margin-left: 0px;">
-        <li><a href="main_menu.html">Main Menu</a></li>
+        <li><a href="main_menu.html">Home</a></li>
         <li class="center"><a href="Account.html">Account</a></li>
         <li class="upward dropdown">
             <a href="#">Audit</a>
@@ -40,11 +40,11 @@
         <li class="upward dropdown">
             <a href="#">Link</a>
             <ul class="dropdown-content">
-                <li><a href="https://imsis-djpu.dephub.go.id/PortalDKPPU/">DGCA</a></li>
-                <li><a href="https://www.easa.europa.eu/en/regulations">EASA</a></li>
+                <li><a href="https://imsis-djpu.dephub.go.id/PortalDKPPU/" target="_blank">DGCA</a></li>
+                <li><a href="https://www.easa.europa.eu/en/regulations" target="_blank">EASA</a></li>
             </ul>
         </li>
-        <li class="forward"><a href="index.html">Exit</a></li>
+        <li class="forward"><a href="index.html">Log Out</a></li>
     </ul>
 
     <div class="container" id="app">
@@ -62,7 +62,9 @@
                 <div class="details personal">
                     <div class="fields">
                         <div class="input-field" v-for="(value, key) in FollowNCR_data" :key="key">
-                            <label>{{ key.replace(/_/g, ' ') }}</label>
+                            <label>{{ key.replace(/_/g, ' ').replace(/(?:^|\s)\S/g, match =>
+                                match.toUpperCase()).replace(/Ncr/gi, 'NCR').replace(/id/gi, 'ID')
+                                .replace(/Temporarylink/gi, 'Remark') }}</label>
 
                             <input
                                 v-if="key === 'proposed_close_date' || key === 'close_approveddate' || key === 'verif_date'"
@@ -79,6 +81,8 @@
                                 <option value="Effective">Effective</option>
                                 <option value="Not Effective">Not Effective</option>
                             </select>
+
+                            <input v-else-if="key === 'accountid'" v-model="currentAccountID" readonly>
 
                             <input v-else type="text" placeholder="Enter your data" v-model="FollowNCR_data[key]"
                                 required>
@@ -104,6 +108,7 @@
             data() {
                 return {
                     title: "FollowUp NCR",
+                    currentAccountID: '',
                     FollowNCR_data: {
                         accountid: '',
                         ncr_init_id: '',
@@ -124,13 +129,24 @@
                     loginMessage: ''
                 };
             },
+            mounted() {
+                const accountid = sessionStorage.getItem('accountid');
+                if (accountid) {
+                    this.currentAccountID = accountid;
+                } else {
+                    window.location.href = 'login.html';
+                }
+            },
             methods: {
                 redirectToMainMenu() {
                     window.location.href = 'main_menu.html';
                 },
-                
+
                 async FollowNCR() {
                     console.log("Sending data:", this.FollowNCR_data);
+
+                    this.NCR_data.accountid = this.currentAccountID;
+
                     try {
                         const response = await axios.post("http://localhost:3000/addNCRFollowResult", this.FollowNCR_data);
 

@@ -16,7 +16,7 @@
     <ul class="nav-links">
         <img src="image/gmf9.png" alt="Login Image"
             style="width: 95%; max-width: 300px; margin-bottom: 0px; margin-left: 0px;">
-        <li><a href="main_menu.html">Main Menu</a></li>
+        <li><a href="main_menu.html">Home</a></li>
         <li class="center"><a href="Account.html">Account</a></li>
         <li class="upward dropdown">
             <a href="#">Audit</a>
@@ -39,32 +39,27 @@
         <li class="upward dropdown">
             <a href="#">Link</a>
             <ul class="dropdown-content">
-                <li><a href="https://imsis-djpu.dephub.go.id/PortalDKPPU/">DGCA</a></li>
-                <li><a href="https://www.easa.europa.eu/en/regulations">EASA</a></li>
+                <li><a href="https://imsis-djpu.dephub.go.id/PortalDKPPU/" target="_blank">DGCA</a></li>
+                <li><a href="https://www.easa.europa.eu/en/regulations" target="_blank">EASA</a></li>
             </ul>
         </li>
-        <li class="forward"><a href="index.html">Exit</a></li>
+        <li class="forward"><a href="index.html">Log Out</a></li>
     </ul>
 
     <div class="container" id="app">
         <header>
             <div class="ncr-title">NON-CONFORMANCE REPORT</div>
             <header>
-                <!-- <ul class="nav-links2">
-                    <li><a href="NCR_Form.html">NCR</a></li>
-                    <li class="center"><a href="Follow_NCR.html">Follow On</a></li>
-                  </ul> -->
             </header>
-            <!-- <span>NCR</span> -->
         </header>
         <form @submit.prevent="IOR" action="#">
-            <!-- Use @submit.prevent to prevent the default form submission behavior -->
             <div class="form first">
                 <div class="details personal">
                     <div class="fields">
                         <div class="input-field" v-for="(value, key) in NCR_data" :key="key">
-                            <label>{{ key.replace(/_/g, ' ') }}</label>
-
+                            <label>{{ key.replace(/_/g, ' ').replace(/(?:^|\s)\S/g, match =>
+                                match.toUpperCase()).replace(/Ian/gi, 'IAN').replace(/Temporarylink/gi, 'Remark')
+                                }}</label>
                             <input
                                 v-if="key === 'issued_date' ||key === 'answer_duedate'||key === 'audit_date'||key === 'acknowledge_date'"
                                 type="date" v-model="NCR_data[key]" required>
@@ -123,7 +118,8 @@
                                 <option value="false">No</option>
                             </select>
 
-                            <select v-else-if="key === 'status'" v-model="NCR_data[key]" placeholder="Select Responsible Office">
+                            <select v-else-if="key === 'status'" v-model="NCR_data[key]"
+                                placeholder="Select Responsible Office">
                                 <option value="" disabled selected>Select Your Data</option>
                                 <option value="Open">Open</option>
                                 <option value="Closed">Closed</option>
@@ -142,7 +138,9 @@
                                 <option value="BA: BIFA Flying School">BA: BIFA Flying School</option>
                                 <option value="EL: Elang Lintas Indonesia">EL: Elang Lintas Indonesia</option>
                             </select>
-                            
+
+                            <input v-else-if="key === 'accountid'" v-model="currentAccountID" readonly>
+
                             <input v-else type="text" placeholder="Enter your data" v-model="NCR_data[key]" required>
                         </div>
                     </div>
@@ -166,6 +164,7 @@
             data() {
                 return {
                     title: "IOR",
+                    currentAccountID: '',
                     NCR_data: {
                         accountid: '',
                         regulationbased: '',
@@ -195,11 +194,22 @@
                     loginMessage: ''
                 };
             },
+            mounted() {
+                const accountid = sessionStorage.getItem('accountid');
+                if (accountid) {
+                    this.currentAccountID = accountid;
+                } else {
+                    window.location.href = 'login.html';
+                }
+            },
             methods: {
                 redirectToMainMenu() {
                     window.location.href = 'main_menu.html';
                 },
                 async IOR() {
+                    // Menetapkan nilai accountid dari data yang sudah dimount
+                    this.NCR_data.accountid = this.currentAccountID;
+
                     console.log("Sending data:", this.NCR_data);
                     try {
                         const response = await axios.post("http://localhost:3000/addNCRInit", this.NCR_data);

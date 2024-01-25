@@ -23,8 +23,9 @@
             <a href="#">Audit</a>
             <ul class="dropdown-content">
                 <li><a href="NCR_Form.html">NCR Form</a></li>
+                <li><a href="Edit_NCR.html">Edit NCR Form</a></li>
                 <li><a href="Follow_NCR.html">Follow On</a></li>
-                <li><a href="#">Edit NCR</a></li>
+                <li><a href="Edit_Follow_NCR.html">Edit Follow On</a></li>
             </ul>
         </li>
         <li class="upward dropdown">
@@ -51,14 +52,9 @@
         <header>
             <div class="ncr-title">FOLLOW INTERNAL OCCURRENCE REPORT</div>
             <header>
-                <!-- <ul class="nav-links2">
-                    <li><a href="IOR_Form.html">IOR</a></li>
-                    <li class="center"><a href="Follow_Occur.html">Follow On</a></li>
-                  </ul> -->
             </header>
         </header>
         <form @submit.prevent="IOR" action="#">
-            <!-- Use @submit.prevent to prevent the default form submission behavior -->
             <div class="form first">
                 <div class="details personal">
                     <div class="fields">
@@ -85,17 +81,12 @@
                                 <option value="Closed ">Closed </option>
                                 <option value="Monitor ">Monitor </option>
                             </select>
-
-                            <!-- <textarea v-else-if="key === 'follup_detail'" rows="2" v-model="FollIOR_data[key]"
-                                placeholder=" Enter your data" required></textarea> -->
-
                             <input v-else type="text" placeholder="Enter your data" v-model="FollIOR_data[key]"
                                 required>
                         </div>
                     </div>
                 </div>
                 <button class="nextBtn" type="submit">
-                    <!-- Change the button to submit -->
                     <span class="btnText">Submit</span>
                     <i class="uil uil-navigator"></i>
                 </button>

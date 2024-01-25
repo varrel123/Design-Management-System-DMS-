@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="IOR.css">
     <!----===== Iconscout CSS ===== -->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
-    <title>NON-CONFORMANCE REPORT (NCR)</title>
+    <title>EDIT NON-CONFORMANCE REPORT (NCR)</title>
 </head>
 
 <body>
@@ -49,7 +49,7 @@
 
     <div class="container" id="app">
         <header>
-            <div class="ncr-title">NON-CONFORMANCE REPORT</div>
+            <div class="ncr-title">EDIT NON-CONFORMANCE REPORT</div>
             <header>
             </header>
         </header>
@@ -59,7 +59,7 @@
                     <div class="fields">
                         <div class="input-field" v-for="(value, key) in NCR_data" :key="key">
                             <label>{{ key.replace(/_/g, ' ').replace(/(?:^|\s)\S/g, match =>
-                                match.toUpperCase()).replace(/Ian/gi, 'IAN').replace(/Temporarylink/gi, 'Remark')
+                                match.toUpperCase()).replace(/Ncr/gi, 'NCR').replace(/Temporarylink/gi, 'Remark').replace(/Ian/gi, 'IAN')
                                 }}</label>
                             <input
                                 v-if="key === 'issued_date' ||key === 'answer_duedate'||key === 'audit_date'||key === 'acknowledge_date'"
@@ -168,6 +168,7 @@
                     currentAccountID: '',
                     NCR_data: {
                         accountid: '',
+                        ncr_init_id:'',
                         regulationbased: '',
                         subject: '',
                         audit_no: '',
@@ -212,26 +213,17 @@
 
                     console.log("Sending data:", this.NCR_data);
                     try {
-                        const response = await axios.post("http://localhost:3000/addNCRInit", this.NCR_data);
+                        const response = await axios.put("http://localhost:3000/UpdateNCRInit", this.NCR_data);
 
                         if (response.data.status === 200) {
-                            this.loginMessage = 'NCR added successfully';
+                            this.loginMessage = 'NCR Updated';
                         } else {
-                            this.loginMessage = 'Failed to add NCR';
+                            this.loginMessage = 'Failed to Update NCR';
                         }
                     } catch (error) {
-                        this.loginMessage = 'Failed to add NCR' + error;
+                        this.loginMessage = 'Failed to Update NCR' + error;
                     }
                 },
-
-                redirectToFollowOccur(buttonType) {
-                    if (buttonType === 'NCR') {
-                        // Redirect to the Occurrence page
-                    } else if (buttonType === 'FollowOn') {
-                        // Stay on the Follow_On page
-                        window.location.href = 'Follow_NCR.html';
-                    }
-                }
             }
         }).mount('#app');
     </script>

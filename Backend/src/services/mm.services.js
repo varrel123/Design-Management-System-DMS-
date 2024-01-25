@@ -43,6 +43,7 @@ async function addAccount(mm) {
     const result = await db.query(query);
     if (result.rowCount === 1) {
         return {
+            status:200,
             message: 'User Created'
         }
     } else {
@@ -125,11 +126,13 @@ async function deleteAccount(temp) {
     const result = await db.query(query);
     if (result.rowCount === 1) {
         return {
+            status:200,
             message: 'User deleted'
         }
     }
     else {
         return {
+            status:404,
             message: 'User not found'
         }
     }

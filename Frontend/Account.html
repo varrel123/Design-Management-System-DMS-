@@ -69,6 +69,9 @@
 
                         <a class="list-group-item list-group-item-action block-button" href="#add-account"
                             @click="changeTab('add')" :class="{ 'active': activeTab === 'add' }">Add New Account</a>
+
+                        <a class="list-group-item list-group-item-action block-button" href="#del-acc"
+                            @click="changeTab('del')" :class="{ 'active': activeTab === 'del' }">Delete Account</a>
                     </div>
                 </div>
                 <div class="col-md-9">
@@ -150,7 +153,38 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="form-label">Unit</label>
-                                        <input type="text" class="form-control" v-model="newAccount.unit" required>
+                                        <select class="form-control" v-model="newAccount.unit" required>
+                                            <option value="" disabled>Select Unit</option>
+                                            <option value="TE">TE</option>
+                                            <option value="TEC-1">TEC-1</option>
+                                            <option value="TEA">TEA</option>
+                                            <option value="TEA-1">TEA-1</option>
+                                            <option value="TEA-2">TEA-2</option>
+                                            <option value="TEA-3">TEA-3</option>
+                                            <option value="TEA-4">TEA-4</option>
+                                            <option value="TED">TED</option>
+                                            <option value="TED-1">TED-1</option>
+                                            <option value="TED-2">TED-2</option>
+                                            <option value="TED-3">TED-3</option>
+                                            <option value="TED-4">TED-4</option>
+                                            <option value="TER">TER</option>
+                                            <option value="TER-1">TER-1</option>
+                                            <option value="TER-2">TER-2</option>
+                                            <option value="TER-3">TER-3</option>
+                                            <option value="TER-4">TER-4</option>
+                                            <option value="TER-5">TER-5</option>
+                                            <option value="TEL">TEL</option>
+                                            <option value="TEL-1">TEL-1</option>
+                                            <option value="TEL-2">TEL-2</option>
+                                            <option value="TEJ">TEJ</option>
+                                            <option value="TEJ-1">TEJ-1</option>
+                                            <option value="TEJ-2">TEJ-2</option>
+                                            <option value="TEJ-3">TEJ-3</option>
+                                            <option value="TEM">TEM</option>
+                                            <option value="TEM-1">TEM-1</option>
+                                            <option value="TEM-2">TEM-2</option>
+                                            <option value="TEM-3">TEM-3</option>
+                                        </select>
                                     </div>
                                     <div class="form-group">
                                         <label class="form-label">Password</label>
@@ -159,10 +193,17 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="form-label">Role</label>
-                                        <input type="text" class="form-control" v-model="newAccount.role" required>
+                                        <select class="form-control" v-model="newAccount.role" required>
+                                            <option value="" disabled>Select Unit</option>
+                                            <option value="Admin">Admin</option>
+                                            <option value="DO">DO</option>
+                                            <option value="AO">AO</option>
+                                            <option value="IM">IM</option>
+                                        </select>
                                     </div>
                                     <button type="submit" class="btn btn-primary">Add Account</button>
                                 </form>
+                                <p>{{ addMassage }}</p> 
                             </div>
                         </div>
 
@@ -174,13 +215,35 @@
                                 </h5>
                                 <form @submit.prevent="changePassword">
                                     <div class="form-group">
+                                        <label class="form-label">Account ID</label>
+                                        <input type="text" class="form-control" v-model="ChangePass.accountid" required>
+                                    </div>
+                                    <div class="form-group">
                                         <label class="form-label">New Password</label>
                                         <input type="password" class="form-control" v-model="ChangePass.password"
                                             required>
                                     </div>
                                     <button type="submit" class="btn btn-primary">Change Password</button>
                                 </form>
-                                <p>{{ changePasswordMessage }}</p> <!-- Display changePasswordMessage -->
+                                <p>{{ changePasswordMessage }}</p>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade active show" id="del-acc" v-show="activeTab === 'del'">
+                            <div class="card-body">
+                                <h5 class="font-weight-bold mb-3 position-relative blue-text">
+                                    <span class="account-info-background"></span>
+                                    Delete Account
+                                </h5>
+                                <form @submit.prevent="DeleteAcc">
+                                    <div class="form-group">
+                                        <label class="form-label">Account ID</label>
+                                        <input type="text" class="form-control" v-model="DeleteAccount.accountid"
+                                            required>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Delete Account</button>
+                                </form>
+                                <p>{{ deletePasswordMassage }}</p> 
                             </div>
                         </div>
 
@@ -206,6 +269,8 @@
                     title: "Account",
                     currentAccountID: '',
                     changePasswordMessage: '',
+                    deletePasswordMassage:'',
+                    addMassage:'',
                     Account_data: {
                         accountid: '',
                         name: '',
@@ -232,6 +297,9 @@
                     ChangePass: {
                         accountid: '',
                         password: ''
+                    },
+                    DeleteAccount: {
+                        accountid: ''
                     }
                 };
             },
@@ -276,6 +344,13 @@
                     try {
                         const response = await axios.post('http://localhost:3000/addAccount', this.newAccount);
                         console.log("Added account:", response.data.account); // Log the added account
+
+                        if (response.data.status === 200) {
+                            this.addMassage = 'Add Account successfully';
+                        } else {
+                            this.changePasswordMessage = 'Failed to Add Account';
+                        }
+
                         this.fetchAllAccounts();
                         this.newAccount = {
                             accountid: '',
@@ -291,7 +366,7 @@
                 async changePassword() {
                     try {
                         const response = await axios.post('http://localhost:3000/updatePassword', {
-                            accountid: this.currentAccountID,
+                            accountid: this.ChangePass.accountid,
                             password: this.ChangePass.password
                         });
 
@@ -310,6 +385,27 @@
                         this.changePasswordMessage = 'Failed to update password';
                     }
                 },
+                async DeleteAcc() {
+                    try {
+                        const response = await axios.delete('http://localhost:3000/deleteAccount', {
+                            data: { accountid: this.DeleteAccount.accountid } // Pass data as an object
+                        });
+
+                        console.log("Delete Password :", response.data.account);
+
+                        if (response.data.status === 200) {
+                            this.deletePasswordMassage = 'Account successfully Deleted';
+                        } else {
+                            this.deletePasswordMassage = 'Failed to Delete password';
+                        }
+
+                        this.fetchAllAccounts();
+                    } catch (error) {
+                        console.error("Error deleting account:", error);
+                        this.deletePasswordMassage = 'Failed to delete account';
+                    }
+                },
+
                 changeTab(tabName) {
                     this.activeTab = tabName;
                     console.log(`Switched to ${tabName} tab`); // Log the tab switch
@@ -326,6 +422,10 @@
                     this.activeTab = 'ChangePW';
                     console.log(`Switched to Change PW tab`);
                     // Do not call this.addAccount() here
+                },
+                switchToDelTab() {
+                    this.activeTab = 'del';
+                    console.log(`Switched to Change delete tab`);
                 }
             }
         }).mount('#app');

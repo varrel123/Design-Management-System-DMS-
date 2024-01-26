@@ -9,64 +9,51 @@ const helper = require('../utils/helper');
 
 async function login(mm) {
     const { accountid, Password } = mm;
-
-    // Pastikan kedua accountid dan password diisi
-    if (!accountid || !Password) {
-        return { status: 400, message: 'Accountid and Password are required' };
-    }
-
-    const query = `SELECT * FROM account WHERE accountid = '${accountid}' AND Password = '${Password}'`;
+    const query = `SELECT * FROM account WHERE accountid = '${accountid}'`;
     const result = await db.query(query);
-
-    if (result.rowCount === 1) {
+    if (result.rowCount > 0) {
         const user = result.rows[0];
-        return { status: 200, message: 'Login successful', user };
-    } else {
-        // Pisahkan penanganan jika accountid atau password salah
-        const accountExists = await db.query(`SELECT * FROM account WHERE accountid = '${accountid}'`);
-        const passwordMatches = await db.query(`SELECT * FROM account WHERE accountid = '${accountid}' AND Password = '${Password}'`);
-
-        if (accountExists.rowCount === 0) {
-            return { status: 404, message: 'Accountid not found' };
-        } else if (passwordMatches.rowCount === 0) {
-            return { status: 401, message: 'Incorrect password' };
+        const comparePass = await helper.comparePassword(Password, user.password);
+        if (comparePass) {
+            return { status: 200, message: 'Login successful', user };
         } else {
-            return { status: 404, message: 'Account not found' };
+            return { status: 401, message: 'Password is not correct' };
         }
+    } else {
+        return { status: 404, message: 'Account not found' };
     }
 }
 
-
 async function addAccount(mm) {
     const { accountid, name, unit, password, role } = mm;
-    const query = `INSERT INTO account (accountid, name, unit, password, role) VALUES ('${accountid}',  '${name}',  '${unit}', '${password}', '${role}')`;
+    const pass = await helper.hashPassword(password);
+    const query = `INSERT INTO account (accountid, name, unit, password, role) VALUES ('${accountid}', '${name}', '${unit}', '${pass}', '${role}')`;
     const result = await db.query(query);
     if (result.rowCount === 1) {
         return {
-            status:200,
-            message: 'User Created'
+            status: 200, message: 'Add Account successful'
         }
     } else {
         return {
-            message: 'Error'
+            status: 404, message: 'Add Account Failed'
         }
     }
 }
 
 async function updatePassword(mm) {
-    const { accountid, password} = mm;
+    const { accountid, password } = mm;
     // const pass = await helper.hashPassword(newPassword);
     const query = `UPDATE account SET password = '${password}' WHERE accountid = '${accountid}'`;
     const result = await db.query(query);
 
     if (result.rowCount === 1) {
         return {
-            status:200,
+            status: 200,
             message: 'Password Updated'
         };
     } else {
         return {
-            status:404,
+            status: 404,
             message: 'User not found or Error updating password'
         };
     }
@@ -126,13 +113,13 @@ async function deleteAccount(temp) {
     const result = await db.query(query);
     if (result.rowCount === 1) {
         return {
-            status:200,
+            status: 200,
             message: 'User deleted'
         }
     }
     else {
         return {
-            status:404,
+            status: 404,
             message: 'User not found'
         }
     }
@@ -560,12 +547,12 @@ async function addFollowUpOccurrence(followUpData) {
 
     if (result.rowCount === 1) {
         return {
-            status:200,
+            status: 200,
             message: 'Follow-Up Occurrence Created'
         };
     } else {
         return {
-            status:404,
+            status: 404,
             message: 'Error'
         };
     }
@@ -628,7 +615,7 @@ async function showNCRInit() {
     const result = await db.query(query);
     if (result.rowCount) {
         return {
-            status:200,
+            status: 200,
             message: 'Showing NCR Intial',
             showProduct: result.rows
         }
@@ -661,7 +648,7 @@ async function showNCRInit_ID(temp) {
     const result = await db.query(query);
     if (result.rowCount) {
         return {
-            status : 200,
+            status: 200,
             message: 'Showing NCR Intial by ID',
             showProduct: result.rows
         }
@@ -678,6 +665,7 @@ async function addNCRReply(mm) {
     const result = await db.query(query);
     if (result.rowCount === 1) {
         return {
+            status: 200,
             message: 'NRC Reply Created'
         }
     } else {

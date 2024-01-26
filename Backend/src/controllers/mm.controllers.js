@@ -318,6 +318,34 @@ async function showNCRFollowResult(req,res){
     }
 }
 
+async function updateFollowUpOccurrence(req,res){
+    try{
+        const result = await mmService.updateFollowUpOccurrence(req.body);
+        res.json(result);
+    }catch(err){
+        res.json(err.detail);
+    }
+}
+
+async function showFollupOccurrence(req,res){
+    try{
+        const result = await mmService.showFollupOccurrence(req.body);
+        res.json(result);
+    }catch(err){
+        res.json(err.detail);
+    }
+}
+
+async function showFollupOccurrenceID(req,res){
+    try{
+        const result = await mmService.showFollupOccurrenceID(req.body);
+        res.json(result);
+    }catch(err){
+        res.json(err.detail);
+    }
+}
+
+
 module.exports = {
     login,
     addAccount,
@@ -353,5 +381,8 @@ module.exports = {
     showNCRFollowResult,
     showNCRInit_ID,
     showAllAccount,
-    updatePassword
+    updatePassword,
+    updateFollowUpOccurrence,
+    showFollupOccurrence,
+    showFollupOccurrenceID
 };

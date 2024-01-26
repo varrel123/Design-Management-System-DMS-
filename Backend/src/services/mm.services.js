@@ -442,6 +442,7 @@ async function updateOccurrence(mm) {
 
     if (result.rowCount === 1) {
         return {
+            status:200,
             message: 'Occurrence Updated'
         }
     } else {
@@ -450,6 +451,7 @@ async function updateOccurrence(mm) {
         }
     }
 }
+
 
 async function deleteOccurrence(temp) {
     const { id_IOR } = temp;
@@ -554,6 +556,94 @@ async function addFollowUpOccurrence(followUpData) {
         return {
             status: 404,
             message: 'Error'
+        };
+    }
+}
+
+async function showFollupOccurrence() {
+    try {
+        const query = `SELECT * FROM tbl_follupOccur`;
+        const result = await db.query(query);
+
+        if (result.rowCount > 0) {
+            return {
+                status: 200,
+                message: 'Occurrence found',
+            };
+        } else {
+            return {
+                status: 200,
+                message: 'Occurrence not found',
+            };
+        }
+    } catch (error) {
+        console.error('Error fetching Occurrenc information:', error);
+        throw error;
+    }
+}
+
+async function showFollupOccurrenceID(temp) {
+    try {
+        const { id_IOR } = temp;
+        const query = `SELECT * FROM tbl_follupOccur WHERE id_IOR = '${id_IOR}'`;
+        const result = await db.query(query);
+
+        if (result.rowCount > 0) {
+            return {
+                status: 200,
+                message: 'Occurrence found',
+            };
+        } else {
+            return {
+                status: 200,
+                message: 'Occurrence not found',
+            };
+        }
+    } catch (error) {
+        console.error('Error fetching Occurrenc information:', error);
+        throw error;
+    }
+}
+
+async function updateFollowUpOccurrence(followUpData) {
+    const {
+        id_IOR,
+        follup_detail,
+        follupby,
+        follup_uic,
+        follup_date,
+        follup_datarefer,
+        follup_status,
+        nextuic_follup,
+        current_probability,
+        current_severity,
+        current_riskindex
+    } = followUpData;
+
+    const query = `UPDATE tbl_follupOccur SET
+        follup_detail = '${follup_detail}',
+        follupby = '${follupby}',
+        follup_uic = '${follup_uic}',
+        follup_date = '${follup_date}',
+        follup_datarefer = ${follup_datarefer},
+        follup_status = '${follup_status}',
+        nextuic_follup = '${nextuic_follup}',
+        current_probability = '${current_probability}',
+        current_severity = '${current_severity}',
+        current_riskindex = '${current_riskindex}'
+    WHERE id_IOR = ${id_IOR}`;
+
+    const result = await db.query(query);
+
+    if (result.rowCount === 1) {
+        return {
+            status: 200,
+            message: 'Follow-Up Occurrence Updated'
+        };
+    } else {
+        return {
+            status: 404,
+            message: 'Error updating Follow-Up Occurrence'
         };
     }
 }
@@ -823,5 +913,8 @@ module.exports = {
     showNCRInit_ID,
     showAllAccount,
     updatePassword,
-    showNCRInit_ID
+    showNCRInit_ID,
+    updateFollowUpOccurrence,
+    showFollupOccurrence,
+    showFollupOccurrenceID
 };

@@ -47,6 +47,8 @@ router.post('/addCategoryIOR', mmController.addCategoryIOR);
 
 router.post('/addFollowUpOccurrence', mmController.addFollowUpOccurrence);
 
+router.put('/updateFollowUpOccurrence', mmController.updateFollowUpOccurrence);
+
 router.post('/addNCRInit', mmController.addNCRInit);
 
 router.delete('/deleteNCRInit', mmController.deleteNCRInit);
@@ -72,5 +74,9 @@ router.delete('/deleteNCRFollowResult', mmController.deleteNCRFollowResult);
 router.put('/UpdateNCRFollowResult', mmController.UpdateNCRFollowResult);
 
 router.get('/showNCRFollowResult', mmController.showNCRFollowResult);
+
+router.get('/showFollupOccurrence', mmController.showFollupOccurrence);
+
+router.get('/showFollupOccurrenceID', mmController.showFollupOccurrenceID);
 
 module.exports = router;

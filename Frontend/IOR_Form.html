@@ -45,6 +45,7 @@
                 <li><a href="https://www.easa.europa.eu/en/regulations" target="_blank">EASA</a></li>
             </ul>
         </li>
+        <li class="forward"><a href="#">User Guide</a></li>
         <li class="forward"><a href="index.html">Log Out</a></li>
     </ul>
 
@@ -92,6 +93,7 @@
                             </select>
                             <textarea v-else-if="key === 'detail_occurance'" placeholder=" Enter your data" rows="2"
                                 v-model="IOR_data[key]" required></textarea>
+
                             <input v-else type="text" placeholder="Enter your data" v-model="IOR_data[key]" required>
                         </div>
                     </div>

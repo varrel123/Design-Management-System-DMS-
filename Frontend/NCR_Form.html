@@ -43,6 +43,7 @@
                 <li><a href="https://www.easa.europa.eu/en/regulations" target="_blank">EASA</a></li>
             </ul>
         </li>
+        <li class="forward"><a href="#">User Guide</a></li>
         <li class="forward"><a href="index.html">Log Out</a></li>
     </ul>
 
@@ -69,6 +70,8 @@
                                 <option value="Required">Required</option>
                                 <option value="Not Required">Not Required</option>
                             </select>
+
+
 
                             <select v-else-if="key === 'regulationbased'" v-model="NCR_data[key]">
                                 <option value="" disabled selected>Select Your Data</option>
@@ -139,6 +142,9 @@
                                 <option value="EL: Elang Lintas Indonesia">EL: Elang Lintas Indonesia</option>
                             </select>
 
+                            <textarea
+                                v-else-if="key === 'subject' ||key === 'level_finding'||key === 'require_condition'||key === 'encounter_condition'||key === 'temporarylink' "
+                                placeholder=" Enter your data" rows="2" v-model="NCR_data[key]" required></textarea>
                             <input v-else-if="key === 'accountid'" v-model="currentAccountID" readonly>
 
                             <input v-else type="text" placeholder="Enter your data" v-model="NCR_data[key]" required>

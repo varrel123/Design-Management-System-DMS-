@@ -442,7 +442,7 @@ async function updateOccurrence(mm) {
 
     if (result.rowCount === 1) {
         return {
-            status:200,
+            status: 200,
             message: 'Occurrence Updated'
         }
     } else {
@@ -750,8 +750,8 @@ async function showNCRInit_ID(temp) {
 }
 
 async function addNCRReply(mm) {
-    const { accountid, ncr_init_id, rca_problem, corrective_act, preventive_act, identified_by, identified_date, accept_by, audit_accept, temporarylink } = mm;
-    const query = `INSERT INTO NCR_reply ( AccountID, NCR_init_ID, RCA_problem, Corrective_Action, Preventive_Action, Identified_by_Auditee, Identified_Date, Accept_by_Auditor, Auditor_Accept_date, TemporaryLink) VALUES ('${accountid}', '${ncr_init_id}', '${rca_problem}', '${corrective_act}', '${preventive_act}', '${identified_by}', '${identified_date}', '${accept_by}', '${audit_accept}', '${temporarylink}')`;
+    const { accountid, ncr_init_id, rca_problem, corrective_act, preventive_act, identified_by, identified_date, accept_by, audit_accept, temporarylink, Recommend_corrective_action } = mm;
+    const query = `INSERT INTO NCR_reply ( AccountID, NCR_init_ID, RCA_problem, Corrective_Action, Preventive_Action, Identified_by_Auditee, Identified_Date, Accept_by_Auditor, Auditor_Accept_date, TemporaryLink,Recommend_corrective_action) VALUES ('${accountid}', '${ncr_init_id}', '${rca_problem}', '${corrective_act}', '${preventive_act}', '${identified_by}', '${identified_date}', '${accept_by}', '${audit_accept}', '${temporarylink}','${Recommend_corrective_action}')`;
     const result = await db.query(query);
     if (result.rowCount === 1) {
         return {

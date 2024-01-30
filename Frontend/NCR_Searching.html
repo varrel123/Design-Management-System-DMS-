@@ -171,10 +171,10 @@
                         window.location.href = 'previewPage.html';
                     },
                     navigateEdit(ncrNo) {
-                        // Menggunakan sessionStorage untuk menyimpan ncr_init_id
-                        sessionStorage.setItem('ncr_init_id', ncrNo);
-                        // Menggunakan window.location.href untuk mengarahkan ke halaman previewPage.html
-                        window.location.href = 'Edit_NCR.html';
+                        // Store the NCR data in sessionStorage
+                        sessionStorage.setItem('ncr_data', JSON.stringify(this.items.find(item => item.ncr_init_id === ncrNo)));
+                        // Redirect to Edit_NCR.html
+                        window.location.href = 'Edit_NCR_2.html';
                     },
                     filterTable() {
                         // Fungsi ini akan dipanggil setiap kali nilai pencarian berubah

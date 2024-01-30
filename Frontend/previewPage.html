@@ -94,7 +94,6 @@
 
     <div class="pdf-container">
         <div class="pdf-content" id="previewContent">
-            <!-- Data PDF akan dimuat di sini -->
         </div>
     </div>
 
@@ -107,7 +106,6 @@
     <script type="module">
         async function loadPreviewData() {
             try {
-                // Menggunakan URLSearchParams untuk mendapatkan ncr_init_id dari URL
                 const urlParams = new URLSearchParams(window.location.search);
                 const ncrNo = urlParams.get('ncrNo') || sessionStorage.getItem('ncr_init_id');
 

@@ -1,0 +1,32 @@
+@startuml
+
+actor User
+participant "Login Page" as LoginPage
+database Database
+participant "User Service" as UserService
+participant "Homepage1" as Homepage1
+participant "Homepage2" as Homepage2
+participant "IOR&NCR Service" as IORNCRService
+participant "Database" as Database
+
+User -> LoginPage: Login
+LoginPage -> UserService: Authenticate User
+UserService -> Database: Check Credentials
+
+alt User is Admin
+    UserService -> Homepage2: Redirect to Homepage2
+    Homepage2 --> IORNCRService: Add, Edit, Search IOR&NCR
+    IORNCRService -> Database: Add, Edit, Delete IOR&NCR
+    Database --> IORNCRService: Confirmation
+    Homepage2 -> Homepage2: Logout
+    Homepage2 --> LoginPage: Redirect to Login Page
+else User is DO/AO/IM
+    UserService -> Homepage1: Redirect to Homepage1
+    Homepage1 --> IORNCRService: View IOR&NCR
+    IORNCRService --> Database: Retrieve IOR&NCR Data
+    Database --> IORNCRService: IOR&NCR Data
+    Homepage1 -> Homepage1: Logout
+    Homepage1 --> LoginPage: Redirect to Login Page
+end
+
+@enduml

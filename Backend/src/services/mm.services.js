@@ -392,6 +392,29 @@ async function showOccurrence(temp) {
     }
 }
 
+async function showOccurrenceAll() {
+    try {
+        const query = `SELECT * FROM tbl_occurrence`;
+        const result = await db.query(query);
+
+        if (result.rowCount > 0) {
+            return {
+                status: 200,
+                message: 'Occurrence found',
+                showProduct: result.rows
+            };
+        } else {
+            return {
+                status: 200,
+                message: 'Occurrence not found',
+            };
+        }
+    } catch (error) {
+        console.error('Error fetching Occurrenc information:', error);
+        throw error;
+    }
+}
+
 async function updateOccurrence(mm) {
     const {
         id_IOR,
@@ -916,5 +939,6 @@ module.exports = {
     showNCRInit_ID,
     updateFollowUpOccurrence,
     showFollupOccurrence,
-    showFollupOccurrenceID
+    showFollupOccurrenceID,
+    showOccurrenceAll
 };

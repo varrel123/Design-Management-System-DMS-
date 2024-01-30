@@ -345,6 +345,14 @@ async function showFollupOccurrenceID(req,res){
     }
 }
 
+async function showOccurrenceAll(req,res){
+    try{
+        const result = await mmService.showOccurrenceAll(req.body);
+        res.json(result);
+    }catch(err){
+        res.json(err.detail);
+    }
+}
 
 module.exports = {
     login,
@@ -384,5 +392,6 @@ module.exports = {
     updatePassword,
     updateFollowUpOccurrence,
     showFollupOccurrence,
-    showFollupOccurrenceID
+    showFollupOccurrenceID,
+    showOccurrenceAll
 };

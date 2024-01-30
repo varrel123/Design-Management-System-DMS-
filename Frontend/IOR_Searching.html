@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NCR Searching</title>
+    <title>IOR Searching</title>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.6/css/jquery.dataTables.min.css">
     <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
     <link rel="stylesheet" href="Account.css">
@@ -61,58 +61,53 @@
                 <table class="table" id="data-table" style="background-color: white; overflow-y:scroll;">
                     <thead style="background-color: #CCE6F4;">
                         <tr>
-                            <th>NCR Init ID</th>
-                            <th>Regulation Based</th>
-                            <th>Subject</th>
-                            <th>Audit Plan No</th>
-                            <th>NCR No</th>
-                            <th>Issued Date</th>
-                            <th>Responsibility Office</th>
-                            <th>Audit Type</th>
+                            <th>ID IOR</th>
+                            <th>Subject IOR</th>
+                            <th>IOR Number</th>
+                            <th>IOR Date</th>
+                            <th>Reference IOR</th>
                             <th>To UIC</th>
-                            <th>Require Condition Reference</th>
-                            <th>Level Finding</th>
-                            <th>Problem Analis</th>
-                            <th>Answer Due Date</th>
-                            <th>Issued IAN</th>
-                            <th>IAN No</th>
-                            <th>Encountered Condition</th>
-                            <th>Audit By</th>
-                            <th>Audit Date</th>
-                            <th>Acknowledge By</th>
-                            <th>Acknowledge Date</th>
-                            <th>Status</th>
-                            <th>Temporary Link</th>
-                            <th>Action</th>
+                            <th>CC UIC</th>
+                            <th>Category IOR</th>
+                            <th>Type OR Phone Number</th>
+                            <th>Level Type</th>
+                            <th>Detail Occurance</th>
+                            <th>Reported By</th>
+                            <th>Reporter UIC</th>
+                            <th>Report Date</th>
+                            <th>Report Identify</th>
+                            <th>Data Reference</th>
+                            <th>Hirac Process</th>
+                            <th>Initial Probability</th>
+                            <th>Initial Severity</th>
+                            <th>Initial Riskindex</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="item in items" :key="item.ncr_init_id">
-                            <td>{{ item.ncr_init_id }}</td>
-                            <td>{{ item.regulationbased }}</td>
-                            <td>{{ item.subject }}</td>
-                            <td>{{ item.audit_plan_no }}</td>
-                            <td>{{ item.ncr_no }}</td>
-                            <td>{{ item.issued_date }}</td>
-                            <td>{{ item.responsibility_office }}</td>
-                            <td>{{ item.audit_type }}</td>
+                        <tr v-for="item in items" :key="item.subject_ior">
+                            <td>{{ item.id_ior }}</td>
+                            <td>{{ item.subject_ior }}</td>
+                            <td>{{ item.occur_nbr }}</td>
+                            <td>{{ item.occur_date }}</td>
+                            <td>{{ item.reference_ior }}</td>
                             <td>{{ item.to_uic }}</td>
-                            <td>{{ item.require_condition_reference }}</td>
-                            <td>{{ item.level_finding }}</td>
-                            <td>{{ item.problem_analysis }}</td>
-                            <td>{{ item.answer_due_date }}</td>
-                            <td>{{ item.issue_ian }}</td>
-                            <td>{{ item.ian_no }}</td>
-                            <td>{{ item.encountered_condition }}</td>
-                            <td>{{ item.audit_by }}</td>
-                            <td>{{ item.audit_date }}</td>
-                            <td>{{ item.acknowledge_by }}</td>
-                            <td>{{ item.acknowledge_date }}</td>
-                            <td>{{ item.status }}</td>
-                            <td>{{ item.temporarylink }}</td>
+                            <td>{{ item.cc_uic }}</td>
+                            <td>{{ item.category_occur }}</td>
+                            <td>{{ item.type_or_pnbr }}</td>
+                            <td>{{ item.level_type }}</td>
+                            <td>{{ item.detail_occurance }}</td>
+                            <td>{{ item.reportedby  }}</td>
+                            <td>{{ item.reporter_uic }}</td>
+                            <td>{{ item.report_date }}</td>
+                            <td>{{ item.reporter_identity }}</td>
+                            <td>{{ item.data_reference }}</td>
+                            <td>{{ item.hirac_process }}</td>
+                            <td>{{ item.initial_probability }}</td>
+                            <td>{{ item.initial_severity }}</td>
+                            <td>{{ item.initial_riskindex }}</td>
                             <td>
-                                <button @click="navigatePreview(item.ncr_init_id)">Preview</button>
-                                <button @click="navigateEdit(item.ncr_init_id)">Edit</button>
+                                <button class="preview-button" @click="navigatePreview(item.subject_ior)">Preview</button>
+                                <button class="preview-button" @click="navigateEdit(item.subject_ior)">Edit</button>
                             </td>
                         </tr>
                     </tbody>
@@ -134,7 +129,7 @@
             createApp({
                 data() {
                     return {
-                        title: "Searching NCR",
+                        title: "Searching IOR",
                         items: [],
                         searchTerm: ''
                     };
@@ -142,7 +137,7 @@
                 methods: {
                     async fetchDataFromServer() {
                         try {
-                            const response = await axios.get("http://localhost:3000/showNCRInit");
+                            const response = await axios.get("http://localhost:3000/showOccurrenceAll");
                             if (response.data.status === 200) {
                                 this.items = response.data.showProduct;
                             } else {
@@ -162,19 +157,19 @@
                         XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
 
                         // Menyimpan file Excel
-                        XLSX.writeFile(wb, 'NCR_Data.xlsx');
+                        XLSX.writeFile(wb, 'IOR_Data.xlsx');
                     },
                     navigatePreview(ncrNo) {
                         // Menggunakan sessionStorage untuk menyimpan ncr_init_id
-                        sessionStorage.setItem('ncr_init_id', ncrNo);
+                        sessionStorage.setItem('id_ior', iorNo);
                         // Menggunakan window.location.href untuk mengarahkan ke halaman previewPage.html
                         window.location.href = 'previewPage.html';
                     },
                     navigateEdit(ncrNo) {
                         // Store the NCR data in sessionStorage
-                        sessionStorage.setItem('ncr_data', JSON.stringify(this.items.find(item => item.ncr_init_id === ncrNo)));
+                        sessionStorage.setItem('IOR_Data', JSON.stringify(this.items.find(item => item.id_ior === ncrNo)));
                         // Redirect to Edit_NCR.html
-                        window.location.href = 'Edit_NCR_2.html';
+                        window.location.href = 'IOR_Edit.html';
                     },
                     filterTable() {
                         // Fungsi ini akan dipanggil setiap kali nilai pencarian berubah
@@ -186,28 +181,26 @@
                             if (item.ncr_init_id.toLowerCase().includes(this.searchTerm.toLowerCase())) {
                                 const row = document.createElement("tr");
                                 row.innerHTML = `
-                                    <td>${item.ncr_init_id}</td>
-                                    <td>${item.regulationbased}</td>
-                                    <td>${item.subject}</td>
-                                    <td>${item.audit_plan_no}</td>
-                                    <td>${item.ncr_no}</td>
-                                    <td>${item.issued_date}</td>
-                                    <td>${item.responsibility_office}</td>
-                                    <td>${item.audit_type}</td>
+                                    <td>${item.id_ior}</td>
+                                    <td>${item.subject_ior}</td>
+                                    <td>${item.occur_nbr}</td>
+                                    <td>${item.occur_date}</td>
+                                    <td>${item.reference_ior}</td>
                                     <td>${item.to_uic}</td>
-                                    <td>${item.require_condition_reference}</td>
-                                    <td>${item.level_finding}</td>
-                                    <td>${item.problem_analysis}</td>
-                                    <td>${item.answer_due_date}</td>
-                                    <td>${item.issue_ian}</td>
-                                    <td>${item.ian_no}</td>
-                                    <td>${item.encountered_condition}</td>
-                                    <td>${item.audit_by}</td>
-                                    <td>${item.audit_date}</td>
-                                    <td>${item.acknowledge_by}</td>
-                                    <td>${item.acknowledge_date}</td>
-                                    <td>${item.status}</td>
-                                    <td>${item.temporarylink}</td>
+                                    <td>${item.cc_uic}</td>
+                                    <td>${item.category_occur}</td>
+                                    <td>${item.type_or_pnbr}</td>
+                                    <td>${item.level_type}</td>
+                                    <td>${item.detail_occurance}</td>
+                                    <td>${item.reportedby }</td>
+                                    <td>${item.reporter_uic}</td>
+                                    <td>${item.report_date}</td>
+                                    <td>${item.reporter_identity}</td>
+                                    <td>${item.data_reference}</td>
+                                    <td>${item.hirac_process}</td>
+                                    <td>${item.initial_probability}</td>
+                                    <td>${item.initial_severity}</td>
+                                    <td>${item.initial_riskindex}</td>
                                     <td>
                                         <button class="preview-button">Preview</button>
                                     </td>

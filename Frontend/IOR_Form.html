@@ -6,9 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!----======== CSS ======== -->
     <link rel="stylesheet" href="IOR.css">
-    <!----===== Iconscout CSS ===== -->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     <title>INTERNAL OCCURRENCE REPORT (IOR)</title>
 </head>
@@ -32,8 +30,9 @@
             <a href="#">Occurrence</a>
             <ul class="dropdown-content">
                 <li><a href="IOR_Form.html">IOR Form</a></li>
+                <li><a href="IOR_Searching.html">Searching IOR</a></li>
                 <li><a href="Follow_Occur.html">Follow On</a></li>
-                <li><a href="#">Edit IOR</a></li>
+                <!-- <li><a href="#">Edit IOR</a></li> -->
             </ul>
         </li>
         <li><a href="#">Personel</a></li>
@@ -53,14 +52,9 @@
         <header>
             <div class="ncr-title">INTERNAL OCCURRENCE REPORT</div>
             <header>
-                <!-- <ul class="nav-links2">
-                    <li><a href="IOR_Form.html">IOR</a></li>
-                    <li class="center"><a href="Follow_Occur.html">Follow On</a></li>
-                  </ul> -->
             </header>
         </header>
         <form @submit.prevent="IOR" action="#">
-            <!-- Use @submit.prevent to prevent the default form submission behavior -->
             <div class="form first">
                 <div class="details personal">
                     <div class="fields">

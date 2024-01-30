@@ -32,8 +32,9 @@
             <a href="#">Occurrence</a>
             <ul class="dropdown-content">
                 <li><a href="IOR_Form.html">IOR Form</a></li>
+                <li><a href="IOR_Searching.html">Searching IOR</a></li>
                 <li><a href="Follow_Occur.html">Follow On</a></li>
-                <li><a href="#">Edit IOR</a></li>
+                <!-- <li><a href="#">Edit IOR</a></li> -->
             </ul>
         </li>
         <li><a href="#">Personel</a></li>
@@ -119,6 +120,7 @@
             data() {
                 return {
                     title: "IOR",
+                    currentAccountID:'',
                     IOR_data: {
                         id_IOR:'',
                         subject_ior: '',
@@ -143,6 +145,19 @@
                     },
                     loginMessage: ''
                 };
+            },
+            mounted() {
+                const accountid = sessionStorage.getItem('accountid');
+                if (accountid) {
+                    this.currentAccountID = accountid;
+                } else {
+                    window.location.href = 'login.html';
+                }
+
+                const iorData = sessionStorage.getItem('id_ior');
+                if (ncrData) {
+                    this.IOR_data = JSON.parse(iorData);
+                }
             },
             methods: {
                 redirectToMainMenu() {

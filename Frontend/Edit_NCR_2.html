@@ -22,17 +22,16 @@
             <a href="#">Audit</a>
             <ul class="dropdown-content">
                 <li><a href="NCR_Form.html">NCR Form</a></li>
-                <li><a href="NCR_Searching.html">Edit NCR Form</a></li>
+                <li><a href="NCR_Searching.html">Searching NCR</a></li>
                 <li><a href="Follow_NCR.html">Follow On</a></li>
-                <li><a href="Edit_Follow_NCR.html">Edit Follow On</a></li>
             </ul>
         </li>
         <li class="upward dropdown">
             <a href="#">Occurrence</a>
             <ul class="dropdown-content">
                 <li><a href="IOR_Form.html">IOR Form</a></li>
+                <li><a href="IOR_Searching.html">Searching IOR</a></li>
                 <li><a href="Follow_Occur.html">Follow On</a></li>
-                <li><a href="#">Edit IOR</a></li>
             </ul>
         </li>
         <li><a href="#">Personel</a></li>
@@ -44,6 +43,7 @@
                 <li><a href="https://www.easa.europa.eu/en/regulations" target="_blank">EASA</a></li>
             </ul>
         </li>
+        <li class="forward"><a href="#">User Guide</a></li>
         <li class="forward"><a href="index.html">Log Out</a></li>
     </ul>
 
@@ -142,6 +142,7 @@
 
                             <input v-else-if="key === 'accountid'" v-model="currentAccountID" readonly>
                             
+                            <input v-else-if="key === 'ncr_init_id'" v-model="currentIORID" readonly>
 
                             <input v-else type="text" placeholder="Enter your data" v-model="NCR_data[key]" required>
                         </div>
@@ -168,6 +169,7 @@
                 return {
                     title: "IOR",
                     currentAccountID: '',
+                    currentIORID:'',
                     NCR_data: {
                         accountid: '',
                         ncr_init_id:'',
@@ -206,9 +208,9 @@
                     window.location.href = 'login.html';
                 }
 
-                const ncrData = sessionStorage.getItem('ncr_data');
+                const ncrData = sessionStorage.getItem('ncr_init_id');
                 if (ncrData) {
-                    this.NCR_data = JSON.parse(ncrData);
+                    this.currentIORID = ncrData;
                 }
             },
             methods: {
@@ -217,6 +219,7 @@
                 },
                 async IOR() {
                     this.NCR_data.accountid = this.currentAccountID;
+                    this.NCR_data.ncr_init_id = this.currentIORID;
 
                     console.log("Sending data:", this.NCR_data);
                     try {

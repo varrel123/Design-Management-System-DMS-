@@ -110,7 +110,7 @@
                             <td>{{ item.status }}</td>
                             <td>{{ item.temporarylink }}</td>
                             <td>
-                                <button @click="navigatePreview(item.ncr_init_id)">Preview</button>
+                                <button @click="navigatePreview(item.ncr_init_id)">Preview</button><br>
                                 <button @click="navigateEdit(item.ncr_init_id)">Edit</button>
                             </td>
                         </tr>
@@ -144,6 +144,9 @@
                             const response = await axios.get("http://localhost:3000/showNCRInit");
                             if (response.data.status === 200) {
                                 this.items = response.data.showProduct;
+                                this.ncr_init_id = response.data.showProduct.ncr_init_id;
+                                this.loginMessage = 'NCR ID: ' + this.ncr_init_id;
+                                sessionStorage.setItem('ncr_init_id', this.ncr_init_id);
                             } else {
                                 console.error('Error Message:', response.data.message);
                             }
@@ -170,9 +173,7 @@
                         window.location.href = 'previewPage.html';
                     },
                     navigateEdit(ncrNo) {
-                        // Store the NCR data in sessionStorage
-                        sessionStorage.setItem('ncr_data', JSON.stringify(this.items.find(item => item.ncr_init_id === ncrNo)));
-                        // Redirect to Edit_NCR.html
+                        sessionStorage.setItem('ncr_init_id', ncrNo);
                         window.location.href = 'Edit_NCR_2.html';
                     },
                     filterTable() {

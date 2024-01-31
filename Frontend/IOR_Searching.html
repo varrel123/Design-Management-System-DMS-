@@ -106,8 +106,8 @@
                             <td>{{ item.initial_severity }}</td>
                             <td>{{ item.initial_riskindex }}</td>
                             <td>
-                                <button class="preview-button" @click="navigatePreview(item.id_ior)">Preview</button>
-                                <button class="preview-button" @click="navigateEdit(item)">Edit</button>
+                                <button class="preview-button" @click="navigatePreview(item.id_ior)">Preview</button> 
+                                <button class="preview-button" @click="navigateEdit(item.id_ior)">Edit</button>
                             </td>
                         </tr>
                     </tbody>
@@ -140,6 +140,9 @@
                             const response = await axios.get("http://localhost:3000/showOccurrenceAll");
                             if (response.data.status === 200) {
                                 this.items = response.data.showProduct;
+                                this.id_ior = response.data.showProduct.id_ior;
+                                this.loginMessage = 'NCR ID: ' + this.id_ior;
+                                sessionStorage.setItem('id_ior', this.id_ior);
                             } else {
                                 console.error('Error Message:', response.data.message);
                             }
@@ -161,12 +164,12 @@
                     },
                     navigatePreview(iorData) {
                         // Menggunakan sessionStorage untuk menyimpan ncr_init_id
-                        sessionStorage.setItem('id_ior', iorData);
+                        sessionStorage.setItem('IOR_Data', iorData);
                         // Menggunakan window.location.href untuk mengarahkan ke halaman previewPage.html
                         window.location.href = 'previewPage.html';
                     },
-                    navigateEdit(item) {
-                        sessionStorage.setItem('IOR_Data', JSON.stringify(item));
+                    navigateEdit(iorData) {
+                        sessionStorage.setItem('id_ior',iorData);
                         window.location.href = 'IOR_Edit.html';
                     },
                     filterTable() {

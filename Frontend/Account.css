@@ -217,7 +217,7 @@ label.btn {
 }
 
 html:not(.dark-style) .account-settings-links .list-group-item.active {
-    background: #0b4685 !important;
+    background: #1e7adc !important;
 }
 
 .account-settings-multiselect~.select2-container {

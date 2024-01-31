@@ -87,11 +87,12 @@
                             <textarea v-else-if="key === 'detail_occurance'" placeholder=" Enter your data" rows="2"
                                 v-model="IOR_data[key]" required></textarea>
 
+                            <input v-else-if="key === 'id_ior'" v-model="currentIORID" readonly>
+
                             <input v-else type="text" placeholder="Enter your data" v-model="IOR_data[key]" required>
                         </div>
                     </div>
                 </div>
-
 
                 <button class="nextBtn" type="submit">
                     <span class="btnText">Submit</span>
@@ -115,7 +116,7 @@
                     currentAccountID: '',
                     currentIORID: '',
                     IOR_data: {
-                        id_IOR: '',
+                        id_ior: '',
                         subject_ior: '',
                         occur_nbr: '',
                         occur_date: '',
@@ -147,9 +148,9 @@
                     window.location.href = 'login.html';
                 }
 
-                const iorData = sessionStorage.getItem('IOR_Data');
+                const iorData = sessionStorage.getItem('id_ior');
                 if (iorData) {
-                    this.IOR_data = JSON.parse(iorData);
+                    this.currentIORID = iorData;
                 }
             },
             methods: {
@@ -159,6 +160,7 @@
                 async IOR() {
                     console.log("Sending data:", this.IOR_data);
                     try {
+                        this.IOR_data.id_ior = this.currentIORID;
                         const response = await axios.put("http://localhost:3000/updateOccurrence", this.IOR_data);
                         console.log(this.IOR_data);
 
@@ -173,14 +175,6 @@
                         this.loginMessage = 'Failed to Update occurrence' + error;
                     }
                 },
-
-                redirectToFollowOccur(buttonType) {
-                    if (buttonType === 'Occurence') {
-                        window.location.href = 'index.html';
-                    } else if (buttonType === 'FollowOn') {
-                        window.location.href = 'Follow_Occur.html';
-                    }
-                }
             }
         }).mount('#app');
     </script>

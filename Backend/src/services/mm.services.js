@@ -417,7 +417,7 @@ async function showOccurrenceAll() {
 
 async function updateOccurrence(mm) {
     const {
-        id_IOR,
+        id_ior,
         subject_ior,
         occur_nbr,
         occur_date,
@@ -432,7 +432,7 @@ async function updateOccurrence(mm) {
         reporter_uic,
         report_date,
         reporter_identity,
-        data_reference,
+        Data_reference,
         hirac_process,
         initial_probability,
         initial_severity,
@@ -440,7 +440,7 @@ async function updateOccurrence(mm) {
     } = mm;
 
     const query = `UPDATE tbl_occurrence SET
-        id_IOR = '${id_IOR}',
+        id_ior = '${id_ior}',
         occur_nbr = '${occur_nbr}',
         occur_date = '${occur_date}',
         reference_ior = '${reference_ior}',
@@ -454,7 +454,7 @@ async function updateOccurrence(mm) {
         reporter_uic = '${reporter_uic}',
         report_date = '${report_date}',
         reporter_identity = ${reporter_identity},
-        data_reference = ${data_reference},
+        Data_reference = ${Data_reference},
         hirac_process = ${hirac_process},
         initial_probability = '${initial_probability}',
         initial_severity = '${initial_severity}',
@@ -714,7 +714,8 @@ async function UpdateNCRInit(temp) {
     const result = await db.query(query);
     if (result.rowCount === 1) {
         return {
-            status: 200, message: 'Update Audit Plan successful'
+            status: 200, 
+            message: 'Update Audit Plan successful'
         }
     } else {
         return {

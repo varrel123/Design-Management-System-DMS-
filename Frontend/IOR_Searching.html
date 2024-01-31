@@ -57,34 +57,34 @@
         </div>
 
         <div class="show-table" style="margin-top: 20px;">
-            <div class="table-responsive" style="overflow: auto;">
+            <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
                 <table class="table" id="data-table" style="background-color: white; overflow-y:scroll;">
                     <thead style="background-color: #CCE6F4;">
                         <tr>
-                            <th>ID IOR</th>
-                            <th>Subject IOR</th>
-                            <th>IOR Number</th>
-                            <th>IOR Date</th>
-                            <th>Reference IOR</th>
-                            <th>To UIC</th>
-                            <th>CC UIC</th>
-                            <th>Category IOR</th>
-                            <th>Type OR Phone Number</th>
-                            <th>Level Type</th>
-                            <th>Detail Occurance</th>
-                            <th>Reported By</th>
-                            <th>Reporter UIC</th>
-                            <th>Report Date</th>
-                            <th>Report Identify</th>
-                            <th>Data Reference</th>
-                            <th>Hirac Process</th>
-                            <th>Initial Probability</th>
-                            <th>Initial Severity</th>
-                            <th>Initial Riskindex</th>
+                            <th id="id_ior">ID IOR</th>
+                            <th id="subject_ior">Subject IOR</th>
+                            <th id="occur_nbr">IOR Number</th>
+                            <th id="occur_date">IOR Date</th>
+                            <th id="reference_ior">Reference IOR</th>
+                            <th id="to_uic">To UIC</th>
+                            <th id="cc_uic">CC UIC</th>
+                            <th id="category_ior">Category IOR</th>
+                            <th id="type_or_phone_number">Type OR Phone Number</th>
+                            <th id="level_type">Level Type</th>
+                            <th id="detail_occurrence">Detail Occurance</th>
+                            <th id="reported_by">Reported By</th>
+                            <th id="reporter_uic">Reporter UIC</th>
+                            <th id="report_date">Report Date</th>
+                            <th id="report_identify">Report Identify</th>
+                            <th id="data_reference">Data Reference</th>
+                            <th id="hirac_process">Hirac Process</th>
+                            <th id="initial_probability">Initial Probability</th>
+                            <th id="initial_severity">Initial Severity</th>
+                            <th id="initial_riskindex">Initial Riskindex</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="item in items" :key="item.subject_ior">
+                        <tr v-for="item in items" :key="item.id_ior">
                             <td>{{ item.id_ior }}</td>
                             <td>{{ item.subject_ior }}</td>
                             <td>{{ item.occur_nbr }}</td>
@@ -96,7 +96,7 @@
                             <td>{{ item.type_or_pnbr }}</td>
                             <td>{{ item.level_type }}</td>
                             <td>{{ item.detail_occurance }}</td>
-                            <td>{{ item.reportedby  }}</td>
+                            <td>{{ item.reportedby }}</td>
                             <td>{{ item.reporter_uic }}</td>
                             <td>{{ item.report_date }}</td>
                             <td>{{ item.reporter_identity }}</td>
@@ -106,8 +106,8 @@
                             <td>{{ item.initial_severity }}</td>
                             <td>{{ item.initial_riskindex }}</td>
                             <td>
-                                <button class="preview-button" @click="navigatePreview(item.subject_ior)">Preview</button>
-                                <button class="preview-button" @click="navigateEdit(item.subject_ior)">Edit</button>
+                                <button class="preview-button" @click="navigatePreview(item.id_ior)">Preview</button>
+                                <button class="preview-button" @click="navigateEdit(item)">Edit</button>
                             </td>
                         </tr>
                     </tbody>
@@ -159,16 +159,14 @@
                         // Menyimpan file Excel
                         XLSX.writeFile(wb, 'IOR_Data.xlsx');
                     },
-                    navigatePreview(ncrNo) {
+                    navigatePreview(iorData) {
                         // Menggunakan sessionStorage untuk menyimpan ncr_init_id
-                        sessionStorage.setItem('id_ior', iorNo);
+                        sessionStorage.setItem('id_ior', iorData);
                         // Menggunakan window.location.href untuk mengarahkan ke halaman previewPage.html
                         window.location.href = 'previewPage.html';
                     },
-                    navigateEdit(ncrNo) {
-                        // Store the NCR data in sessionStorage
-                        sessionStorage.setItem('IOR_Data', JSON.stringify(this.items.find(item => item.id_ior === ncrNo)));
-                        // Redirect to Edit_NCR.html
+                    navigateEdit(item) {
+                        sessionStorage.setItem('IOR_Data', JSON.stringify(item));
                         window.location.href = 'IOR_Edit.html';
                     },
                     filterTable() {
@@ -192,7 +190,7 @@
                                     <td>${item.type_or_pnbr}</td>
                                     <td>${item.level_type}</td>
                                     <td>${item.detail_occurance}</td>
-                                    <td>${item.reportedby }</td>
+                                    <td>${item.reportedby}</td>
                                     <td>${item.reporter_uic}</td>
                                     <td>${item.report_date}</td>
                                     <td>${item.reporter_identity}</td>

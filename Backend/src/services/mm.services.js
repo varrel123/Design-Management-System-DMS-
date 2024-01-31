@@ -42,8 +42,8 @@ async function addAccount(mm) {
 
 async function updatePassword(mm) {
     const { accountid, password } = mm;
-    // const pass = await helper.hashPassword(newPassword);
-    const query = `UPDATE account SET password = '${password}' WHERE accountid = '${accountid}'`;
+    const pass = await helper.hashPassword(password);
+    const query = `UPDATE account SET password = '${pass}' WHERE accountid = '${accountid}'`;
     const result = await db.query(query);
 
     if (result.rowCount === 1) {

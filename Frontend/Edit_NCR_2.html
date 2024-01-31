@@ -221,7 +221,7 @@
                     console.log("Sending data:", this.NCR_data);
                     try {
                         const response = await axios.put("http://localhost:3000/UpdateNCRInit", this.NCR_data);
-
+                        console.log(response);
                         if (response.data.status === 200) {
                             this.loginMessage = 'NCR Updated';
                         } else {

@@ -264,4 +264,95 @@ html:not(.dark-style) .account-settings-links .list-group-item.active {
     color: #ffffff;
 }
 
+.show-table {
+  margin-top: 20px;
+}
 
+/* Style for the table responsive container */
+.table-responsive {
+  max-height: 700px; /* Adjust the max-height as needed */
+  overflow-y: auto;
+  display: block;
+}
+
+/* Style for the table */
+.table {
+    width: 100%; /* Adjust the width as needed */
+    background-color: white;
+    display: block;
+    font-size: 13px;
+    border-collapse: collapse; /* Ensure no spacing between table cells */
+}
+
+/* Styles for table headers */
+.table th {
+    text-align: center; /* Center align text in headers */
+    padding: 10px; /* Add padding for better appearance */
+}
+
+/* Styles for table cells */
+.table td {
+    text-align: center; /* Center align text in cells */
+    padding: 10px; /* Add padding for better appearance */
+    border: 1px solid #ddd; /* Add border for better visibility */
+}
+
+/* Style for table header */
+.table thead {
+  background-color: #1c4962;
+}
+
+/* Style for table cells */
+.table td, .table th {
+  border: 1px solid #000000;
+  padding: 2px;
+}
+
+.table th#id_ior,
+.table th#subject_ior,
+.table th#occur_nbr,
+.table th#occur_date,
+.table th#reference_ior,
+.table th#to_uic,
+.table th#cc_uic,
+.table th#category_ior,
+.table th#type_or_phone_number,
+.table th#level_type,
+.table th#detail_occurrence,
+.table th#reported_by,
+.table th#reporter_uic,
+.table th#report_date,
+.table th#report_identify,
+.table th#data_reference,
+.table th#hirac_process,
+.table th#initial_probability,
+.table th#initial_severity,
+.table th#initial_riskindex {
+    min-width: 150px; /* Adjust the min-width as needed */
+}
+
+.table th#ncr_init_id,
+.table th#regulationbased,
+.table th#subject,
+.table th#audit_plan_no,
+.table th#ncr_no,
+.table th#to_uic,
+.table th#issued_date,
+.table th#responsibility_office,
+.table th#audit_type,
+.table th#require_condition_reference,
+.table th#level_finding,
+.table th#problem_analis,
+.table th#answer_due_date,
+.table th#issued_ian,
+.table th#ian_no,
+.table th#encountered_condition,
+.table th#audit_by,
+.table th#audit_date,
+.table th#acknowledge_by,
+.table th#acknowledge_date,
+.table th#status,
+.table th#temporary_link,
+.table th#action {
+    min-width: 150px; /* Adjust the min-width as needed */
+}

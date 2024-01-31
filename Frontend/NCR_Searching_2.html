@@ -15,22 +15,18 @@
     <ul class="nav-links">
         <img src="image/gmf9.png" alt="Login Image"
             style="width: 95%; max-width: 300px; margin-bottom: 0px; margin-left: 0px;">
-        <li><a href="main_menu.html">Home</a></li>
-        <li class="center"><a href="Account.html">Account</a></li>
+        <li><a href="main_menu2.html">Home</a></li>
+        <li class="center"><a href="Account2.html">Account</a></li>
         <li class="upward dropdown">
             <a href="#">Audit</a>
             <ul class="dropdown-content">
-                <li><a href="NCR_Form.html">NCR Form</a></li>
-                <li><a href="NCR_Searching.html">Searching NCR</a></li>
-                <li><a href="Follow_NCR.html">Follow On</a></li>
+                <li><a href="NCR_Searching_2.html">View NCR</a></li>
             </ul>
         </li>
         <li class="upward dropdown">
             <a href="#">Occurrence</a>
             <ul class="dropdown-content">
-                <li><a href="IOR_Form.html">IOR Form</a></li>
-                <li><a href="IOR_Searching.html">Searching IOR</a></li>
-                <li><a href="Follow_Occur.html">Follow On</a></li>
+                <li><a href="IOR_Searching_2.html">View IOR</a></li>
             </ul>
         </li>
         <li><a href="#">Personel</a></li>
@@ -111,7 +107,6 @@
                             <td>{{ item.temporarylink }}</td>
                             <td>
                                 <button @click="navigatePreview(item.ncr_init_id)">Preview</button>
-                                <button @click="navigateEdit(item.ncr_init_id)">Edit</button>
                             </td>
                         </tr>
                     </tbody>
